@@ -1,11 +1,14 @@
 {
   "name": "@torque-labs/torque-utils",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Torque Labs utility library.",
   "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Torque Labs",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@solana/actions": "^1.0.2"
+  }
 }
