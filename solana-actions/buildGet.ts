@@ -2,7 +2,7 @@ import { ActionGetResponse } from "@solana/actions";
 import { getSplDetails } from "../tokens";
 import { SwapAction } from "./types";
 
-export const swap = async (
+export const swapGet = async (
     swapAction: SwapAction,
     offerId: string,
     offerTitle: string,

@@ -1,7 +1,7 @@
 import { SwapAction } from "./types";
 import { getSplDetails } from "../tokens";
 
-export const swap = async (swapAction: SwapAction): Promise<string> => {
+export const swapPost = async (swapAction: SwapAction): Promise<string> => {
     const { inToken, outToken, inAmount, outAmount, usdcValue } = swapAction;
     if (inToken === "SOL" && outToken === "SOL") {
         throw new Error("Cannot swap SOL to SOL");
