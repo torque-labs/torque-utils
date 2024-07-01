@@ -32,7 +32,7 @@ export const swapPost = async (swapAction: SwapAction): Promise<string> => {
         default:
             throw new Error("Invalid swap action schema");
     }
-    return `https://actions.dialect.to/api/jupiter/swap/${urlInToken}-${urlOutToken}/${swapAmount}`;
+    return `https://actions.dialect.to/api/jupiter/swap/${urlInToken}-${urlOutToken}/${swapAmount * 1.05}`; // add 5% buffer to ensure conversion
 }
 
 export const nftCollectionBuyPost = async (
