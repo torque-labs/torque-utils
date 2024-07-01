@@ -1,6 +1,6 @@
 {
   "name": "@torque-labs/torque-utils",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Torque Labs utility library.",
   "main": "index.ts",
   "scripts": {

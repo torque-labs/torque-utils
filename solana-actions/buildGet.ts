@@ -80,7 +80,7 @@ export const swapGet = async (
     } as ActionGetResponse;
 }
 
-export const tensorFloorBuyGet = async (
+export const nftCollectionTradeGet = async (
     tensorFloorBuyAction: NftCollectionTradeAction,
     offerId: string,
     publisherHandle: string,
