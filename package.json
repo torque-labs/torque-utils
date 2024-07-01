@@ -9,6 +9,7 @@
   "author": "Torque Labs",
   "license": "MIT",
   "dependencies": {
-    "@solana/actions": "^1.0.2"
+    "@solana/actions": "^1.0.2",
+    "zod": "^3.23.8"
   }
 }

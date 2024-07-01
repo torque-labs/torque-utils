@@ -1,7 +1,7 @@
 import { ActionGetResponse } from "@solana/actions";
 import { getSplDetails } from "../tokens";
-import { HedgehogBetAction, RealmsVoteAction, SniperRaffleAction, SwapAction } from "./types";
-
+import { SwapAction, NftCollectionTradeAction } from "./types";
+import { getTensorSlugFromCollectionAddress } from "./util";
 
 const torqueActionUrl = "http://localhost:3001/actions";
 const convertBlinkToTorqueBlink = (
@@ -38,8 +38,30 @@ export const swapGet = async (
     publisherHandle: string,
     offerImageUrl?: string,
 ) => {
-    const { outToken, outAmount } = swapAction;
-    const tokenDetails = await getSplDetails(outToken);
+    let inDetails: any, outDetails: any, swapAmount: number, urlInToken: string, urlOutToken: string, tokenDetails: any;
+    let label: string;
+    switch (true) {
+        case 'inToken' in swapAction && 'inAmount' in swapAction && 'outToken' in swapAction:
+            inDetails = await getSplDetails(swapAction.inToken);
+            outDetails = await getSplDetails(swapAction.outToken);
+            label = `Swap ${swapAction.inAmount} ${inDetails.symbol} for ${outDetails.symbol}`;
+            break;
+        case 'inToken' in swapAction && 'outAmount' in swapAction && 'outToken' in swapAction:
+            inDetails = await getSplDetails(swapAction.inToken);
+            outDetails = await getSplDetails(swapAction.outToken);
+            label = `Swap ${inDetails.symbol} for ${swapAction.outAmount} ${outDetails.symbol}`;
+            break;
+        case 'inToken' in swapAction && 'inAmount' in swapAction:
+            inDetails = await getSplDetails(swapAction.inToken);
+            label = `Swap for ${inDetails.inAmount} ${outDetails.symbol}`;
+            break;
+        case 'outToken' in swapAction && 'outAmount' in swapAction:
+            inDetails = await getSplDetails(swapAction.outToken);
+            label = `Swap for ${inDetails.outAmount} ${outDetails.symbol}`;
+            break;
+        default:
+            throw new Error("Invalid swap action schema");
+    }
     return {
         "title": offerTitle,
         "icon": offerImageUrl
@@ -50,7 +72,7 @@ export const swapGet = async (
         "links": {
             "actions": [
                 {
-                    "label": `Swap for ${outAmount} ${tokenDetails.symbol}`, // button text
+                    "label": label, // button text
                     "href": `http://localhost:3001/actions/${publisherHandle}/${offerId}`,
                 }
             ]
@@ -58,47 +80,63 @@ export const swapGet = async (
     } as ActionGetResponse;
 }
 
-export const realmsVoteGet = async (
-    realmsVoteAction: RealmsVoteAction,
+export const tensorFloorBuyGet = async (
+    tensorFloorBuyAction: NftCollectionTradeAction,
     offerId: string,
     publisherHandle: string,
 ) => {
-    const { proposalId, choice, daoName } = realmsVoteAction;
-    const response = await fetch(`https://actions.dialect.to/api/realms/vote/dao/${daoName}/proposal/${proposalId}/`);
-    const voteDetails = await response.json();
+    const { collectionAddress } = tensorFloorBuyAction;
+    const collectionSlug = await getTensorSlugFromCollectionAddress(collectionAddress);
+    const response = await fetch(`https://www.tensor.trade/trade/${collectionSlug}`);
+    const details = await response.json();
     return convertBlinkToTorqueBlink(
-        voteDetails,
+        details,
         offerId,
         publisherHandle
     );
 }
 
-export const sniperRaffleGet = async (
-    sniperRaffleAction: SniperRaffleAction,
-    offerId: string,
-    publisherHandle: string,
-) => {
-    const { raffleKey } = sniperRaffleAction;
-    const response = await fetch(`https://www.sniper.xyz/api/actions/${raffleKey}`);
-    const raffleData = await response.json();
-    return convertBlinkToTorqueBlink(
-        raffleData,
-        offerId,
-        publisherHandle
-    );
-}
+// export const realmsVoteGet = async (
+//     realmsVoteAction: RealmsVoteAction,
+//     offerId: string,
+//     publisherHandle: string,
+// ) => {
+//     const { proposalId, choice, daoName } = realmsVoteAction;
+//     const response = await fetch(`https://actions.dialect.to/api/realms/vote/dao/${daoName}/proposal/${proposalId}/`);
+//     const voteDetails = await response.json();
+//     return convertBlinkToTorqueBlink(
+//         voteDetails,
+//         offerId,
+//         publisherHandle
+//     );
+// }
 
-export const hedgehogBetGet = async (
-    sniperRaffleAction: HedgehogBetAction,
-    offerId: string,
-    publisherHandle: string,
-) => {
-    const { marketKey } = sniperRaffleAction;
-    const response = await fetch(`https://hedgehog.markets/api/v1/classic/buy/??market=${marketKey}`);
-    const betData = await response.json();
-    return convertBlinkToTorqueBlink(
-        betData,
-        offerId,
-        publisherHandle
-    );
-}
+// export const sniperRaffleGet = async (
+//     sniperRaffleAction: SniperRaffleAction,
+//     offerId: string,
+//     publisherHandle: string,
+// ) => {
+//     const { raffleKey } = sniperRaffleAction;
+//     const response = await fetch(`https://www.sniper.xyz/api/actions/${raffleKey}`);
+//     const raffleData = await response.json();
+//     return convertBlinkToTorqueBlink(
+//         raffleData,
+//         offerId,
+//         publisherHandle
+//     );
+// }
+
+// export const hedgehogBetGet = async (
+//     sniperRaffleAction: HedgehogBetAction,
+//     offerId: string,
+//     publisherHandle: string,
+// ) => {
+//     const { marketKey } = sniperRaffleAction;
+//     const response = await fetch(`https://hedgehog.markets/api/v1/classic/buy/??market=${marketKey}`);
+//     const betData = await response.json();
+//     return convertBlinkToTorqueBlink(
+//         betData,
+//         offerId,
+//         publisherHandle
+//     );
+// }
