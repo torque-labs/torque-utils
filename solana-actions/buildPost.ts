@@ -1,17 +1,66 @@
-import { SwapAction } from "./types";
+import { SwapAction, NftCollectionTradeAction } from "./types";
 import { getSplDetails } from "../tokens";
+import { getTensorSlugFromCollectionAddress } from "./util";
 
 export const swapPost = async (swapAction: SwapAction): Promise<string> => {
-    const { inToken, outToken, inAmount, outAmount, usdcValue } = swapAction;
-    if (inToken === "SOL" && outToken === "SOL") {
-        throw new Error("Cannot swap SOL to SOL");
+    let swapAmount: number, urlInToken: string, urlOutToken: string, tokenDetails: any;
+    switch (true) {
+        case 'inToken' in swapAction && 'inAmount' in swapAction && 'outToken' in swapAction:
+            tokenDetails = await getSplDetails(swapAction.inToken);
+            swapAmount = tokenDetails.usdcValuePerToken * swapAction.inAmount;
+            urlInToken = swapAction.inToken;
+            urlOutToken = swapAction.outToken;
+            break;
+        case 'inToken' in swapAction && 'outAmount' in swapAction && 'outToken' in swapAction:
+            tokenDetails = await getSplDetails(swapAction.outToken);
+            swapAmount = tokenDetails.usdcValuePerToken * swapAction.outAmount;
+            urlInToken = swapAction.inToken;
+            urlOutToken = swapAction.outToken;
+            break;
+        case 'inToken' in swapAction && 'inAmount' in swapAction:
+            tokenDetails = await getSplDetails(swapAction.inToken);
+            swapAmount = tokenDetails.usdcValuePerToken * swapAction.inAmount;
+            urlInToken = swapAction.inToken;
+            urlOutToken = "SOL";
+            break;
+        case 'outToken' in swapAction && 'outAmount' in swapAction:
+            tokenDetails = await getSplDetails(swapAction.outToken);
+            swapAmount = tokenDetails.usdcValuePerToken * swapAction.outAmount;
+            urlInToken = "SOL";
+            urlOutToken = swapAction.outToken;
+            break;
+        default:
+            throw new Error("Invalid swap action schema");
     }
-    if (!outAmount && !usdcValue) {
-        throw new Error("Must provide either outAmount or usdcValue");
-    }
-    const tokenDetails = await getSplDetails(outToken);
-    const swapAmount = usdcValue
-        ? usdcValue
-        : tokenDetails.usdcValuePerToken * Number(outAmount) * 1.01; // * 1.01 for amount buffer 
-    return `https://actions.dialect.to/api/jupiter/swap/${inToken}-${outToken}/${swapAmount}`;
+    return `https://actions.dialect.to/api/jupiter/swap/${urlInToken}-${urlOutToken}/${swapAmount}`;
 }
+
+export const nftCollectionBuyPost = async (
+    tensorFloorBuyAction: NftCollectionTradeAction,
+): Promise<string> => {
+    const { collectionAddress } = tensorFloorBuyAction;
+    const collectionSlug = await getTensorSlugFromCollectionAddress(collectionAddress);
+    return `https://www.tensor.trade/trade/${collectionSlug}`;
+}
+
+// export const realmsVotePost = async (realmsVoteAction: RealmsVoteAction): Promise<string> => {
+//     const { proposalId, choice, daoName } = realmsVoteAction;
+//     return `https://actions.dialect.to/api/realms/vote/dao/${daoName}/proposal/${proposalId}/vote?choice=${choice}`;
+// }
+
+// export const sniperRafflePost = async (
+//     sniperRaffleAction: SniperRaffleAction,
+//     amount: number,
+// ): Promise<string> => {
+//     const { raffleKey } = sniperRaffleAction;
+//     return `https://www.sniper.xyz/api/raffle?collection=${raffleKey}&amount=${amount}`;
+// }
+
+// export const hedgehogBetPost = async (
+//     hedgehogBetAction: HedgehogBetAction,
+//     amount: number,
+//     bet: 'yes' | 'no',
+// ): Promise<string> => {
+//     const { marketKey } = hedgehogBetAction;
+//     return `https://hedgehog.markets/api/v1/classic/buy/?market=${marketKey}&${bet}Amount=${amount}`;
+// }
