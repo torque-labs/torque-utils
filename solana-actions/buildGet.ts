@@ -2,8 +2,8 @@ import { ActionGetResponse } from "@solana/actions";
 import { getSplDetails } from "../tokens";
 import { SwapAction, NftCollectionTradeAction } from "./types";
 import { getTensorSlugFromCollectionAddress } from "./util";
+import { TORQUE_API_URL } from "..";
 
-const torqueActionUrl = "http://localhost:3001/actions";
 const convertBlinkToTorqueBlink = (
     blink: ActionGetResponse,
     offerId: string,
@@ -23,7 +23,7 @@ const convertBlinkToTorqueBlink = (
                     const [route, params] = action.href.split("?");
                     return {
                         "label": action.label,
-                        "href": `${torqueActionUrl}/${publisherHandle}/${offerId}?${params}`,
+                        "href": `${TORQUE_API_URL}/share/${publisherHandle}/${offerId}?${params}`,
                     }
                 })
                 : []
@@ -38,26 +38,26 @@ export const swapGet = async (
     publisherHandle: string,
     offerImageUrl?: string,
 ) => {
-    let inDetails: any, outDetails: any, swapAmount: number, urlInToken: string, urlOutToken: string, tokenDetails: any;
+    let inDetails: any, outDetails: any;
     let label: string;
     switch (true) {
         case 'inToken' in swapAction && 'inAmount' in swapAction && 'outToken' in swapAction:
             inDetails = await getSplDetails(swapAction.inToken);
             outDetails = await getSplDetails(swapAction.outToken);
-            label = `Swap ${swapAction.inAmount} ${inDetails.symbol} for ${outDetails.symbol}`;
+            label = `Swap ${swapAction.inAmount} $${inDetails.symbol} for $${outDetails.symbol}`;
             break;
         case 'inToken' in swapAction && 'outAmount' in swapAction && 'outToken' in swapAction:
             inDetails = await getSplDetails(swapAction.inToken);
             outDetails = await getSplDetails(swapAction.outToken);
-            label = `Swap ${inDetails.symbol} for ${swapAction.outAmount} ${outDetails.symbol}`;
+            label = `Swap $${inDetails.symbol} for ${swapAction.outAmount} $${outDetails.symbol}`;
             break;
         case 'inToken' in swapAction && 'inAmount' in swapAction:
             inDetails = await getSplDetails(swapAction.inToken);
-            label = `Swap for ${inDetails.inAmount} ${outDetails.symbol}`;
+            label = `Sell ${inDetails.inAmount} $${outDetails.symbol}`;
             break;
         case 'outToken' in swapAction && 'outAmount' in swapAction:
             inDetails = await getSplDetails(swapAction.outToken);
-            label = `Swap for ${inDetails.outAmount} ${outDetails.symbol}`;
+            label = `Buy ${inDetails.outAmount} $${outDetails.symbol}`;
             break;
         default:
             throw new Error("Invalid swap action schema");
@@ -73,7 +73,7 @@ export const swapGet = async (
             "actions": [
                 {
                     "label": label, // button text
-                    "href": `http://localhost:3001/actions/${publisherHandle}/${offerId}`,
+                    "href": `${TORQUE_API_URL}/actions/${publisherHandle}/${offerId}`,
                 }
             ]
         }
