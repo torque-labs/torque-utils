@@ -1,3 +1,4 @@
+export const TORQUE_API_URL: string = process.env.TORQUE_API_URL ?? "https://api.torque.so";
 
 const tensorGraphqlCollectionQuery = `query CollectionStats($slug: String!) {
   instrumentTV2(slug: $slug) {

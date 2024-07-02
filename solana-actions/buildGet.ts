@@ -1,8 +1,7 @@
 import { ActionGetResponse } from "@solana/actions";
 import { getSplDetails } from "../tokens";
 import { SwapAction, NftCollectionTradeAction } from "./types";
-import { getTensorSlugFromCollectionAddress } from "./util";
-import { TORQUE_API_URL } from "..";
+import { getTensorSlugFromCollectionAddress, TORQUE_API_URL } from "./util";
 
 const convertBlinkToTorqueBlink = (
     blink: ActionGetResponse,
