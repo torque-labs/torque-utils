@@ -4,33 +4,28 @@ import { getTensorSlugFromCollectionAddress } from "./util";
 
 export const swapPost = async (swapAction: SwapAction): Promise<string> => {
     let swapAmount: number, urlInToken: string, urlOutToken: string, tokenDetails: any;
-    switch (true) {
-        case 'inToken' in swapAction && 'inAmount' in swapAction && 'outToken' in swapAction:
-            tokenDetails = await getSplDetails(swapAction.inToken);
-            swapAmount = tokenDetails.usdcValuePerToken * swapAction.inAmount;
-            urlInToken = swapAction.inToken;
-            urlOutToken = swapAction.outToken;
-            break;
-        case 'inToken' in swapAction && 'outAmount' in swapAction && 'outToken' in swapAction:
-            tokenDetails = await getSplDetails(swapAction.outToken);
-            swapAmount = tokenDetails.usdcValuePerToken * swapAction.outAmount;
-            urlInToken = swapAction.inToken;
-            urlOutToken = swapAction.outToken;
-            break;
-        case 'inToken' in swapAction && 'inAmount' in swapAction:
-            tokenDetails = await getSplDetails(swapAction.inToken);
-            swapAmount = tokenDetails.usdcValuePerToken * swapAction.inAmount;
-            urlInToken = swapAction.inToken;
-            urlOutToken = "SOL";
-            break;
-        case 'outToken' in swapAction && 'outAmount' in swapAction:
-            tokenDetails = await getSplDetails(swapAction.outToken);
-            swapAmount = tokenDetails.usdcValuePerToken * swapAction.outAmount;
-            urlInToken = "SOL";
-            urlOutToken = swapAction.outToken;
-            break;
-        default:
-            throw new Error("Invalid swap action schema");
+    if (swapAction.inToken && swapAction.inAmount && swapAction.outToken) {
+        tokenDetails = await getSplDetails(swapAction.inToken);
+        swapAmount = tokenDetails.usdcValuePerToken * swapAction.inAmount;
+        urlInToken = swapAction.inToken;
+        urlOutToken = swapAction.outToken;
+    } else if (swapAction.inToken && swapAction.outAmount && swapAction.outToken) {
+        tokenDetails = await getSplDetails(swapAction.outToken);
+        swapAmount = tokenDetails.usdcValuePerToken * swapAction.outAmount;
+        urlInToken = swapAction.inToken;
+        urlOutToken = swapAction.outToken;
+    } else if (swapAction.inToken && swapAction.inAmount) {
+        tokenDetails = await getSplDetails(swapAction.inToken);
+        swapAmount = tokenDetails.usdcValuePerToken * swapAction.inAmount;
+        urlInToken = swapAction.inToken;
+        urlOutToken = "SOL";
+    } else if (swapAction.outToken && swapAction.outAmount) {
+        tokenDetails = await getSplDetails(swapAction.outToken);
+        swapAmount = tokenDetails.usdcValuePerToken * swapAction.outAmount;
+        urlInToken = "SOL";
+        urlOutToken = swapAction.outToken;
+    } else {
+        throw new Error("Invalid swap action schema");
     }
     return `https://actions.dialect.to/api/jupiter/swap/${urlInToken}-${urlOutToken}/${swapAmount * 1.05}`; // add 5% buffer to ensure conversion
 }

@@ -37,29 +37,23 @@ export const swapGet = async (
     publisherHandle: string,
     offerImageUrl?: string,
 ) => {
-    let inDetails: any, outDetails: any;
     let label: string;
-    switch (true) {
-        case 'inToken' in swapAction && 'inAmount' in swapAction && 'outToken' in swapAction:
-            inDetails = await getSplDetails(swapAction.inToken);
-            outDetails = await getSplDetails(swapAction.outToken);
-            label = `Swap ${swapAction.inAmount} $${inDetails.symbol} for $${outDetails.symbol}`;
-            break;
-        case 'inToken' in swapAction && 'outAmount' in swapAction && 'outToken' in swapAction:
-            inDetails = await getSplDetails(swapAction.inToken);
-            outDetails = await getSplDetails(swapAction.outToken);
-            label = `Swap $${inDetails.symbol} for ${swapAction.outAmount} $${outDetails.symbol}`;
-            break;
-        case 'inToken' in swapAction && 'inAmount' in swapAction:
-            inDetails = await getSplDetails(swapAction.inToken);
-            label = `Sell ${inDetails.inAmount} $${outDetails.symbol}`;
-            break;
-        case 'outToken' in swapAction && 'outAmount' in swapAction:
-            inDetails = await getSplDetails(swapAction.outToken);
-            label = `Buy ${inDetails.outAmount} $${outDetails.symbol}`;
-            break;
-        default:
-            throw new Error("Invalid swap action schema");
+    if (swapAction.inToken && swapAction.inAmount && swapAction.outToken) {
+        const inDetails = await getSplDetails(swapAction.inToken);
+        const outDetails = await getSplDetails(swapAction.outToken);
+        label = `Swap ${swapAction.inAmount} $${inDetails.symbol} for $${outDetails.symbol}`;
+    } else if (swapAction.inToken && swapAction.outAmount && swapAction.outToken) {
+        const inDetails = await getSplDetails(swapAction.inToken);
+        const outDetails = await getSplDetails(swapAction.outToken);
+        label = `Swap $${inDetails.symbol} for ${swapAction.outAmount} $${outDetails.symbol}`;
+    } else if (swapAction.inToken && swapAction.inAmount) {
+        const inDetails = await getSplDetails(swapAction.inToken);
+        label = `Sell ${swapAction.inAmount} $${inDetails.symbol}`;
+    } else if (swapAction.outToken && swapAction.outAmount) {
+        const outDetails = await getSplDetails(swapAction.outToken);
+        label = `Buy ${swapAction.outAmount} $${outDetails.symbol}`;
+    } else {
+        throw new Error("Invalid swap action schema");
     }
     return {
         "title": offerTitle,

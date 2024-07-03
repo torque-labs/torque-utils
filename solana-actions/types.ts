@@ -1,29 +1,46 @@
 import { z } from "zod";
 
-export const SwapActionSchema = z.union([
-    z.object({
-        inToken: z.string(),
-        inAmount: z.coerce.number(),
-        usdcValue: z.coerce.number().optional(),
-    }),
-    z.object({
-        outToken: z.string(),
-        outAmount: z.coerce.number(),
-        usdcValue: z.coerce.number().optional(),
-    }),
-    z.object({
-        inToken: z.string(),
-        outToken: z.string(),
-        inAmount: z.coerce.number(),
-        usdcValue: z.coerce.number().optional(),
-    }),
-    z.object({
-        inToken: z.string(),
-        outToken: z.string(),
-        outAmount: z.coerce.number(),
-        usdcValue: z.coerce.number().optional(),
-    }),
-]);
+const SwapActionBaseSchema = z.object({
+    inToken: z.string().nullish(),
+    outToken: z.string().nullish(),
+    inAmount: z.number().nullish(),
+    outAmount: z.number().nullish(),
+    usdcValue: z.number().nullish(),
+});
+
+export enum OfferType {
+    CLICK = "CLICK", // TODO: EVENT
+    BOUNTY = "BOUNTY", // TODO: ACTION
+}
+
+
+
+/**
+ * sell -> token and amount
+ * buy -> token and amount
+ * swap -> both token and one amount
+ */
+export const SwapActionSchema = SwapActionBaseSchema.refine(
+    (data) => {
+        // sell -> token and amount
+        if (data.inToken && data.inAmount !== null) {
+            return true;
+        }
+        // buy -> token and amount
+        if (data.outToken && data.outAmount !== null) {
+            return true;
+        }
+        // swap -> both token and one amount
+        if (data.inToken && data.outToken && (data.inAmount !== null || data.outAmount !== null)) {
+            return true;
+        }
+        return false;
+    },
+    {
+        message: "Invalid swap action configuration.",
+        path: [],
+    }
+);
 export type SwapAction = z.infer<typeof SwapActionSchema>;
 
 export enum NftCollectionTradeType {
@@ -49,3 +66,45 @@ export type NftCollectionTradeAction = z.infer<typeof NftCollectionTradeSchema>;
 // export interface HedgehogBetAction {
 //     marketKey: string;
 // }
+
+export enum EventType {
+    CLICK = "CLICK",
+    SWAP = "SWAP",
+    NFT_COLLECTION_TRADE = "NFT_COLLECTION_TRADE",
+}
+export enum CampaignType {
+    CLICK = "CLICK",
+    BOUNTY = "BOUNTY"
+}
+export enum RewardType {
+    POINTS = "POINTS",
+    TOKENS = "TOKENS",
+    ASYMMETRIC_REWARD = "ASYMMETRIC_REWARD"
+}
+export const CreateCampaignSchema = z.object({
+    campaignName: z.string(),
+    campaignType: z.string(),
+    landingPage: z.string(),
+
+    eventType: z.nativeEnum(EventType),
+    eventConfig: z.union([
+        SwapActionSchema,
+        NftCollectionTradeSchema
+    ]).optional(),
+
+    publisherRewardType: z.nativeEnum(RewardType),
+    publisherTokenAddress: z.string().optional(),
+    publisherPayoutPerConversion: z.number(),
+    userRewardType: z.nativeEnum(RewardType).optional(),
+    userTokenAddress: z.string().optional(),
+    userPayoutPerConversion: z.number().optional(),
+
+    startTime: z.number(),
+    endTime: z.number(),
+    audience: z.string().optional().nullable(),
+
+    asymmetricRewards: z.array(z.object({
+        tokenAddress: z.string(),
+        amount: z.number(),
+    }))
+});
