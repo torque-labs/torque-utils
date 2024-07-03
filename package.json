@@ -1,8 +1,18 @@
 {
   "name": "@torque-labs/torque-utils",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "description": "Torque Labs utility library.",
-  "main": "index.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/torque-labs/torque-utils.git"
+  },
+  "homepage": "https://torque.so",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc"
