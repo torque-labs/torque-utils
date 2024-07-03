@@ -1,5 +1,5 @@
 export async function getSplDetails(tokenAddress: string) {
-    const response = await fetch(process.env.RPC as string, {
+    const response = await fetch(process.env.HELIUS_RPC as string, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
