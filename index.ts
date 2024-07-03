@@ -1,1 +1,1 @@
-export * from './solana-actions/index';
+export * from './solana-actions/index.js';

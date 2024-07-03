@@ -1,6 +1,6 @@
-import { SwapAction, NftCollectionTradeAction } from "./types";
-import { getSplDetails } from "../tokens";
-import { getTensorSlugFromCollectionAddress } from "./util";
+import { SwapAction, NftCollectionTradeAction } from "./types.js";
+import { getSplDetails } from "../tokens.js";
+import { getTensorSlugFromCollectionAddress } from "./util.js";
 
 export const swapPost = async (swapAction: SwapAction): Promise<string> => {
     let swapAmount: number, urlInToken: string, urlOutToken: string, tokenDetails: any;
