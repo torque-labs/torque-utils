@@ -35,7 +35,7 @@ export const nftCollectionBuyPost = async (
 ): Promise<string> => {
     const { collectionAddress } = tensorFloorBuyAction;
     const collectionSlug = await getTensorSlugFromCollectionAddress(collectionAddress);
-    return `https://www.tensor.trade/trade/${collectionSlug}`;
+    return `https://actions.dialect.to/api/tensor/buy-floor/${collectionSlug}`;
 }
 
 // export const realmsVotePost = async (realmsVoteAction: RealmsVoteAction): Promise<string> => {
