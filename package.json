@@ -1,6 +1,6 @@
 {
   "name": "@torque-labs/torque-utils",
-  "version": "1.0.17",
+  "version": "1.0.18",
   "description": "Torque Labs utility library.",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -15,7 +15,8 @@
   "homepage": "https://torque.so",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc"
+    "build": "tsc",
+    "prepack": "npm run build"
   },
   "author": "Torque Labs",
   "license": "MIT",
