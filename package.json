@@ -1,6 +1,6 @@
 {
   "name": "@torque-labs/torque-utils",
-  "version": "1.0.16",
+  "version": "1.0.17",
   "description": "Torque Labs utility library.",
   "main": "./dist/index.js",
   "module": "./dist/index.js",

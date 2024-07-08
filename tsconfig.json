@@ -1,32 +1,22 @@
 {
-    "compilerOptions": {
-        "lib": [
-            "es2022",
-            "DOM"
-        ],
-        "allowJs": true,
-        "skipLibCheck": true,
-        "strict": true,
-        "esModuleInterop": true,
-        "module": "NodeNext",
-        "target": "ES2022",
-        "isolatedModules": true,
-        "incremental": true,
-        "declaration": true,
-        "rootDir": "./",
-        "outDir": "./dist",
-        "noImplicitOverride": true,
-        "resolveJsonModule": true,
-        "moduleDetection": "force",
-        "sourceMap": true,
-        "declarationMap": true
-    },
-    "include": [
-        "**/*.ts"
-    ],
-    "exclude": [
-        "node_modules",
-        "docs-website",
-        "dist"
-    ]
+  "compilerOptions": {
+    "lib": ["es2022", "DOM"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "esModuleInterop": true,
+    "module": "NodeNext",
+    "target": "ES2022",
+    "isolatedModules": true,
+    "declaration": true,
+    "rootDir": "./",
+    "outDir": "./dist",
+    "noImplicitOverride": true,
+    "resolveJsonModule": true,
+    "moduleDetection": "force",
+    "sourceMap": true,
+    "declarationMap": true
+  },
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules", "docs-website", "dist"]
 }
