@@ -63,14 +63,17 @@ export type NftCollectionTradeAction = z.infer<typeof NftCollectionTradeSchema>;
 //     raffleKey: string;
 // }
 
-// export interface HedgehogBetAction {
-//     marketKey: string;
-// }
+export const HedgehogPlaceBetActionSchema = z.object({
+    market: z.string(),
+    usdcAmount: z.number(),
+});
+export type HedgehogPlaceBetAction = z.infer<typeof HedgehogPlaceBetActionSchema>;
 
 export enum EventType {
     CLICK = "CLICK",
     SWAP = "SWAP",
     NFT_COLLECTION_TRADE = "NFT_COLLECTION_TRADE",
+    HEDGEHOG_PLACE_BET = "HEDGEHOG_PLACE_BET",
 }
 export enum CampaignType {
     CLICK = "CLICK",

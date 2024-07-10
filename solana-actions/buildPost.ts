@@ -1,4 +1,4 @@
-import { SwapAction, NftCollectionTradeAction } from "./types.js";
+import { SwapAction, NftCollectionTradeAction, HedgehogPlaceBetAction } from "../types.js";
 import { getSplDetails } from "../tokens.js";
 import { getTensorSlugFromCollectionAddress } from "./util.js";
 
@@ -38,6 +38,18 @@ export const nftCollectionBuyPost = async (
     return `https://actions.dialect.to/api/tensor/buy-floor/${collectionSlug}`;
 }
 
+export const hedgehogBetPost = async (
+    hedgehogBetAction: HedgehogPlaceBetAction,
+    amount: number = 0,
+    bet: 'yes' | 'no' = 'yes',
+): Promise<string> => {
+    const { market, usdcAmount } = hedgehogBetAction;
+    if (amount < usdcAmount) {
+        throw new Error("Amount is less than the minimum amount");
+    }
+    return `https://hedgehog.markets/api/v1/classic/buy/?market=${market}&${bet}Amount=${amount}`;
+}
+
 // export const realmsVotePost = async (realmsVoteAction: RealmsVoteAction): Promise<string> => {
 //     const { proposalId, choice, daoName } = realmsVoteAction;
 //     return `https://actions.dialect.to/api/realms/vote/dao/${daoName}/proposal/${proposalId}/vote?choice=${choice}`;
@@ -49,13 +61,4 @@ export const nftCollectionBuyPost = async (
 // ): Promise<string> => {
 //     const { raffleKey } = sniperRaffleAction;
 //     return `https://www.sniper.xyz/api/raffle?collection=${raffleKey}&amount=${amount}`;
-// }
-
-// export const hedgehogBetPost = async (
-//     hedgehogBetAction: HedgehogBetAction,
-//     amount: number,
-//     bet: 'yes' | 'no',
-// ): Promise<string> => {
-//     const { marketKey } = hedgehogBetAction;
-//     return `https://hedgehog.markets/api/v1/classic/buy/?market=${marketKey}&${bet}Amount=${amount}`;
 // }
