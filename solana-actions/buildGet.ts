@@ -1,6 +1,6 @@
 import { ActionGetResponse } from "@solana/actions";
 import { getSplDetails } from "../tokens.js";
-import { SwapAction, NftCollectionTradeAction } from "./types.js";
+import { SwapAction, NftCollectionTradeAction, HedgehogPlaceBetAction } from "../types.js";
 import { getTensorSlugFromCollectionAddress, TORQUE_API_URL } from "./util.js";
 
 const convertBlinkToTorqueBlink = (
@@ -89,6 +89,33 @@ export const nftCollectionTradeGet = async (
     );
 }
 
+export const hedgehogBetGet = async (
+    betAction: HedgehogPlaceBetAction,
+    offerId: string,
+    publisherHandle: string,
+) => {
+    const { market, usdcAmount } = betAction;
+    const response = await fetch(`https://hedgehog.markets/markets/${market}`);
+    const betData = await response.json();
+    const hrefPath = '/api/v1/classic/buy/?'
+    for (let i = 0; i < betData.links.actions.length; i++) {
+        if (!betData.links.actions[i].parameters) {
+            if (betData.links.actions[i].label.includes("Yes")) {
+                betData.links.actions[i].label = `$${usdcAmount} on Yes`;
+                betData.links.actions[i].href = `${hrefPath}market=${market}&yesAmount=${usdcAmount}`;
+            } else if (betData.links.actions[i].label.includes("No")) {
+                betData.links.actions[i].label = `$${usdcAmount} on No`;
+                betData.links.actions[i].href = `${hrefPath}market=${market}&noAmount=${usdcAmount}`;
+            }
+        }
+    }
+    return convertBlinkToTorqueBlink(
+        betData,
+        offerId,
+        publisherHandle
+    );
+}
+
 // export const realmsVoteGet = async (
 //     realmsVoteAction: RealmsVoteAction,
 //     offerId: string,
@@ -114,21 +141,6 @@ export const nftCollectionTradeGet = async (
 //     const raffleData = await response.json();
 //     return convertBlinkToTorqueBlink(
 //         raffleData,
-//         offerId,
-//         publisherHandle
-//     );
-// }
-
-// export const hedgehogBetGet = async (
-//     sniperRaffleAction: HedgehogBetAction,
-//     offerId: string,
-//     publisherHandle: string,
-// ) => {
-//     const { marketKey } = sniperRaffleAction;
-//     const response = await fetch(`https://hedgehog.markets/api/v1/classic/buy/??market=${marketKey}`);
-//     const betData = await response.json();
-//     return convertBlinkToTorqueBlink(
-//         betData,
 //         offerId,
 //         publisherHandle
 //     );
