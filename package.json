@@ -1,6 +1,6 @@
 {
   "name": "@torque-labs/torque-utils",
-  "version": "1.0.21",
+  "version": "1.0.22",
   "description": "Torque Labs utility library.",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -24,5 +24,9 @@
     "@solana/actions": "^1.0.2",
     "zod": "^3.23.8"
   },
-  "type": "module"
+  "type": "module",
+  "devDependencies": {
+    "@types/node": "^20.14.11",
+    "typescript": "^5.5.3"
+  }
 }

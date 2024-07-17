@@ -1,0 +1,1 @@
+export const CLICKY_ADDRESS = "CAvc2Mr9WcH6HiYQeLYcXG3H9G2rg1sV2EEksMd6gyGS";
