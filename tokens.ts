@@ -1,7 +1,7 @@
 import { CLICKY_ADDRESS } from "./consants.js";
 import { Token } from "./types.js";
 
-export async function getSplDetails(tokenAddress: string): Promise<Token> {
+export async function getTokenDetails(tokenAddress: string): Promise<Token> {
   if (tokenAddress === CLICKY_ADDRESS) {
     return {
       name: "Clicky",
@@ -33,6 +33,7 @@ export async function getSplDetails(tokenAddress: string): Promise<Token> {
         metadata: {
           name: string;
           symbol: string;
+          token_standard?: string;
         };
         links: {
           image: string;
@@ -55,9 +56,10 @@ export async function getSplDetails(tokenAddress: string): Promise<Token> {
       logo: result.content.links.image,
       decimals: result.token_info.decimals,
       usdcValuePerToken:
-        result.token_info.price_info.currency === "USDC"
+        result.token_info?.price_info?.currency === "USDC"
           ? result.token_info.price_info.price_per_token
           : 1,
+      tokenStandard: result.content?.metadata?.token_standard,
     };
   } else {
     throw new Error("Token not found");

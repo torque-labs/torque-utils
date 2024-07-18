@@ -4,4 +4,5 @@ export type Token = {
   decimals: number;
   symbol: string;
   usdcValuePerToken: number;
+  tokenStandard?: string;
 };
