@@ -1,13 +1,23 @@
 {
   "name": "@torque-labs/torque-utils",
-  "version": "1.0.28",
+  "version": "1.0.29",
   "description": "Torque Labs utility library.",
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "author": "Torque Labs",
+  "license": "MIT",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/types/index.d.ts",
   "files": [
     "dist"
   ],
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "require": "./dist/cjs/index.js",
+      "import": "./dist/esm/index.js"
+    }
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/torque-labs/torque-utils.git"
@@ -15,18 +25,18 @@
   "homepage": "https://torque.so",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc",
+    "build": "tsc && tsc-alias -p tsconfig.json",
+    "postbuild": "esm2cjs --in dist/esm --out dist/cjs -l error",
     "prepack": "npm run build"
   },
-  "author": "Torque Labs",
-  "license": "MIT",
   "dependencies": {
     "@solana/actions": "^1.0.2",
     "zod": "^3.23.8"
   },
-  "type": "module",
   "devDependencies": {
+    "@alcalzone/esm2cjs": "^1.1.2",
     "@types/node": "^20.14.11",
+    "tsc-alias": "^1.8.10",
     "typescript": "^5.5.3"
   }
 }
