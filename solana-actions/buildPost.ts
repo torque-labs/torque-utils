@@ -67,12 +67,24 @@ export const hedgehogBetPost = async (
   return `https://hedgehog.markets/api/v1/classic/buy/?market=${market}&${bet}Amount=${amount}`;
 };
 
+const validateMemoInputs = (query: { [key: string]: string }) => {
+  const keys = Object.keys(query).map((x) => x.toLowerCase());
+  for (let i = 0; i < keys.length; i++) {
+    if (keys[i] === "email") {
+      const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(query[keys[i]]);
+      if (!isValidEmail) {
+        throw new Error("Invalid email address.");
+      }
+    }
+  }
+};
 export const memoPost = async (
   signUpAction: SignUpAction,
   query: { [key: string]: string }
 ): Promise<string> => {
+  validateMemoInputs(query);
   const { inputFields } = signUpAction;
-  let url = `${TORQUE_API_URL}/actions/memo?`;
+  let url = `${TORQUE_API_URL}/actions/memo?campaignId=${query.campaignId}&`;
   inputFields.forEach((field: SolanaActionParam) => {
     if (query[field.paramName]) {
       url += `${field.paramName}=${query[field.paramName]}&`;
