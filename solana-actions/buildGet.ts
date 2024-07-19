@@ -124,33 +124,3 @@ export const hedgehogBetGet = async (
   }
   return convertBlinkToTorqueBlink(betData, offerId, publisherHandle);
 };
-
-// export const realmsVoteGet = async (
-//     realmsVoteAction: RealmsVoteAction,
-//     offerId: string,
-//     publisherHandle: string,
-// ) => {
-//     const { proposalId, choice, daoName } = realmsVoteAction;
-//     const response = await fetch(`https://actions.dialect.to/api/realms/vote/dao/${daoName}/proposal/${proposalId}/`);
-//     const voteDetails = await response.json();
-//     return convertBlinkToTorqueBlink(
-//         voteDetails,
-//         offerId,
-//         publisherHandle
-//     );
-// }
-
-// export const sniperRaffleGet = async (
-//     sniperRaffleAction: SniperRaffleAction,
-//     offerId: string,
-//     publisherHandle: string,
-// ) => {
-//     const { raffleKey } = sniperRaffleAction;
-//     const response = await fetch(`https://www.sniper.xyz/api/actions/${raffleKey}`);
-//     const raffleData = await response.json();
-//     return convertBlinkToTorqueBlink(
-//         raffleData,
-//         offerId,
-//         publisherHandle
-//     );
-// }

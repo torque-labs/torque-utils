@@ -2,9 +2,11 @@ import {
   SwapAction,
   NftCollectionTradeAction,
   HedgehogPlaceBetAction,
+  SignUpAction,
+  SolanaActionParam,
 } from "../types.js";
 import { getTokenDetails } from "../tokens.js";
-import { getTensorSlugFromCollectionAddress } from "./util.js";
+import { getTensorSlugFromCollectionAddress, TORQUE_API_URL } from "./util.js";
 
 export const swapPost = async (swapAction: SwapAction): Promise<string> => {
   let swapAmount: number,
@@ -65,15 +67,16 @@ export const hedgehogBetPost = async (
   return `https://hedgehog.markets/api/v1/classic/buy/?market=${market}&${bet}Amount=${amount}`;
 };
 
-// export const realmsVotePost = async (realmsVoteAction: RealmsVoteAction): Promise<string> => {
-//     const { proposalId, choice, daoName } = realmsVoteAction;
-//     return `https://actions.dialect.to/api/realms/vote/dao/${daoName}/proposal/${proposalId}/vote?choice=${choice}`;
-// }
-
-// export const sniperRafflePost = async (
-//     sniperRaffleAction: SniperRaffleAction,
-//     amount: number,
-// ): Promise<string> => {
-//     const { raffleKey } = sniperRaffleAction;
-//     return `https://www.sniper.xyz/api/raffle?collection=${raffleKey}&amount=${amount}`;
-// }
+export const memoPost = async (
+  signUpAction: SignUpAction,
+  query: { [key: string]: string }
+): Promise<string> => {
+  const { inputFields } = signUpAction;
+  let url = `${TORQUE_API_URL}/actions/memo?`;
+  inputFields.forEach((field: SolanaActionParam) => {
+    if (query[field.paramName]) {
+      url += `${field.paramName}=${query[field.paramName]}&`;
+    }
+  });
+  return url;
+};

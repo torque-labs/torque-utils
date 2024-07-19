@@ -79,15 +79,6 @@ export const NftCollectionTradeSchema = z.object({
  */
 export type NftCollectionTradeAction = z.infer<typeof NftCollectionTradeSchema>;
 
-// export interface RealmsVoteAction {
-//     daoName: string;
-//     proposalId: string;
-//     choice: "Yes" | "No" | "Abstain";
-// }
-// export interface SniperRaffleAction {
-//     raffleKey: string;
-// }
-
 /**
  * Hedgehog place bet action schema
  */
@@ -103,6 +94,21 @@ export type HedgehogPlaceBetAction = z.infer<
   typeof HedgehogPlaceBetActionSchema
 >;
 
+export const ClickActionSchema = z.object({
+  enableBlink: z.boolean(),
+});
+export type ClickAction = z.infer<typeof ClickActionSchema>;
+
+const solanaActionParamSchema = z.object({
+  label: z.string(),
+  paramName: z.string(),
+  required: z.boolean(),
+});
+export type SolanaActionParam = z.infer<typeof solanaActionParamSchema>;
+export const SignUpActionSchema = z.object({
+  inputFields: z.array(solanaActionParamSchema),
+});
+export type SignUpAction = z.infer<typeof SignUpActionSchema>;
 /**
  * Event types for for campaign conversion requirements
  */
@@ -111,6 +117,7 @@ export enum EventType {
   SWAP = "SWAP",
   NFT_COLLECTION_TRADE = "NFT_COLLECTION_TRADE",
   HEDGEHOG_PLACE_BET = "HEDGEHOG_PLACE_BET",
+  SIGN_UP = "SIGN_UP",
 }
 
 /**
@@ -139,7 +146,14 @@ export const CreateCampaignSchema = z.object({
   landingPage: z.string(),
 
   eventType: z.nativeEnum(EventType),
-  eventConfig: z.union([SwapActionSchema, NftCollectionTradeSchema]).optional(),
+  eventConfig: z
+    .union([
+      SwapActionSchema,
+      NftCollectionTradeSchema,
+      ClickActionSchema,
+      SignUpActionSchema,
+    ])
+    .optional(),
 
   publisherRewardType: z.nativeEnum(RewardType),
   publisherTokenAddress: z.string().optional(),
