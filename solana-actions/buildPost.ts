@@ -3,11 +3,7 @@ import {
   NftCollectionTradeAction,
   HedgehogPlaceBetAction,
 } from "../types.js";
-<<<<<<< HEAD
 import { getTokenDetails } from "../tokens.js";
-=======
-import { getSplDetails } from "../tokens.js";
->>>>>>> baa8e80 (Update tensor endpoint for post)
 import { getTensorSlugFromCollectionAddress } from "./util.js";
 
 export const swapPost = async (swapAction: SwapAction): Promise<string> => {
@@ -16,11 +12,7 @@ export const swapPost = async (swapAction: SwapAction): Promise<string> => {
     urlOutToken: string,
     tokenDetails: any;
   if (swapAction.inToken && swapAction.inAmount && swapAction.outToken) {
-<<<<<<< HEAD
     tokenDetails = await getTokenDetails(swapAction.inToken);
-=======
-    tokenDetails = await getSplDetails(swapAction.inToken);
->>>>>>> baa8e80 (Update tensor endpoint for post)
     swapAmount = tokenDetails.usdcValuePerToken * swapAction.inAmount;
     urlInToken = swapAction.inToken;
     urlOutToken = swapAction.outToken;
@@ -29,29 +21,17 @@ export const swapPost = async (swapAction: SwapAction): Promise<string> => {
     swapAction.outAmount &&
     swapAction.outToken
   ) {
-<<<<<<< HEAD
     tokenDetails = await getTokenDetails(swapAction.outToken);
-=======
-    tokenDetails = await getSplDetails(swapAction.outToken);
->>>>>>> baa8e80 (Update tensor endpoint for post)
     swapAmount = tokenDetails.usdcValuePerToken * swapAction.outAmount;
     urlInToken = swapAction.inToken;
     urlOutToken = swapAction.outToken;
   } else if (swapAction.inToken && swapAction.inAmount) {
-<<<<<<< HEAD
     tokenDetails = await getTokenDetails(swapAction.inToken);
-=======
-    tokenDetails = await getSplDetails(swapAction.inToken);
->>>>>>> baa8e80 (Update tensor endpoint for post)
     swapAmount = tokenDetails.usdcValuePerToken * swapAction.inAmount;
     urlInToken = swapAction.inToken;
     urlOutToken = "SOL";
   } else if (swapAction.outToken && swapAction.outAmount) {
-<<<<<<< HEAD
     tokenDetails = await getTokenDetails(swapAction.outToken);
-=======
-    tokenDetails = await getSplDetails(swapAction.outToken);
->>>>>>> baa8e80 (Update tensor endpoint for post)
     swapAmount = tokenDetails.usdcValuePerToken * swapAction.outAmount;
     urlInToken = "SOL";
     urlOutToken = swapAction.outToken;
@@ -70,11 +50,7 @@ export const nftCollectionBuyPost = async (
   const collectionSlug = await getTensorSlugFromCollectionAddress(
     collectionAddress
   );
-<<<<<<< HEAD
-  return `https://actions.dialect.to/api/tensor/buy-floor/${collectionSlug}`;
-=======
   return `https://tensor.dial.to/buy-floor/${collectionSlug}`;
->>>>>>> baa8e80 (Update tensor endpoint for post)
 };
 
 export const hedgehogBetPost = async (
