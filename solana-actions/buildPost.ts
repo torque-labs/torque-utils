@@ -4,6 +4,7 @@ import {
   HedgehogPlaceBetAction,
   SignUpAction,
   SolanaActionParam,
+  ClickAction,
 } from "../types.js";
 import { getTokenDetails } from "../tokens.js";
 import { getTensorSlugFromCollectionAddress, TORQUE_API_URL } from "./util.js";
@@ -91,4 +92,14 @@ export const memoPost = async (
     }
   });
   return url;
+};
+
+export const clickPost = async (
+  clickData: ClickAction,
+  query: { [key: string]: string }
+): Promise<string> => {
+  if (!clickData.enableBlink) {
+    throw new Error("Click action must have enableBlink set to true.");
+  }
+  return `${TORQUE_API_URL}/actions/memo?campaignId=${query.campaignId}&`;
 };

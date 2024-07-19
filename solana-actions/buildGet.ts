@@ -5,6 +5,7 @@ import {
   NftCollectionTradeAction,
   HedgehogPlaceBetAction,
   SignUpAction,
+  ClickAction,
 } from "../types.js";
 import { getTensorSlugFromCollectionAddress, TORQUE_API_URL } from "./util.js";
 
@@ -222,6 +223,38 @@ export const memoGet = async (
           ],
         };
       }),
+    },
+  } as ActionGetResponse;
+};
+
+export const clickGet = async (
+  clickData: ClickAction,
+  offerId: string,
+  title: string,
+  publisherHandle: string,
+  remainingConversions?: number,
+  imageUrl?: string,
+  description?: string
+) => {
+  if (!clickData.enableBlink) {
+    throw new Error("Click action must have enableBlink set to true.");
+  }
+  return {
+    title: `🔧 ${title} ⚡👀 ... ${
+      remainingConversions ? `\n${remainingConversions} offers remaining` : ""
+    }`,
+    icon: imageUrl
+      ? imageUrl
+      : "https://torque-assets.s3.us-east-1.amazonaws.com/clicky.png",
+    description: description,
+    label: "Sign Up",
+    links: {
+      actions: [
+        {
+          label: "CLICK", // button text
+          href: `${TORQUE_API_URL}/actions/${publisherHandle}/${offerId}?campaignId=${offerId}`,
+        },
+      ],
     },
   } as ActionGetResponse;
 };
