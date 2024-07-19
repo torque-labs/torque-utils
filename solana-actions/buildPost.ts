@@ -50,7 +50,7 @@ export const nftCollectionBuyPost = async (
   const collectionSlug = await getTensorSlugFromCollectionAddress(
     collectionAddress
   );
-  return `https://actions.dialect.to/api/tensor/buy-floor/${collectionSlug}`;
+  return `https://tensor.dial.to/buy-floor/${collectionSlug}`;
 };
 
 export const hedgehogBetPost = async (
