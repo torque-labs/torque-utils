@@ -6,37 +6,131 @@ import {
   HedgehogPlaceBetAction,
   SignUpAction,
   ClickAction,
+  EventType,
 } from "../types.js";
 import { getTensorSlugFromCollectionAddress, TORQUE_API_URL } from "./util.js";
 
+const buildTitle = async (
+  eventType: EventType,
+  eventConfig: any,
+  incomingBlink?: ActionGetResponse
+) => {
+  let words: string;
+  if (eventType === EventType.NFT_COLLECTION_TRADE) {
+    const collection = incomingBlink?.title.split("Buy Floor ")[1];
+    if (eventConfig.tradeType === "BUY") {
+      words = `Buy ${collection}`;
+    } else if (eventConfig.tradeType === "SELL") {
+      words = `Sell ${collection}`;
+    } else {
+      words = `Trade ${collection}`;
+    }
+  } else if (eventType === EventType.SWAP) {
+    if (
+      eventConfig.inToken &&
+      eventConfig.inAmount > 0 &&
+      eventConfig.outToken
+    ) {
+      const inDetails = await getTokenDetails(eventConfig.inToken);
+      const outDetails = await getTokenDetails(eventConfig.outToken);
+      words = `Swap ${eventConfig.inAmount} $${inDetails.symbol} for $${outDetails.symbol}`;
+    } else if (
+      eventConfig.inToken &&
+      eventConfig.outAmount > 0 &&
+      eventConfig.outToken
+    ) {
+      const inDetails = await getTokenDetails(eventConfig.inToken);
+      const outDetails = await getTokenDetails(eventConfig.outToken);
+      words = `Swap $${inDetails.symbol} for ${eventConfig.outAmount} $${outDetails.symbol}`;
+    } else if (
+      eventConfig.inToken &&
+      eventConfig.inAmount > 0 &&
+      !eventConfig.outToken
+    ) {
+      const inDetails = await getTokenDetails(eventConfig.inToken);
+      words = `Sell ${eventConfig.inAmount} $${inDetails.symbol}`;
+    } else if (
+      eventConfig.outToken &&
+      eventConfig.outAmount > 0 &&
+      !eventConfig.inToken
+    ) {
+      const outDetails = await getTokenDetails(eventConfig.outToken);
+      words = `Buy ${eventConfig.outAmount} $${outDetails.symbol}`;
+    } else {
+      throw new Error("Invalid swap action schema");
+    }
+  } else {
+    throw new Error("Invalid event type");
+  }
+  return words;
+};
+
 export const convertBlinkToTorqueBlink = async (
   blink: ActionGetResponse,
+  eventType: EventType,
+  eventConfig: any,
   offerId: string,
   publisherHandle: string,
   remainingConversions?: number,
   userRewardType?: string,
   userRewardToken?: string,
-  userRewardAmount?: number
+  userRewardAmount?: number,
+  raffleRewardType?: string,
+  raffleRewardToken?: string,
+  raffleRewardAmount?: number
 ): Promise<ActionGetResponse> => {
-  let description = blink.description;
-  if (userRewardType === "TOKENS" && userRewardToken && userRewardAmount) {
-    const tokenDetails = await getTokenDetails(userRewardToken);
-    const amount =
-      Number(userRewardAmount) / Math.pow(10, tokenDetails.decimals);
-    description = `Earn ${amount} $${tokenDetails.symbol} by Blinking with Torque!`;
+  const title =
+    eventType === EventType.SWAP || eventType === EventType.NFT_COLLECTION_TRADE
+      ? await buildTitle(eventType, eventConfig, blink)
+      : eventType === EventType.SIGN_UP
+      ? "Sign Up"
+      : blink.title;
+
+  let description;
+  if (
+    raffleRewardType === "TOKENS" &&
+    raffleRewardToken &&
+    raffleRewardAmount
+  ) {
+    const rewardDetails = await getTokenDetails(raffleRewardToken);
+    description = `🎟️ Raffle Prize: ${
+      raffleRewardAmount / 10 ** rewardDetails.decimals
+    } $${rewardDetails.symbol}`;
+  } else if (
+    userRewardType === "TOKENS" &&
+    userRewardToken &&
+    userRewardAmount
+  ) {
+    const rewardDetails = await getTokenDetails(userRewardToken);
+    description = `🤑 Reward: ${
+      userRewardAmount / 10 ** rewardDetails.decimals
+    } $${rewardDetails.symbol}`;
+  } else {
+    description = blink.description;
   }
 
+  const label =
+    EventType.SWAP === eventType
+      ? "SWAP TOKENS"
+      : EventType.NFT_COLLECTION_TRADE === eventType
+      ? "TRADE NFT"
+      : EventType.CLICK === eventType
+      ? "CLICK"
+      : EventType.SIGN_UP === eventType
+      ? "SIGN UP"
+      : blink.label;
+
   return {
-    title: `🔧 ${blink.title} ⚡👀 ${
+    title: `${title} 🔧 ${
       remainingConversions
-        ? `| ${remainingConversions} conversions remaining`
-        : ""
+        ? `${remainingConversions} remaining`
+        : "Boosted Blink!"
     }`,
     icon: blink.icon
       ? blink.icon
-      : "https://torque-assets.s3.us-east-1.amazonaws.com/clicky.png",
+      : "https://torque-assets.s3.amazonaws.com/logo.png",
     description: description,
-    label: blink.label,
+    label: label,
     links: blink.links?.actions?.length
       ? {
           ...blink.links,
@@ -64,41 +158,17 @@ export const swapGet = async (
   remainingConversions?: number,
   userRewardType?: string,
   userRewardToken?: string,
-  userRewardAmount?: number
+  userRewardAmount?: number,
+  raffleRewardType?: string,
+  raffleRewardToken?: string,
+  raffleRewardAmount?: number
 ) => {
   console.log({ swapAction });
-  let label: string;
-  if (swapAction.inToken && swapAction.inAmount && swapAction.outToken) {
-    const inDetails = await getTokenDetails(swapAction.inToken);
-    const outDetails = await getTokenDetails(swapAction.outToken);
-    label = `Swap ${swapAction.inAmount} $${inDetails.symbol} for $${outDetails.symbol}`;
-  } else if (
-    swapAction.inToken &&
-    swapAction.outAmount &&
-    swapAction.outToken
-  ) {
-    const inDetails = await getTokenDetails(swapAction.inToken);
-    const outDetails = await getTokenDetails(swapAction.outToken);
-    label = `Swap $${inDetails.symbol} for ${swapAction.outAmount} $${outDetails.symbol}`;
-  } else if (swapAction.inToken && swapAction.inAmount) {
-    const inDetails = await getTokenDetails(swapAction.inToken);
-    label = `Sell ${swapAction.inAmount} $${inDetails.symbol}`;
-  } else if (swapAction.outToken && swapAction.outAmount) {
-    const outDetails = await getTokenDetails(swapAction.outToken);
-    label = `Buy ${swapAction.outAmount} $${outDetails.symbol}`;
-  } else {
-    throw new Error("Invalid swap action schema");
-  }
+  let label = `Swap`;
   let description: string =
     "Swap your tokens through Torque for extra rewards!";
-  if (userRewardType === "TOKENS" && userRewardToken && userRewardAmount) {
-    const tokenDetails = await getTokenDetails(userRewardToken);
-    const amount =
-      Number(userRewardAmount) / Math.pow(10, tokenDetails.decimals);
-    description = `Earn ${amount} $${tokenDetails.symbol} by swapping through Torque!`;
-  }
-  return {
-    title: `🔧 ${offerTitle} ⚡👀 ... ${
+  const blink = {
+    title: `🔧 ${offerTitle} ... ${
       remainingConversions ? `\n${remainingConversions} offers remaining` : ""
     }`,
     icon: offerImageUrl
@@ -115,6 +185,20 @@ export const swapGet = async (
       ],
     },
   } as ActionGetResponse;
+  return convertBlinkToTorqueBlink(
+    blink,
+    EventType.SWAP,
+    swapAction,
+    offerId,
+    publisherHandle,
+    remainingConversions,
+    userRewardType,
+    userRewardToken,
+    userRewardAmount,
+    raffleRewardType,
+    raffleRewardToken,
+    raffleRewardAmount
+  );
 };
 
 export const nftCollectionTradeGet = async (
@@ -124,7 +208,10 @@ export const nftCollectionTradeGet = async (
   remainingConversions?: number,
   userRewardType?: string,
   userRewardToken?: string,
-  userRewardAmount?: number
+  userRewardAmount?: number,
+  raffleRewardType?: string,
+  raffleRewardToken?: string,
+  raffleRewardAmount?: number
 ): Promise<ActionGetResponse> => {
   const { collectionAddress } = tensorFloorBuyAction;
   console.log(collectionAddress);
@@ -138,12 +225,17 @@ export const nftCollectionTradeGet = async (
   const details: ActionGetResponse = await response.json();
   return convertBlinkToTorqueBlink(
     details,
+    EventType.NFT_COLLECTION_TRADE,
+    tensorFloorBuyAction,
     offerId,
     publisherHandle,
     remainingConversions,
     userRewardType,
     userRewardToken,
-    userRewardAmount
+    userRewardAmount,
+    raffleRewardType,
+    raffleRewardToken,
+    raffleRewardAmount
   );
 };
 
@@ -182,6 +274,8 @@ export const hedgehogBetGet = async (
   }
   return convertBlinkToTorqueBlink(
     betData,
+    EventType.HEDGEHOG_PLACE_BET,
+    hedgehogBetAction,
     offerId,
     publisherHandle,
     remainingConversions,
@@ -198,12 +292,16 @@ export const memoGet = async (
   publisherHandle: string,
   remainingConversions?: number,
   imageUrl?: string,
-  description?: string
+  description?: string,
+  userRewardType?: string,
+  userRewardToken?: string,
+  userRewardAmount?: number,
+  raffleRewardType?: string,
+  raffleRewardToken?: string,
+  raffleRewardAmount?: number
 ) => {
-  return {
-    title: `🔧 ${title} ⚡👀 ... ${
-      remainingConversions ? `\n${remainingConversions} offers remaining` : ""
-    }`,
+  const blink = {
+    title,
     icon: imageUrl
       ? imageUrl
       : "https://torque-assets.s3.us-east-1.amazonaws.com/clicky.png",
@@ -225,6 +323,20 @@ export const memoGet = async (
       }),
     },
   } as ActionGetResponse;
+  return convertBlinkToTorqueBlink(
+    blink,
+    EventType.SIGN_UP,
+    signUpData,
+    offerId,
+    publisherHandle,
+    remainingConversions,
+    userRewardType,
+    userRewardToken,
+    userRewardAmount,
+    raffleRewardType,
+    raffleRewardToken,
+    raffleRewardAmount
+  );
 };
 
 export const clickGet = async (
@@ -234,15 +346,19 @@ export const clickGet = async (
   publisherHandle: string,
   remainingConversions?: number,
   imageUrl?: string,
-  description?: string
+  description?: string,
+  userRewardType?: string,
+  userRewardToken?: string,
+  userRewardAmount?: number,
+  raffleRewardType?: string,
+  raffleRewardToken?: string,
+  raffleRewardAmount?: number
 ) => {
   if (!clickData.enableBlink) {
     throw new Error("Click action must have enableBlink set to true.");
   }
-  return {
-    title: `🔧 ${title} ⚡👀 ... ${
-      remainingConversions ? `\n${remainingConversions} offers remaining` : ""
-    }`,
+  const blink = {
+    title,
     icon: imageUrl
       ? imageUrl
       : "https://torque-assets.s3.us-east-1.amazonaws.com/clicky.png",
@@ -257,4 +373,19 @@ export const clickGet = async (
       ],
     },
   } as ActionGetResponse;
+
+  return convertBlinkToTorqueBlink(
+    blink,
+    EventType.CLICK,
+    clickData,
+    offerId,
+    publisherHandle,
+    remainingConversions,
+    userRewardType,
+    userRewardToken,
+    userRewardAmount,
+    raffleRewardType,
+    raffleRewardToken,
+    raffleRewardAmount
+  );
 };
