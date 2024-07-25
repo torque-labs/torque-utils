@@ -1,15 +1,11 @@
 import { z } from "zod";
 
-/**
- * Base schema for swap action
- */
-const SwapActionBaseSchema = z.object({
-  inToken: z.string().nullish(),
-  outToken: z.string().nullish(),
-  inAmount: z.coerce.number().nullish(),
-  outAmount: z.coerce.number().nullish(),
-  usdcValue: z.coerce.number().nullish(),
-});
+import {
+  SwapActionSchema,
+  NftCollectionTradeSchema,
+  ClickActionSchema,
+  SignUpActionSchema,
+} from "./actions.js";
 
 /**
  * Offer types for campaigns
@@ -19,96 +15,6 @@ export enum OfferType {
   BOUNTY = "BOUNTY", // TODO: ACTION
 }
 
-/**
- * Refined schema for swap action with valid combinations
- *
- * @description
- * sell -> token and amount
- * buy -> token and amount
- * swap -> both token and one amount
- */
-export const SwapActionSchema = SwapActionBaseSchema.refine(
-  (data) => {
-    // sell -> token and amount
-    if (data.inToken && data.inAmount !== null) {
-      return true;
-    }
-    // buy -> token and amount
-    if (data.outToken && data.outAmount !== null) {
-      return true;
-    }
-    // swap -> both token and one amount
-    if (
-      data.inToken &&
-      data.outToken &&
-      (data.inAmount !== null || data.outAmount !== null)
-    ) {
-      return true;
-    }
-    return false;
-  },
-  {
-    message: "Invalid swap action configuration.",
-    path: [],
-  }
-);
-/**
- * Swap action type
- */
-export type SwapAction = z.infer<typeof SwapActionSchema>;
-
-/**
- * NFT collection trade types
- */
-export enum NftCollectionTradeType {
-  BUY = "BUY",
-  SELL = "SELL",
-  TRADE = "TRADE",
-}
-
-/**
- * NFT collection trade schema
- */
-export const NftCollectionTradeSchema = z.object({
-  collectionAddress: z.string(),
-  tradeType: z.nativeEnum(NftCollectionTradeType),
-});
-
-/**
- * NFT collection trade action
- */
-export type NftCollectionTradeAction = z.infer<typeof NftCollectionTradeSchema>;
-
-/**
- * Hedgehog place bet action schema
- */
-export const HedgehogPlaceBetActionSchema = z.object({
-  market: z.string(),
-  usdcAmount: z.coerce.number(),
-});
-
-/**
- * Hedgehog place bet action type
- */
-export type HedgehogPlaceBetAction = z.infer<
-  typeof HedgehogPlaceBetActionSchema
->;
-
-export const ClickActionSchema = z.object({
-  enableBlink: z.boolean(),
-});
-export type ClickAction = z.infer<typeof ClickActionSchema>;
-
-const solanaActionParamSchema = z.object({
-  label: z.string(),
-  paramName: z.string(),
-  required: z.boolean(),
-});
-export type SolanaActionParam = z.infer<typeof solanaActionParamSchema>;
-export const SignUpActionSchema = z.object({
-  inputFields: z.array(solanaActionParamSchema),
-});
-export type SignUpAction = z.infer<typeof SignUpActionSchema>;
 /**
  * Event types for for campaign conversion requirements
  */
@@ -138,7 +44,20 @@ export enum RewardType {
 }
 
 /**
+ * Schemas + types for campaigns
+ */
+export const AssymetricRewardSchema = z.object({
+  tokenAddress: z.string(),
+  amount: z.number(),
+  userPubKey: z.string().nullish(),
+});
+
+export type AssymetricReward = z.infer<typeof AssymetricRewardSchema>;
+
+/**
  * Schema for creating a new campaign
+ *
+ * TODO: Update as server would expect
  */
 export const CreateCampaignSchema = z.object({
   campaignName: z.string(),
