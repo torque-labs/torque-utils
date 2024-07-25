@@ -93,9 +93,14 @@ export const convertBlinkToTorqueBlink = async (
     raffleRewardAmount
   ) {
     const rewardDetails = await getTokenDetails(raffleRewardToken);
+    console.log(rewardDetails);
+    const tokenDesc =
+      rewardDetails.tokenStandard === "ProgrammableNonFungible"
+        ? rewardDetails.name
+        : `$${rewardDetails.symbol}`;
     description = `🎟️ Raffle Prize: ${
       raffleRewardAmount / 10 ** rewardDetails.decimals
-    } $${rewardDetails.symbol}`;
+    } ${tokenDesc}`;
   } else if (
     userRewardType === "TOKENS" &&
     userRewardToken &&
