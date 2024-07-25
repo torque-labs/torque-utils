@@ -48,7 +48,7 @@ export enum RewardType {
  */
 export const AssymetricRewardSchema = z.object({
   tokenAddress: z.string(),
-  amount: z.number(),
+  amount: z.string(),
   userPubKey: z.string().nullish(),
 });
 
