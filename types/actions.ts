@@ -82,6 +82,11 @@ export const NftCollectionTradeSchema = z.object({
  */
 export type NftCollectionTradeAction = z.infer<typeof NftCollectionTradeSchema>;
 
+export const NftBuyBidSchema = z.object({
+  nftMint: z.string(),
+});
+export type NftBuyBidAction = z.infer<typeof NftBuyBidSchema>;
+
 /**
  * HEDGEHOG ACTIONS
  * ============================================================
