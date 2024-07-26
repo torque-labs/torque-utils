@@ -5,6 +5,7 @@ import {
   SignUpAction,
   SolanaActionParam,
   ClickAction,
+  NftBuyBidAction,
 } from "../types.js";
 import { getTensorSlugFromCollectionAddress, TORQUE_API_URL } from "./util.js";
 
@@ -20,6 +21,13 @@ export const nftCollectionBuyPost = async (
     collectionAddress
   );
   return `https://tensor.dial.to/buy-floor/${collectionSlug}`;
+};
+
+export const nftBuyBidPost = async (
+  tensorFloorBuyAction: NftBuyBidAction
+): Promise<string> => {
+  const { nftMint } = tensorFloorBuyAction;
+  return `https://tensor.dial.to/bid/${nftMint}`;
 };
 
 export const hedgehogBetPost = async (

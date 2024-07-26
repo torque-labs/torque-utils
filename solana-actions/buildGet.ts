@@ -7,6 +7,7 @@ import {
   SignUpAction,
   ClickAction,
   EventType,
+  NftBuyBidAction,
 } from "../types.js";
 import { getTensorSlugFromCollectionAddress, TORQUE_API_URL } from "./util.js";
 
@@ -15,6 +16,7 @@ const buildTitle = async (
   eventConfig: any,
   incomingBlink?: ActionGetResponse
 ) => {
+  console.log(eventType, eventConfig);
   let words: string;
   if (eventType === EventType.NFT_COLLECTION_TRADE) {
     const collection = incomingBlink?.title.split("Buy Floor ")[1];
@@ -59,6 +61,8 @@ const buildTitle = async (
     } else {
       throw new Error("Invalid swap action schema");
     }
+  } else if (eventType === EventType.NFT_BUY_BID) {
+    words = incomingBlink?.title ?? "Buy or Bid on this NFT";
   } else {
     throw new Error("Invalid event type");
   }
@@ -80,7 +84,9 @@ export const convertBlinkToTorqueBlink = async (
   raffleRewardAmount?: number
 ): Promise<ActionGetResponse> => {
   const title =
-    eventType === EventType.SWAP || eventType === EventType.NFT_COLLECTION_TRADE
+    eventType === EventType.SWAP ||
+    eventType === EventType.NFT_COLLECTION_TRADE ||
+    eventType === EventType.NFT_BUY_BID
       ? await buildTitle(eventType, eventConfig, blink)
       : eventType === EventType.SIGN_UP
       ? "Sign Up"
@@ -231,6 +237,38 @@ export const nftCollectionTradeGet = async (
   return convertBlinkToTorqueBlink(
     details,
     EventType.NFT_COLLECTION_TRADE,
+    tensorFloorBuyAction,
+    offerId,
+    publisherHandle,
+    remainingConversions,
+    userRewardType,
+    userRewardToken,
+    userRewardAmount,
+    raffleRewardType,
+    raffleRewardToken,
+    raffleRewardAmount
+  );
+};
+
+export const nftBuyBidGet = async (
+  tensorFloorBuyAction: NftBuyBidAction,
+  offerId: string,
+  publisherHandle: string,
+  remainingConversions?: number,
+  userRewardType?: string,
+  userRewardToken?: string,
+  userRewardAmount?: number,
+  raffleRewardType?: string,
+  raffleRewardToken?: string,
+  raffleRewardAmount?: number
+): Promise<ActionGetResponse> => {
+  const { nftMint } = tensorFloorBuyAction;
+  const response = await fetch(`https://tensor.dial.to/bid/${nftMint}`);
+  const details: ActionGetResponse = await response.json();
+  console.log(details);
+  return convertBlinkToTorqueBlink(
+    details,
+    EventType.NFT_BUY_BID,
     tensorFloorBuyAction,
     offerId,
     publisherHandle,
