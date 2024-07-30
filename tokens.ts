@@ -46,6 +46,9 @@ export async function getTokenDetails(tokenAddress: string): Promise<Token> {
           price_per_token: number;
         };
       };
+      compression: {
+        compressed: boolean;
+      };
     };
   };
 
@@ -54,12 +57,13 @@ export async function getTokenDetails(tokenAddress: string): Promise<Token> {
       name: result.content.metadata.name,
       symbol: result.content.metadata.symbol,
       logo: result.content.links.image,
-      decimals: result.token_info.decimals,
+      decimals: result.token_info?.decimals ?? 0,
       usdcValuePerToken:
         result.token_info?.price_info?.currency === "USDC"
           ? result.token_info.price_info.price_per_token
           : 1,
       tokenStandard: result.content?.metadata?.token_standard,
+      isCompressed: result.compression.compressed,
     };
   } else {
     throw new Error("Token not found");

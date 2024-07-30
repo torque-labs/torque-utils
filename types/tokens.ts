@@ -5,4 +5,5 @@ export type Token = {
   symbol: string;
   usdcValuePerToken: number;
   tokenStandard?: string;
+  isCompressed?: boolean;
 };
