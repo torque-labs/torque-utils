@@ -44,15 +44,23 @@ export enum RewardType {
 }
 
 /**
+ * Raffle participant types
+ */
+export enum RaffleParticipants {
+  USER = "USER",
+  PUBLISHER = "PUBLISHER",
+  BOTH = "BOTH",
+}
+
+/**
  * Schemas + types for campaigns
  */
 export const AssymetricRewardSchema = z.object({
   tokenAddress: z.string(),
   amount: z.string(),
   userPubKey: z.string().nullish(),
+  participants: z.nativeEnum(RaffleParticipants).nullish(),
 });
-
-export type AssymetricReward = z.infer<typeof AssymetricRewardSchema>;
 
 /**
  * Schema for creating a new campaign
