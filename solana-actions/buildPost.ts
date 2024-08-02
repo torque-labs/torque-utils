@@ -15,9 +15,9 @@ export const swapPost = async (campaignId: string): Promise<string> => {
 export const nftCollectionBuyPost = async (
   tensorFloorBuyAction: NftCollectionTradeAction
 ): Promise<string> => {
-  const { collectionAddress } = tensorFloorBuyAction;
+  const { collectionAddresses } = tensorFloorBuyAction;
   const collectionSlug = await getTensorSlugFromCollectionAddress(
-    collectionAddress
+    collectionAddresses[0]
   );
   return `https://tensor.dial.to/buy-floor/${collectionSlug}`;
 };

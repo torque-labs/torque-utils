@@ -1,5 +1,11 @@
 import { z } from "zod";
 
+const TimeRequirementSchema = z.object({
+  positionOpenThroughDate: z.date().optional(),
+  tokenBalanceHeldThroughDate: z.date().optional(),
+});
+export type TimeRequirement = z.infer<typeof TimeRequirementSchema>;
+
 /**
  * SWAP ACTIONS
  * ============================================================
@@ -67,14 +73,16 @@ export enum NftCollectionTradeType {
   BUY = "BUY",
   SELL = "SELL",
   TRADE = "TRADE",
+  BID = "BID",
 }
 
 /**
  * NFT collection trade schema
  */
 export const NftCollectionTradeSchema = z.object({
-  collectionAddress: z.string(),
+  collectionAddresses: z.array(z.string()),
   tradeType: z.nativeEnum(NftCollectionTradeType),
+  timeRequirement: TimeRequirementSchema.optional(),
 });
 
 /**

@@ -218,10 +218,10 @@ export const nftCollectionTradeGet = async (
   raffleRewardToken?: string,
   raffleRewardAmount?: number
 ): Promise<ActionGetResponse> => {
-  const { collectionAddress } = tensorFloorBuyAction;
-  console.log(collectionAddress);
+  const { collectionAddresses } = tensorFloorBuyAction;
+  console.log(collectionAddresses);
   const collectionSlug = await getTensorSlugFromCollectionAddress(
-    collectionAddress
+    collectionAddresses[0]
   );
   console.log(collectionSlug);
   const response = await fetch(
