@@ -90,14 +90,14 @@ export type NftCollectionTradeAction = z.infer<typeof NftCollectionTradeSchema>;
 /**
  * Tensor action schema
  */
-export const tensorActionSchema = z.object({
+export const TensorActionSchema = z.object({
   collectionAddress: z.array(z.string().min(32).max(64)),
 });
 
 /**
  * Tensor action type
  */
-export type TensorAction = z.infer<typeof tensorActionSchema>;
+export type TensorAction = z.infer<typeof TensorActionSchema>;
 
 /**
  * HEDGEHOG ACTIONS

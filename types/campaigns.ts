@@ -5,6 +5,8 @@ import {
   NftCollectionTradeSchema,
   ClickActionSchema,
   SignUpActionSchema,
+  HedgehogPlaceBetActionSchema,
+  TensorActionSchema,
 } from "./actions.js";
 
 /**
@@ -57,6 +59,10 @@ export enum RaffleParticipants {
 /**
  * Schemas + types for campaigns
  */
+
+/**
+ * Asymmetric Reward Schema
+ */
 export const AsymmetricRewardSchema = z.object({
   tokenAddress: z.string(),
   amount: z.string(),
@@ -64,43 +70,55 @@ export const AsymmetricRewardSchema = z.object({
   participants: z.nativeEnum(RaffleParticipants).nullish(),
 });
 
+/**
+ * Asymmetric Reward type
+ */
 export type AsymmetricReward = z.infer<typeof AsymmetricRewardSchema>;
 
 /**
  * Schema for creating a new campaign
- *
- * TODO: Update as server would expect
  */
-export const CreateCampaignSchema = z.object({
+const CreateCampaignInputSchema = z.object({
+  // Campaign Details
   campaignName: z.string(),
   campaignType: z.string(),
+  campaignDescription: z.string().max(250).nullish(),
+  campaignContent: z.string().nullish(),
+  campaignImage: z.string().nullish(),
   landingPage: z.string(),
 
+  // Event Details
   eventType: z.nativeEnum(EventType),
   eventConfig: z
     .union([
       SwapActionSchema,
       NftCollectionTradeSchema,
-      ClickActionSchema,
+      HedgehogPlaceBetActionSchema,
       SignUpActionSchema,
+      ClickActionSchema,
+      TensorActionSchema,
     ])
     .optional(),
 
+  // Reward Details
+  conversionCount: z.number().optional().nullable(),
   publisherRewardType: z.nativeEnum(RewardType),
   publisherTokenAddress: z.string().optional(),
   publisherPayoutPerConversion: z.number(),
   userRewardType: z.nativeEnum(RewardType).optional(),
   userTokenAddress: z.string().optional(),
   userPayoutPerConversion: z.number().optional(),
+  asymmetricRewards: z.array(AsymmetricRewardSchema).optional(),
 
+  // Time Details
   startTime: z.number(),
   endTime: z.number(),
-  audience: z.string().optional().nullable(),
 
-  asymmetricRewards: z.array(
-    z.object({
-      tokenAddress: z.string(),
-      amount: z.number(),
-    })
-  ),
+  // Audience Details
+  audience: z.string().optional().nullable(),
 });
+
+/**
+ *
+ */
+export type CreateCampaignInput = z.infer<typeof CreateCampaignInputSchema>;
