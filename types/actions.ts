@@ -91,7 +91,7 @@ export type NftCollectionTradeAction = z.infer<typeof NftCollectionTradeSchema>;
  * Tensor action schema
  */
 export const TensorActionSchema = z.object({
-  collectionAddress: z.array(z.string().min(32).max(64)),
+  collectionIds: z.array(z.string().min(1)),
 });
 
 /**
