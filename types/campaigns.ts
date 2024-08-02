@@ -78,7 +78,7 @@ export type AsymmetricReward = z.infer<typeof AsymmetricRewardSchema>;
 /**
  * Schema for creating a new campaign
  */
-const CreateCampaignInputSchema = z.object({
+export const CreateCampaignInputSchema = z.object({
   // Campaign Details
   campaignName: z.string(),
   campaignType: z.string(),
