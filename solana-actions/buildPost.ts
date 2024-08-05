@@ -1,3 +1,4 @@
+import { fetchSingleCollectionDetails } from "../lib/tensor-api.js";
 import {
   SwapAction,
   NftCollectionTradeAction,
@@ -20,6 +21,19 @@ export const nftCollectionBuyPost = async (
     collectionAddress
   );
   return `https://tensor.dial.to/buy-floor/${collectionSlug}`;
+};
+
+export const tensorCollectionBuyFloorPost = async (
+  tensorCollectoinId: string
+): Promise<string> => {
+  const { slugdisplay } = await fetchSingleCollectionDetails(
+    tensorCollectoinId
+  );
+  return `https://tensor.so/collections/${slugdisplay}`;
+};
+
+export const tensorCollectionBidPost = (tensorCollectoinId: string): string => {
+  return `${TORQUE_API_URL}/actions/tensor/collection-bid?collectionId=${tensorCollectoinId}`;
 };
 
 export const hedgehogBetPost = async (

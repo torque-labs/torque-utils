@@ -1,5 +1,3 @@
-import { Connection } from "@solana/web3.js";
-
 export const TENSOR_API = "https://api.mainnet.tensordev.io/api/v1";
 export const fetchUserBids = async (userPubKey: string) => {
   const response = await fetch(
@@ -20,29 +18,6 @@ export const fetchUserBids = async (userPubKey: string) => {
 export const fetchUserBidActions = async (userPubKey: string) => {
   const response = await fetch(
     `${TENSOR_API}/user/transactions?wallets=${userPubKey}&limit=100&txTypes=SWAP_INIT_POOL&txTypes=SWAP_CLOSE_POOL&txTypes=SWAP_BUY_NFT&txTypes=CANCEL_BID&txTypes=PLACE_BID`,
-    {
-      method: "GET",
-      headers: {
-        accept: "application/json",
-        "x-tensor-api-key": process.env.TENSOR_API_KEY as string,
-      },
-    }
-  )
-    .then((response) => response.json())
-    .catch((err) => console.error(err));
-  return response;
-};
-
-export const buildCollectionBidTransaction = async (
-  userPubKey: string,
-  collection: any,
-  price: number = 1,
-  quantity: number = 1
-) => {
-  const connection = new Connection(process.env.RPC as string, "confirmed");
-  const { blockhash } = await connection.getLatestBlockhash();
-  const response = await fetch(
-    `${TENSOR_API}/tx/collection_bid?owner=${userPubKey}&price=${price}&quantity=${quantity}&collId=${collection}&blockhash=${blockhash}`,
     {
       method: "GET",
       headers: {
