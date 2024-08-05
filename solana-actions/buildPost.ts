@@ -29,7 +29,7 @@ export const tensorCollectionBuyFloorPost = async (
   const { slugdisplay } = await fetchSingleCollectionDetails(
     tensorCollectoinId
   );
-  return `https://tensor.so/collections/${slugdisplay}`;
+  return `https://tensor.dial.to/buy-floor/${slugdisplay}`;
 };
 
 export const tensorCollectionBidPost = (tensorCollectoinId: string): string => {
