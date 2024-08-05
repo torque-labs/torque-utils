@@ -88,9 +88,13 @@ export const mapCollection = (collection: any) => {
     compressed: collection.compressed,
   };
 };
-export const fetchCollections = async () => {
+export const fetchCollections = async (collectionIds?: string[]) => {
+  const collectionQuery = collectionIds
+    ? `&collIds=${collectionIds.join(",")}`
+    : "";
+
   const { collections } = await fetch(
-    `${TENSOR_API}/collections?sortBy=statsV2.volume7d%3Adesc&limit=100`,
+    `${TENSOR_API}/collections?sortBy=statsV2.volume7d%3Adesc&limit=100${collectionQuery}`,
     {
       method: "GET",
       headers: {
@@ -101,6 +105,7 @@ export const fetchCollections = async () => {
   )
     .then((response) => response.json())
     .catch((err) => console.error(err));
+
   return collections.map(mapCollection);
 };
 export const fetchSingleCollectionDetails = async (collectionId: string) => {
