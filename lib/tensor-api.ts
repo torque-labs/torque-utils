@@ -31,6 +31,18 @@ export const fetchUserBidActions = async (userPubKey: string) => {
   return response;
 };
 
+export const fetchNftDetails = async (mint: string) => {
+  return await fetch(`${TENSOR_API}/mint?mint=${mint}`, {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      "x-tensor-api-key": process.env.TENSOR_API_KEY as string,
+    },
+  })
+    .then((response) => response.json())
+    .catch((err) => console.error(err));
+};
+
 function uint8ArrayToUuidString(uint8Array: Uint8Array): string {
   // Convert the Uint8Array to a string of hex characters
   let hexString = "";
