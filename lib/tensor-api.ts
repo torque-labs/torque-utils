@@ -2,77 +2,56 @@ import { fetchWhitelist, Whitelist } from "@tensor-foundation/whitelist";
 import { address, createSolanaRpc } from "solana2.0";
 
 export const TENSOR_API = "https://api.mainnet.tensordev.io/api/v1";
+const tensorGetOptions = {
+  method: "GET",
+  headers: {
+    accept: "application/json",
+    "x-tensor-api-key": process.env.TENSOR_API_KEY as string,
+  },
+};
+
+/**
+ * Fetches user's active bids
+ */
 export const fetchUserBids = async (userPubKey: string) => {
   const response = await fetch(
     `${TENSOR_API}/user/coll_bids?owner=${userPubKey}&limit=100`,
-    {
-      method: "GET",
-      headers: {
-        accept: "application/json",
-        "x-tensor-api-key": process.env.TENSOR_API_KEY as string,
-      },
-    }
+    tensorGetOptions
   )
     .then((response) => response.json())
     .catch((err) => console.error(err));
   return response;
 };
 
+/**
+ * Fetches user's tensor actions
+ */
 export const fetchUserBidActions = async (userPubKey: string) => {
   const response = await fetch(
     `${TENSOR_API}/user/transactions?wallets=${userPubKey}&limit=100&txTypes=SWAP_INIT_POOL&txTypes=SWAP_CLOSE_POOL&txTypes=SWAP_BUY_NFT&txTypes=CANCEL_BID&txTypes=PLACE_BID`,
-    {
-      method: "GET",
-      headers: {
-        accept: "application/json",
-        "x-tensor-api-key": process.env.TENSOR_API_KEY as string,
-      },
-    }
+    tensorGetOptions
   )
     .then((response) => response.json())
     .catch((err) => console.error(err));
   return response;
 };
 
+/**
+ * Fetches a single NFT's details
+ */
 export const fetchNftDetails = async (mint: string) => {
-  return await fetch(`${TENSOR_API}/mint?mint=${mint}`, {
-    method: "GET",
-    headers: {
-      accept: "application/json",
-      "x-tensor-api-key": process.env.TENSOR_API_KEY as string,
-    },
-  })
+  return await fetch(`${TENSOR_API}/mint?mint=${mint}`, tensorGetOptions)
     .then((response) => response.json())
     .catch((err) => console.error(err));
 };
 
-function uint8ArrayToUuidString(uint8Array: Uint8Array): string {
-  // Convert the Uint8Array to a string of hex characters
-  let hexString = "";
-  for (let i = 0; i < uint8Array.length; i++) {
-    // Convert each byte to a hex string and pad with leading zero if necessary
-    hexString += String.fromCharCode(uint8Array[i]);
-  }
-
-  // Format the string according to UUID conventions: 8-4-4-4-12
-  return `${hexString.substring(0, 8)}-${hexString.substring(
-    8,
-    12
-  )}-${hexString.substring(12, 16)}-${hexString.substring(
-    16,
-    20
-  )}-${hexString.substring(20, 32)}`;
-}
+/**
+ * Fetches collection details using tensor's UUID
+ */
 export const getCollectionByUUID = async (uuid: string) => {
   const response = await fetch(
     `${TENSOR_API}/collections?sortBy=statsV2.volume1h%3Adesc&limit=1&collIds=${uuid}`,
-    {
-      method: "GET",
-      headers: {
-        accept: "application/json",
-        "x-tensor-api-key": process.env.TENSOR_API_KEY as string,
-      },
-    }
+    tensorGetOptions
   )
     .then((response) => response.json())
     .catch((err) => console.error(err));
@@ -91,6 +70,10 @@ export const mapCollection = (collection: any) => {
     compressed: collection.compressed,
   };
 };
+
+/**
+ * Fetches top 100 collection by 7d volume
+ */
 export const fetchCollections = async (collectionIds?: string[]) => {
   const collectionQuery = collectionIds
     ? `&collIds=${collectionIds.join(",")}`
@@ -98,36 +81,41 @@ export const fetchCollections = async (collectionIds?: string[]) => {
 
   const { collections } = await fetch(
     `${TENSOR_API}/collections?sortBy=statsV2.volume7d%3Adesc&limit=100${collectionQuery}`,
-    {
-      method: "GET",
-      headers: {
-        accept: "application/json",
-        "x-tensor-api-key": process.env.TENSOR_API_KEY as string,
-      },
-    }
+    tensorGetOptions
   )
     .then((response) => response.json())
     .catch((err) => console.error(err));
 
   return collections.map(mapCollection);
 };
+
+/**
+ * Fetches single collection details
+ */
 export const fetchSingleCollectionDetails = async (collectionId: string) => {
-  const response = await fetch(
-    `${TENSOR_API}/collections?sortBy=statsV2.volume7d%3Adesc&collIds=${collectionId}&limit=1`,
-    {
-      method: "GET",
-      headers: {
-        accept: "application/json",
-        "x-tensor-api-key": process.env.TENSOR_API_KEY as string,
-      },
-    }
-  )
-    .then((response) => response.json())
-    .catch((err) => console.error(err));
-  console.log(response);
-  return mapCollection(response.collections[0]);
+  const [{ collections }, { mints }] = await Promise.all([
+    fetch(
+      `${TENSOR_API}/collections?sortBy=statsV2.volume7d%3Adesc&collIds=${collectionId}&limit=1`,
+      tensorGetOptions
+    )
+      .then((response) => response.json())
+      .catch((err) => console.error(err)),
+    fetch(
+      "https://api.mainnet.tensordev.io/api/v1/mint/collection?collId=136f3198-c4c1-4ccf-966f-a5431a091581&sortBy=ListingPriceAsc&limit=1",
+      tensorGetOptions
+    )
+      .then((response) => response.json())
+      .catch((err) => console.error(err)),
+  ]);
+  return {
+    ...mapCollection(collections[0]),
+    metadataProgram: mints[0].metadataProgram,
+  };
 };
 
+/**
+ * Converts whitelist PDA to Tesnor collection UUID
+ */
 const uuidBytesToUuidString = (uuidBytes: Uint8Array): string => {
   let hexString = "";
   for (let i = 0; i < uuidBytes.length; i++) {
@@ -142,7 +130,6 @@ const uuidBytesToUuidString = (uuidBytes: Uint8Array): string => {
     20
   )}-${hexString.substring(20, 32)}`;
 };
-
 export const whiteListToCollectionId = async (whitelist: string) => {
   const rpc = createSolanaRpc(process.env.RPC as string);
   const whitelistData: Whitelist = await fetchWhitelist(
@@ -151,3 +138,9 @@ export const whiteListToCollectionId = async (whitelist: string) => {
   ).then((whitelistResponse) => whitelistResponse.data);
   return uuidBytesToUuidString(whitelistData.uuid as Uint8Array);
 };
+
+(async () => {
+  console.log(
+    await fetchSingleCollectionDetails("136f3198-c4c1-4ccf-966f-a5431a091581")
+  );
+})();
