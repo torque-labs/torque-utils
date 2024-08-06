@@ -86,6 +86,7 @@ export const CreateCampaignInputSchema = z.object({
   campaignContent: z.string().nullish(),
   campaignImage: z.string().nullish(),
   landingPage: z.string(),
+  blinkOnly: z.boolean().nullish(),
 
   // Event Details
   eventType: z.nativeEnum(EventType),
