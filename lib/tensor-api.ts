@@ -1,3 +1,6 @@
+import { fetchWhitelist, Whitelist } from "@tensor-foundation/whitelist";
+import { address, createSolanaRpc } from "solana2.0";
+
 export const TENSOR_API = "https://api.mainnet.tensordev.io/api/v1";
 export const fetchUserBids = async (userPubKey: string) => {
   const response = await fetch(
@@ -123,4 +126,28 @@ export const fetchSingleCollectionDetails = async (collectionId: string) => {
     .catch((err) => console.error(err));
   console.log(response);
   return mapCollection(response.collections[0]);
+};
+
+const uuidBytesToUuidString = (uuidBytes: Uint8Array): string => {
+  let hexString = "";
+  for (let i = 0; i < uuidBytes.length; i++) {
+    hexString += String.fromCharCode(uuidBytes[i]);
+  }
+
+  return `${hexString.substring(0, 8)}-${hexString.substring(
+    8,
+    12
+  )}-${hexString.substring(12, 16)}-${hexString.substring(
+    16,
+    20
+  )}-${hexString.substring(20, 32)}`;
+};
+
+export const whiteListToCollectionId = async (whitelist: string) => {
+  const rpc = createSolanaRpc(process.env.RPC as string);
+  const whitelistData: Whitelist = await fetchWhitelist(
+    rpc,
+    address(whitelist)
+  ).then((whitelistResponse) => whitelistResponse.data);
+  return uuidBytesToUuidString(whitelistData.uuid as Uint8Array);
 };
