@@ -7,6 +7,7 @@ import {
   SignUpActionSchema,
   HedgehogPlaceBetActionSchema,
   TensorActionSchema,
+  DriftDepositActionSchema,
 } from "./actions.js";
 
 /**
@@ -28,6 +29,7 @@ export enum EventType {
   SIGN_UP = "SIGN_UP",
   TENSOR_BUY = "TENSOR_BUY",
   TENSOR_BID = "TENSOR_BID",
+  DRIFT_DEPOSIT = "DRIFT_DEPOSIT",
 }
 
 /**
@@ -98,6 +100,7 @@ export const CreateCampaignInputSchema = z.object({
       SignUpActionSchema,
       ClickActionSchema,
       TensorActionSchema,
+      DriftDepositActionSchema,
     ])
     .optional(),
 
