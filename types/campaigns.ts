@@ -59,6 +59,19 @@ export enum RaffleParticipants {
 }
 
 /**
+ * Conversion Audience Operations
+ */
+export enum ConversionAudienceOperation {
+  AND = "AND",
+  OR = "OR",
+}
+
+export const ConversionAudienceSchema = z.object({
+  campaignIds: z.array(z.string()),
+  operation: z.nativeEnum(ConversionAudienceOperation),
+});
+export type ConversionAudience = z.infer<typeof ConversionAudienceSchema>;
+/**
  * Schemas + types for campaigns
  */
 
@@ -120,6 +133,7 @@ export const CreateCampaignInputSchema = z.object({
 
   // Audience Details
   audience: z.string().optional().nullable(),
+  conversionAudience: ConversionAudienceSchema.optional(),
 });
 
 /**
