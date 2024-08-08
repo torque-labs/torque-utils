@@ -160,3 +160,12 @@ export const SignUpActionSchema = z.object({
  * Sign up action type
  */
 export type SignUpAction = z.infer<typeof SignUpActionSchema>;
+
+/**
+ * Drift Deposit action schema
+ */
+export const DriftDepositActionSchema = z.object({
+  minAmount: z.coerce.number(),
+  tokenAddress: z.string(),
+});
+export type DriftDepositAction = z.infer<typeof DriftDepositActionSchema>;
