@@ -111,7 +111,7 @@ export const CampaignRequestParamsSchema = z.object({
 /**
  * Campaign filter type
  */
-export type CampaignRequestInput = z.infer<typeof CampaignRequestParamsSchema>;
+export type CampaignRequestParams = z.infer<typeof CampaignRequestParamsSchema>;
 
 /**
  * Schema for creating a new campaign
