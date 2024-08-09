@@ -66,11 +66,19 @@ export enum ConversionAudienceOperation {
   OR = "OR",
 }
 
+/**
+ * Conversion audience schema
+ */
 export const ConversionAudienceSchema = z.object({
   campaignIds: z.array(z.string()),
   operation: z.nativeEnum(ConversionAudienceOperation),
 });
+
+/**
+ * Conversion audience type
+ */
 export type ConversionAudience = z.infer<typeof ConversionAudienceSchema>;
+
 /**
  * Schemas + types for campaigns
  */
@@ -89,6 +97,21 @@ export const AsymmetricRewardSchema = z.object({
  * Asymmetric Reward type
  */
 export type AsymmetricReward = z.infer<typeof AsymmetricRewardSchema>;
+
+/**
+ * Campaign filter schema
+ */
+export const CampaignRequestParamsSchema = z.object({
+  limit: z.number().optional(),
+  page: z.number().optional(),
+  status: z.string().optional(),
+  advertiserPubKey: z.string().optional(),
+});
+
+/**
+ * Campaign filter type
+ */
+export type CampaignRequestInput = z.infer<typeof CampaignRequestParamsSchema>;
 
 /**
  * Schema for creating a new campaign

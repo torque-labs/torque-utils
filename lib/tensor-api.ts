@@ -138,9 +138,3 @@ export const whiteListToCollectionId = async (whitelist: string) => {
   ).then((whitelistResponse) => whitelistResponse.data);
   return uuidBytesToUuidString(whitelistData.uuid as Uint8Array);
 };
-
-(async () => {
-  console.log(
-    await fetchSingleCollectionDetails("136f3198-c4c1-4ccf-966f-a5431a091581")
-  );
-})();
