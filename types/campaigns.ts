@@ -8,6 +8,7 @@ import {
   HedgehogPlaceBetActionSchema,
   TensorActionSchema,
   DriftDepositActionSchema,
+  NftBidSchema,
 } from "./actions.js";
 
 /**
@@ -137,6 +138,7 @@ export const CreateCampaignInputSchema = z.object({
       ClickActionSchema,
       TensorActionSchema,
       DriftDepositActionSchema,
+      NftBidSchema,
     ])
     .optional(),
 
