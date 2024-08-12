@@ -86,11 +86,11 @@ export type NftCollectionTradeAction = z.infer<typeof NftCollectionTradeSchema>;
  * SINGLE NFT ACTIONS
  * ============================================================
  */
-export const NftBidSchema = z.object({
+export const NftBidBuySchema = z.object({
   mint: z.string(),
   minAmount: z.number().optional(),
 });
-export type NftBid = z.infer<typeof NftBidSchema>;
+export type NftBidBuy = z.infer<typeof NftBidBuySchema>;
 
 /**
  * TENSOR ACTIONS

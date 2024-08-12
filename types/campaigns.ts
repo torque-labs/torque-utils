@@ -8,7 +8,7 @@ import {
   HedgehogPlaceBetActionSchema,
   TensorActionSchema,
   DriftDepositActionSchema,
-  NftBidSchema,
+  NftBidBuySchema,
 } from "./actions.js";
 
 /**
@@ -31,6 +31,7 @@ export enum EventType {
   TENSOR_BUY = "TENSOR_BUY",
   TENSOR_BID = "TENSOR_BID",
   DRIFT_DEPOSIT = "DRIFT_DEPOSIT",
+  NFT_BUY_BID = "NFT_BUY_BID",
 }
 
 /**
@@ -138,7 +139,7 @@ export const CreateCampaignInputSchema = z.object({
       ClickActionSchema,
       TensorActionSchema,
       DriftDepositActionSchema,
-      NftBidSchema,
+      NftBidBuySchema,
     ])
     .optional(),
 
