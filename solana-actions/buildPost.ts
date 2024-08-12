@@ -36,6 +36,10 @@ export const tensorCollectionBidPost = (tensorCollectoinId: string): string => {
   return `${TORQUE_API_URL}/actions/tensor/collection-bid?collectionId=${tensorCollectoinId}`;
 };
 
+export const nftBidBuyPost = (mint: string): string => {
+  return `https://tensor.dial.to/bid/${mint}`;
+};
+
 export const hedgehogBetPost = async (
   hedgehogBetAction: HedgehogPlaceBetAction,
   amount: number = 0,

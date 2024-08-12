@@ -7,6 +7,7 @@ import {
   SignUpAction,
   ClickAction,
   EventType,
+  NftBidBuy,
 } from "../types.js";
 import { getTensorSlugFromCollectionAddress, TORQUE_API_URL } from "./util.js";
 
@@ -125,6 +126,9 @@ export const convertBlinkToTorqueBlink = async (
       ? "SIGN UP"
       : blink.label;
 
+  if (EventType.NFT_BUY_BID === eventType && blink.links?.actions.length) {
+    blink.links.actions = [blink.links.actions[0]];
+  }
   return {
     title: `${title} 🔧 ${
       remainingConversions
@@ -232,6 +236,37 @@ export const nftCollectionTradeGet = async (
     details,
     EventType.NFT_COLLECTION_TRADE,
     tensorFloorBuyAction,
+    offerId,
+    publisherHandle,
+    remainingConversions,
+    userRewardType,
+    userRewardToken,
+    userRewardAmount,
+    raffleRewardType,
+    raffleRewardToken,
+    raffleRewardAmount
+  );
+};
+
+export const nftBidBuyGet = async (
+  nftBidBuy: NftBidBuy,
+  offerId: string,
+  publisherHandle: string,
+  remainingConversions?: number,
+  userRewardType?: string,
+  userRewardToken?: string,
+  userRewardAmount?: number,
+  raffleRewardType?: string,
+  raffleRewardToken?: string,
+  raffleRewardAmount?: number
+): Promise<ActionGetResponse> => {
+  const { mint } = nftBidBuy;
+  const response = await fetch(`https://tensor.dial.to/bid/${mint}`);
+  const details: ActionGetResponse = await response.json();
+  return convertBlinkToTorqueBlink(
+    details,
+    EventType.NFT_BUY_BID,
+    nftBidBuy,
     offerId,
     publisherHandle,
     remainingConversions,
