@@ -3,6 +3,7 @@ import { z } from "zod";
 export const TokenHoldingTimeConfigSchema = z.object({
   token: z.string(),
   amount: z.number(),
+  tokenStandard: z.string().optional(),
 });
 export type TokenHoldingTimeConfig = z.infer<
   typeof TokenHoldingTimeConfigSchema
