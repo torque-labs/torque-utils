@@ -6,7 +6,7 @@ import {
   SignUpAction,
   SolanaActionParam,
   ClickAction,
-} from "../types.js";
+} from "../types/index.js";
 import { getTensorSlugFromCollectionAddress, TORQUE_API_URL } from "./util.js";
 
 export const swapPost = async (campaignId: string): Promise<string> => {

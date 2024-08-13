@@ -1,15 +1,6 @@
 import { z } from "zod";
-
-import {
-  SwapActionSchema,
-  NftCollectionTradeSchema,
-  ClickActionSchema,
-  SignUpActionSchema,
-  HedgehogPlaceBetActionSchema,
-  TensorActionSchema,
-  DriftDepositActionSchema,
-  NftBidBuySchema,
-} from "./actions.js";
+import { TimeConfigSchema } from "./timeConfig";
+import { EventConfigSchema } from "./eventConfig";
 
 /**
  * Offer types for campaigns
@@ -17,21 +8,6 @@ import {
 export enum OfferType {
   CLICK = "CLICK", // TODO: EVENT
   BOUNTY = "BOUNTY", // TODO: ACTION
-}
-
-/**
- * Event types for for campaign conversion requirements
- */
-export enum EventType {
-  CLICK = "CLICK",
-  SWAP = "SWAP",
-  NFT_COLLECTION_TRADE = "NFT_COLLECTION_TRADE",
-  HEDGEHOG_PLACE_BET = "HEDGEHOG_PLACE_BET",
-  SIGN_UP = "SIGN_UP",
-  TENSOR_BUY = "TENSOR_BUY",
-  TENSOR_BID = "TENSOR_BID",
-  DRIFT_DEPOSIT = "DRIFT_DEPOSIT",
-  NFT_BUY_BID = "NFT_BUY_BID",
 }
 
 /**
@@ -128,20 +104,9 @@ export const CreateCampaignInputSchema = z.object({
   landingPage: z.string(),
   blinkOnly: z.boolean().nullish(),
 
-  // Event Details
-  eventType: z.nativeEnum(EventType),
-  eventConfig: z
-    .union([
-      SwapActionSchema,
-      NftCollectionTradeSchema,
-      HedgehogPlaceBetActionSchema,
-      SignUpActionSchema,
-      ClickActionSchema,
-      TensorActionSchema,
-      DriftDepositActionSchema,
-      NftBidBuySchema,
-    ])
-    .optional(),
+  // Conversion Details
+  eventConfig: EventConfigSchema,
+  timeConfig: TimeConfigSchema,
 
   // Reward Details
   conversionCount: z.number().optional().nullable(),
