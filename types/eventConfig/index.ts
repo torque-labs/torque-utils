@@ -26,8 +26,8 @@ export enum EventType {
 }
 
 export const EventConfigSchema = z.object({
-  eventType: z.nativeEnum(EventType),
-  eventConfig: z
+  type: z.nativeEnum(EventType),
+  requirement: z
     .union([
       SwapActionSchema,
       NftCollectionTradeSchema,
