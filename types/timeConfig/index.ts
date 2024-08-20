@@ -8,14 +8,27 @@ export enum TimeConfigType {
   TOKEN_HOLDING = "TOKEN_HOLDING",
   OPEN_POSITION = "OPEN_POSITION",
 }
-export const TimeConfigRequirementSchema = z.union([
+
+const TimeConfigRequirementSchema = z.union([
   TokenHoldingTimeConfigSchema,
   OpenPositionTimeConfigSchema,
 ]);
 
-export const TimeConfigSchema = z.object({
-  duration: z.number(),
-  type: z.nativeEnum(TimeConfigType),
-  requirement: TimeConfigRequirementSchema,
-});
+const TimeConfigUnionSchema = z
+  .discriminatedUnion("type", [
+    z.object({
+      type: z.literal(TimeConfigType.TOKEN_HOLDING),
+      requirement: TokenHoldingTimeConfigSchema,
+    }),
+    z.object({
+      type: z.literal(TimeConfigType.OPEN_POSITION),
+      requirement: OpenPositionTimeConfigSchema,
+    }),
+  ])
+  .and(z.object({ duration: z.number() }));
+
+export const TimeConfigSchema = TimeConfigUnionSchema.and(
+  z.object({ duration: z.number() })
+).optional();
+
 export type TimeConfig = z.infer<typeof TimeConfigSchema>;
