@@ -78,7 +78,8 @@ export const convertBlinkToTorqueBlink = async (
   userRewardAmount?: number,
   raffleRewardType?: string,
   raffleRewardToken?: string,
-  raffleRewardAmount?: number
+  raffleRewardAmount?: number,
+  holdForDays?: number
 ): Promise<ActionGetResponse> => {
   const title =
     eventType === EventType.SWAP || eventType === EventType.NFT_COLLECTION_TRADE
@@ -87,7 +88,10 @@ export const convertBlinkToTorqueBlink = async (
       ? "Sign Up"
       : blink.title;
 
-  let description;
+  let description = "";
+  if (holdForDays) {
+    description = `⏰ Hold for ${holdForDays} days`;
+  }
   if (
     raffleRewardType === "TOKENS" &&
     raffleRewardToken &&
@@ -170,7 +174,8 @@ export const swapGet = async (
   userRewardAmount?: number,
   raffleRewardType?: string,
   raffleRewardToken?: string,
-  raffleRewardAmount?: number
+  raffleRewardAmount?: number,
+  holdForDays?: number
 ) => {
   console.log({ swapAction });
   let label = `Swap`;
@@ -206,7 +211,8 @@ export const swapGet = async (
     userRewardAmount,
     raffleRewardType,
     raffleRewardToken,
-    raffleRewardAmount
+    raffleRewardAmount,
+    holdForDays
   );
 };
 
