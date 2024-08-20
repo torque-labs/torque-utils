@@ -79,7 +79,7 @@ export const convertBlinkToTorqueBlink = async (
   raffleRewardType?: string,
   raffleRewardToken?: string,
   raffleRewardAmount?: number,
-  holdForDays?: number
+  holdForSeconds?: number
 ): Promise<ActionGetResponse> => {
   const title =
     eventType === EventType.SWAP || eventType === EventType.NFT_COLLECTION_TRADE
@@ -89,8 +89,10 @@ export const convertBlinkToTorqueBlink = async (
       : blink.title;
 
   let description = "";
-  if (holdForDays) {
-    description = `⏰ Hold for ${holdForDays} days`;
+  if (holdForSeconds) {
+    const dayDuration = holdForSeconds / 60 / 60 / 24;
+    const days = dayDuration > 1 ? "days" : "day";
+    description = `⏰ Hold for ${dayDuration} ${days} `;
   }
   if (
     raffleRewardType === "TOKENS" &&
@@ -103,7 +105,7 @@ export const convertBlinkToTorqueBlink = async (
       rewardDetails.tokenStandard === "ProgrammableNonFungible"
         ? rewardDetails.name
         : `$${rewardDetails.symbol}`;
-    description = `🎟️ Raffle Prize: ${
+    description += `🎟️ Raffle Prize: ${
       raffleRewardAmount / 10 ** rewardDetails.decimals
     } ${tokenDesc}`;
   } else if (
@@ -175,7 +177,7 @@ export const swapGet = async (
   raffleRewardType?: string,
   raffleRewardToken?: string,
   raffleRewardAmount?: number,
-  holdForDays?: number
+  holdForSeconds?: number
 ) => {
   console.log({ swapAction });
   let label = `Swap`;
@@ -212,7 +214,7 @@ export const swapGet = async (
     raffleRewardType,
     raffleRewardToken,
     raffleRewardAmount,
-    holdForDays
+    holdForSeconds
   );
 };
 
