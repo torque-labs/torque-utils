@@ -22,6 +22,6 @@ const TimeConfigUnionSchema = z.discriminatedUnion("type", [
 
 export const TimeConfigSchema = TimeConfigUnionSchema.and(
   z.object({ duration: z.number() })
-).optional();
+);
 
 export type TimeConfig = z.infer<typeof TimeConfigSchema>;

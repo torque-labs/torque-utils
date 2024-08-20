@@ -106,7 +106,7 @@ export const CreateCampaignInputSchema = z.object({
 
   // Conversion Details
   eventConfig: EventConfigSchema,
-  timeConfig: TimeConfigSchema,
+  timeConfig: TimeConfigSchema.optional(),
 
   // Reward Details
   conversionCount: z.number().optional().nullable(),
