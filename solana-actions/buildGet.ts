@@ -8,7 +8,7 @@ import {
   ClickAction,
   EventType,
   NftBidBuy,
-} from "../types.js";
+} from "../types/index.js";
 import { getTensorSlugFromCollectionAddress, TORQUE_API_URL } from "./util.js";
 
 const buildTitle = async (
