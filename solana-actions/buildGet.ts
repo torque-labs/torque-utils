@@ -79,7 +79,8 @@ export const convertBlinkToTorqueBlink = async (
   raffleRewardType?: string,
   raffleRewardToken?: string,
   raffleRewardAmount?: number,
-  holdForSeconds?: number
+  holdForSeconds?: number,
+  currentConversions?: number
 ): Promise<ActionGetResponse> => {
   const title =
     eventType === EventType.SWAP || eventType === EventType.NFT_COLLECTION_TRADE
@@ -137,9 +138,11 @@ export const convertBlinkToTorqueBlink = async (
   }
   return {
     title: `${title} 🔧 ${
-      remainingConversions
-        ? `${remainingConversions} remaining`
-        : "Boosted Blink!"
+      currentConversions
+        ? `\n${currentConversions} offers accepted`
+        : remainingConversions
+        ? `\n${remainingConversions} offers remaining`
+        : ""
     }`,
     icon: blink.icon
       ? blink.icon
@@ -177,7 +180,8 @@ export const swapGet = async (
   raffleRewardType?: string,
   raffleRewardToken?: string,
   raffleRewardAmount?: number,
-  holdForSeconds?: number
+  holdForSeconds?: number,
+  currentConversions?: number
 ) => {
   console.log({ swapAction });
   let label = `Swap`;
@@ -185,7 +189,11 @@ export const swapGet = async (
     "Swap your tokens through Torque for extra rewards!";
   const blink = {
     title: `🔧 ${offerTitle} ... ${
-      remainingConversions ? `\n${remainingConversions} offers remaining` : ""
+      currentConversions
+        ? `\n${currentConversions} offers accepted`
+        : remainingConversions
+        ? `\n${remainingConversions} offers remaining`
+        : ""
     }`,
     icon: offerImageUrl
       ? offerImageUrl
@@ -214,7 +222,8 @@ export const swapGet = async (
     raffleRewardType,
     raffleRewardToken,
     raffleRewardAmount,
-    holdForSeconds
+    holdForSeconds,
+    currentConversions
   );
 };
 
