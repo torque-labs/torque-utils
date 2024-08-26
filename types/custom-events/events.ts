@@ -40,12 +40,15 @@ export type CustomEventBooleanConfig = z.infer<
   typeof CustomEventBooleanConfigSchema
 >;
 
-export const CustomEventConfigSchema = z.array(
-  z.union([
-    CustomEventStringConfigSchema,
-    CustomEventNumberConfigSchema,
-    CustomEventBooleanConfigSchema,
-  ])
-);
+export const CustomEventConfigSchema = z.object({
+  eventName: z.string(),
+  fields: z.array(
+    z.union([
+      CustomEventStringConfigSchema,
+      CustomEventNumberConfigSchema,
+      CustomEventBooleanConfigSchema,
+    ])
+  ),
+});
 
 export type CustomEventConfig = z.infer<typeof CustomEventConfigSchema>;

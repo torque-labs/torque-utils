@@ -67,7 +67,9 @@ export const CustomEventRequestSchema = z.object({
     z.record(z.string(), z.string().or(z.number()).or(z.boolean()))
   ),
   event_data: z.record(z.string(), z.string().or(z.number()).or(z.boolean())),
-  context: z.record(z.string(), z.string().or(z.number()).or(z.boolean())),
+  context: z
+    .record(z.string(), z.string().or(z.number()).or(z.boolean()))
+    .nullish(),
 });
 
 /**

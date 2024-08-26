@@ -7,3 +7,4 @@ export * from "./timeConfig/validationInput.js";
 export * from "./events.js";
 export * from "./custom-events/events.js";
 export * from "./tokens.js";
+export * from "./errors.js";

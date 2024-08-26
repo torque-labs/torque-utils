@@ -3,7 +3,7 @@ import { z } from "zod";
 import { CustomEventConfig } from "../types/custom-events/events";
 
 export function eventConfigToValidationSchema(config: CustomEventConfig) {
-  const fields = config.map((field) => {
+  const fields = config.fields.map((field) => {
     let validation: z.ZodSchema;
 
     if (field.type === "string") {
