@@ -11,8 +11,8 @@ export function eventConfigToValidationSchema(config: CustomEventConfig) {
         ? z.literal(field.validation.match)
         : z.string();
 
-      if (!field.validation.required && !field.validation.match) {
-        validation = validation.optional();
+      if (!field.validation.match) {
+        validation = validation.nullish();
       }
 
       return {
@@ -29,18 +29,15 @@ export function eventConfigToValidationSchema(config: CustomEventConfig) {
           .number()
           .min(field.validation.min)
           .max(field.validation.max);
-      } else if (field.validation.min) {
+      } else if (field.validation.min && !field.validation.max) {
         validation = z.coerce.number().min(field.validation.min);
-      } else if (field.validation.max) {
+      } else if (field.validation.max && !field.validation.min) {
         validation = z.coerce.number().max(field.validation.max);
+      } else {
       }
 
-      if (
-        !field.validation.required &&
-        !field.validation.min &&
-        !field.validation.max
-      ) {
-        validation = validation.optional();
+      if (!field.validation.min && !field.validation.max) {
+        validation = validation.nullish();
       }
 
       return {
@@ -56,15 +53,8 @@ export function eventConfigToValidationSchema(config: CustomEventConfig) {
         validation = z.coerce
           .boolean()
           .refine((value) => value === field.validation.match);
-      } else if (!field.validation.required) {
-        validation = z.coerce.boolean().optional();
-      }
-
-      if (
-        !field.validation.required &&
-        typeof field.validation.match === "undefined"
-      ) {
-        validation = validation.optional();
+      } else {
+        validation = validation.nullish();
       }
 
       return {

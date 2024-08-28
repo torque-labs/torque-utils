@@ -4,8 +4,7 @@ export const CustomEventStringConfigSchema = z.object({
   name: z.string(),
   type: z.literal("string"),
   validation: z.object({
-    required: z.boolean().optional(),
-    match: z.string().optional(),
+    match: z.string().nullish(),
   }),
 });
 
@@ -17,9 +16,8 @@ export const CustomEventNumberConfigSchema = z.object({
   name: z.string(),
   type: z.literal("number"),
   validation: z.object({
-    required: z.boolean().optional(),
-    min: z.number().optional(),
-    max: z.number().optional(),
+    min: z.number().nullish(),
+    max: z.number().nullish(),
   }),
 });
 
@@ -31,8 +29,7 @@ export const CustomEventBooleanConfigSchema = z.object({
   name: z.string(),
   type: z.literal("boolean"),
   validation: z.object({
-    required: z.boolean().optional(),
-    match: z.boolean().optional(),
+    match: z.boolean().nullish(),
   }),
 });
 
@@ -52,3 +49,10 @@ export const CustomEventConfigSchema = z.object({
 });
 
 export type CustomEventConfig = z.infer<typeof CustomEventConfigSchema>;
+
+export const CustomEventDefinitionSchema = z.record(
+  z.string(),
+  z.literal("string").or(z.literal("number").or(z.literal("boolean")))
+);
+
+export type CustomEventDefinition = z.infer<typeof CustomEventDefinitionSchema>;
