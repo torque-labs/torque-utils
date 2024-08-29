@@ -10,6 +10,8 @@ import {
   NftBidBuySchema,
 } from "./requirements";
 
+import { CustomEventConfigSchema } from "../custom-events/events";
+
 /**
  * Event types for for campaign conversion requirements
  */
@@ -23,6 +25,7 @@ export enum EventType {
   TENSOR_BID = "TENSOR_BID",
   DRIFT_DEPOSIT = "DRIFT_DEPOSIT",
   NFT_BUY_BID = "NFT_BUY_BID",
+  CUSTOM_EVENT = "CUSTOM_EVENT",
 }
 
 export const EventConfigSchema = z.object({
@@ -37,6 +40,7 @@ export const EventConfigSchema = z.object({
       TensorActionSchema,
       DriftDepositActionSchema,
       NftBidBuySchema,
+      CustomEventConfigSchema,
     ])
     .optional(),
 });
