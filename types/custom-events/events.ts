@@ -16,8 +16,8 @@ export const CustomEventNumberConfigSchema = z.object({
   name: z.string(),
   type: z.literal("number"),
   validation: z.object({
-    min: z.number().nullish(),
-    max: z.number().nullish(),
+    min: z.coerce.number().nullish(),
+    max: z.coerce.number().nullish(),
   }),
 });
 
