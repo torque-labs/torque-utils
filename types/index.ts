@@ -1,4 +1,5 @@
 export * from "./campaigns.js";
+export * from "./tarp.js";
 export * from "./eventConfig/index.js";
 export * from "./eventConfig/requirements.js";
 export * from "./timeConfig/index.js";
