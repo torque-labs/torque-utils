@@ -40,9 +40,13 @@ export const fetchUserBidActions = async (userPubKey: string) => {
  * Fetches a single NFT's details
  */
 export const fetchNftDetails = async (mint: string) => {
-  return await fetch(`${TENSOR_API}/mint?mint=${mint}`, tensorGetOptions)
+  const mints = await fetch(
+    `${TENSOR_API}/mint?mints=${mint}`,
+    tensorGetOptions
+  )
     .then((response) => response.json())
     .catch((err) => console.error(err));
+  return mints[0];
 };
 
 /**
