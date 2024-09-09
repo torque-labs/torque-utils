@@ -8,6 +8,7 @@ import {
   ClickAction,
   EventType,
   NftBidBuy,
+  RealmsVoteAction,
 } from "../types/index.js";
 import { getTensorSlugFromCollectionAddress, TORQUE_API_URL } from "./util.js";
 
@@ -82,7 +83,7 @@ export const convertBlinkToTorqueBlink = async (
   holdForSeconds?: number,
   currentConversions?: number
 ): Promise<ActionGetResponse> => {
-  const title =
+  let title =
     eventType === EventType.SWAP || eventType === EventType.NFT_COLLECTION_TRADE
       ? await buildTitle(eventType, eventConfig, blink)
       : eventType === EventType.SIGN_UP
@@ -106,9 +107,16 @@ export const convertBlinkToTorqueBlink = async (
       rewardDetails.tokenStandard === "ProgrammableNonFungible"
         ? rewardDetails.name
         : `$${rewardDetails.symbol}`;
-    description += `🎟️ Raffle Prize: ${
-      raffleRewardAmount / 10 ** rewardDetails.decimals
-    } ${tokenDesc}`;
+    if (eventType === EventType.REALMS_VOTE) {
+      title += ` 🎟️ Raffle Prize: ${
+        raffleRewardAmount / 10 ** rewardDetails.decimals
+      } ${tokenDesc}`;
+      description = blink.description;
+    } else {
+      description += `🎟️ Raffle Prize: ${
+        raffleRewardAmount / 10 ** rewardDetails.decimals
+      } ${tokenDesc}`;
+    }
   } else if (
     userRewardType === "TOKENS" &&
     userRewardToken &&
@@ -138,10 +146,12 @@ export const convertBlinkToTorqueBlink = async (
   }
   return {
     title: `${title} 🔧 ${
-      currentConversions
-        ? `\n${currentConversions} offers accepted`
-        : remainingConversions
-        ? `\n${remainingConversions} offers remaining`
+      eventType !== EventType.REALMS_VOTE
+        ? currentConversions
+          ? `\n${currentConversions} offers accepted`
+          : remainingConversions
+          ? `\n${remainingConversions} offers remaining`
+          : ""
         : ""
     }`,
     icon: blink.icon
@@ -296,52 +306,6 @@ export const nftBidBuyGet = async (
   );
 };
 
-export const hedgehogBetGet = async (
-  hedgehogBetAction: HedgehogPlaceBetAction,
-  offerId: string,
-  publisherHandle: string,
-  remainingConversions?: number,
-  userRewardType?: string,
-  userRewardToken?: string,
-  userRewardAmount?: number
-): Promise<ActionGetResponse> => {
-  const { market, usdcAmount } = hedgehogBetAction;
-  const response = await fetch(
-    `https://hedgehog.markets/api/v1/classic/buy/?market=${market}`
-  );
-  const betData = await response.json();
-  const hrefPath = "/api/v1/classic/buy/?";
-  betData.links.actions = betData.links.actions.filter(
-    (x: any) => !x.parameters
-  );
-  for (let i = 0; i < betData.links.actions.length; i++) {
-    if (!betData.links.actions[i].parameters) {
-      if (betData.links.actions[i].label.includes("Yes")) {
-        betData.links.actions[i].label = `$${usdcAmount} on Yes`;
-        betData.links.actions[
-          i
-        ].href = `${hrefPath}market=${market}&yesAmount=${usdcAmount}`;
-      } else if (betData.links.actions[i].label.includes("No")) {
-        betData.links.actions[i].label = `$${usdcAmount} on No`;
-        betData.links.actions[
-          i
-        ].href = `${hrefPath}market=${market}&noAmount=${usdcAmount}`;
-      }
-    }
-  }
-  return convertBlinkToTorqueBlink(
-    betData,
-    EventType.HEDGEHOG_PLACE_BET,
-    hedgehogBetAction,
-    offerId,
-    publisherHandle,
-    remainingConversions,
-    userRewardType,
-    userRewardToken,
-    userRewardAmount
-  );
-};
-
 export const memoGet = async (
   signUpData: SignUpAction,
   offerId: string,
@@ -435,6 +399,39 @@ export const clickGet = async (
     blink,
     EventType.CLICK,
     clickData,
+    offerId,
+    publisherHandle,
+    remainingConversions,
+    userRewardType,
+    userRewardToken,
+    userRewardAmount,
+    raffleRewardType,
+    raffleRewardToken,
+    raffleRewardAmount
+  );
+};
+
+export const realmsVoteGet = async (
+  realmsVoteAction: RealmsVoteAction,
+  offerId: string,
+  publisherHandle: string,
+  remainingConversions?: number,
+  userRewardType?: string,
+  userRewardToken?: string,
+  userRewardAmount?: number,
+  raffleRewardType?: string,
+  raffleRewardToken?: string,
+  raffleRewardAmount?: number
+) => {
+  const { daoPubKey, proposalPubKey } = realmsVoteAction;
+  const response = await fetch(
+    `https://realms.dial.to/vote/dao/${daoPubKey}/proposal/${proposalPubKey}`
+  );
+  const details: ActionGetResponse = await response.json();
+  return convertBlinkToTorqueBlink(
+    details,
+    EventType.REALMS_VOTE,
+    realmsVoteAction,
     offerId,
     publisherHandle,
     remainingConversions,

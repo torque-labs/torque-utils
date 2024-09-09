@@ -183,3 +183,13 @@ export const SignUpActionSchema = z.object({
  * Sign up action type
  */
 export type SignUpAction = z.infer<typeof SignUpActionSchema>;
+
+/**
+ * REALMS VOTE ACTION
+ */
+export const RealmsVoteActionSchema = z.object({
+  daoPubKey: z.string(),
+  proposalPubKey: z.string(),
+  customProgramId: z.string().optional(),
+});
+export type RealmsVoteAction = z.infer<typeof RealmsVoteActionSchema>;
