@@ -428,6 +428,17 @@ export const realmsVoteGet = async (
     `https://realms.dial.to/vote/dao/${daoPubKey}/proposal/${proposalPubKey}`
   );
   const details: ActionGetResponse = await response.json();
+  console.log("links: ", details.links);
+  if (details.links?.actions) {
+    details.links.actions = details.links.actions
+      ? details.links.actions.map((x, i) => {
+          return {
+            ...x,
+            href: x.href + `?voteIndex=${i}`,
+          };
+        })
+      : details.links.actions;
+  }
   return convertBlinkToTorqueBlink(
     details,
     EventType.REALMS_VOTE,
