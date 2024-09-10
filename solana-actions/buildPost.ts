@@ -77,7 +77,13 @@ export const clickPost = async (
   return `${TORQUE_API_URL}/actions/memo?campaignId=${query.campaignId}&`;
 };
 
-export const realmsVotePost = (realmsVoteAction: RealmsVoteAction): string => {
+export const realmsVotePost = (
+  realmsVoteAction: RealmsVoteAction,
+  voteIndex: number
+): string => {
+  if (voteIndex < 0) {
+    throw new Error("Vote index out of bounds.");
+  }
   const { daoPubKey, proposalPubKey } = realmsVoteAction;
-  return `https://realms.dial.to/vote/dao/${daoPubKey}/proposal/${proposalPubKey}`;
+  return `https://realms.dial.to/vote/dao/${daoPubKey}/proposal/${proposalPubKey}/${voteIndex}`;
 };
