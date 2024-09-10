@@ -6,6 +6,7 @@ import {
   SignUpAction,
   SolanaActionParam,
   ClickAction,
+  RealmsVoteAction,
 } from "../types/index.js";
 import { getTensorSlugFromCollectionAddress, TORQUE_API_URL } from "./util.js";
 
@@ -38,18 +39,6 @@ export const tensorCollectionBidPost = (tensorCollectoinId: string): string => {
 
 export const nftBidBuyPost = (mint: string): string => {
   return `https://tensor.dial.to/bid/${mint}`;
-};
-
-export const hedgehogBetPost = async (
-  hedgehogBetAction: HedgehogPlaceBetAction,
-  amount: number = 0,
-  bet: "yes" | "no" = "yes"
-): Promise<string> => {
-  const { market, usdcAmount } = hedgehogBetAction;
-  if (amount < usdcAmount) {
-    throw new Error("Amount is less than the minimum amount");
-  }
-  return `https://hedgehog.markets/api/v1/classic/buy/?market=${market}&${bet}Amount=${amount}`;
 };
 
 const validateMemoInputs = (query: { [key: string]: string }) => {
@@ -86,4 +75,15 @@ export const clickPost = async (
     throw new Error("Click action must have enableBlink set to true.");
   }
   return `${TORQUE_API_URL}/actions/memo?campaignId=${query.campaignId}&`;
+};
+
+export const realmsVotePost = (
+  realmsVoteAction: RealmsVoteAction,
+  voteIndex: number
+): string => {
+  if (voteIndex < 0) {
+    throw new Error("Vote index out of bounds.");
+  }
+  const { daoPubKey, proposalPubKey } = realmsVoteAction;
+  return `https://realms.dial.to/vote/dao/${daoPubKey}/proposal/${proposalPubKey}/${voteIndex}`;
 };

@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { custom, z } from "zod";
 import { EventType } from "./eventConfig";
 
 /**
@@ -46,6 +46,12 @@ export const OnChainEventRequestSchema = z.discriminatedUnion("eventType", [
     nftMint: z.string(),
     bidder: z.string(),
     amount: z.number(),
+  }),
+  z.object({
+    eventType: z.literal(EventType.REALMS_VOTE),
+    daoPubKey: z.string(),
+    proposalPubKey: z.string(),
+    customProgramId: z.string().optional(),
   }),
 ]);
 
