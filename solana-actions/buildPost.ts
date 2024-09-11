@@ -2,7 +2,6 @@ import { fetchSingleCollectionDetails } from "../lib/tensor-api.js";
 import {
   SwapAction,
   NftCollectionTradeAction,
-  HedgehogPlaceBetAction,
   SignUpAction,
   SolanaActionParam,
   ClickAction,

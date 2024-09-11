@@ -110,25 +110,6 @@ export const TensorActionSchema = z.object({
 export type TensorAction = z.infer<typeof TensorActionSchema>;
 
 /**
- * HEDGEHOG ACTIONS
- * ============================================================
- */
-/**
- * Hedgehog place bet action schema
- */
-export const HedgehogPlaceBetActionSchema = z.object({
-  market: z.string(),
-  usdcAmount: z.coerce.number(),
-});
-
-/**
- * Hedgehog place bet action type
- */
-export type HedgehogPlaceBetAction = z.infer<
-  typeof HedgehogPlaceBetActionSchema
->;
-
-/**
  * DRIFT ACTIONS
  * ============================================================
  */

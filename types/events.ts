@@ -26,12 +26,6 @@ export const OnChainEventRequestSchema = z.discriminatedUnion("eventType", [
     price: z.number(),
   }),
   z.object({
-    eventType: z.literal(EventType.HEDGEHOG_PLACE_BET),
-    market: z.string(),
-    usdcAmount: z.number(),
-    feePayer: z.string(),
-  }),
-  z.object({
     eventType: z.literal(EventType.SIGN_UP),
     message: z.string(),
   }),

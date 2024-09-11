@@ -3,7 +3,6 @@ import { getTokenDetails } from "../tokens.js";
 import {
   SwapAction,
   NftCollectionTradeAction,
-  HedgehogPlaceBetAction,
   SignUpAction,
   ClickAction,
   EventType,
