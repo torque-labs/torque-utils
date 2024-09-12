@@ -8,6 +8,7 @@ import {
   DriftDepositActionSchema,
   NftBidBuySchema,
   RealmsVoteActionSchema,
+  MarginfiLendActionSchema,
 } from "./requirements";
 
 import { CustomEventConfigSchema } from "../custom-events/events";
@@ -26,6 +27,7 @@ export enum EventType {
   NFT_BUY_BID = "NFT_BUY_BID",
   CUSTOM_EVENT = "CUSTOM_EVENT",
   REALMS_VOTE = "REALMS_VOTE",
+  MARGINFI_LEND = "MARGINFI_LEND",
 }
 
 export const EventConfigSchema = z.object({
@@ -41,6 +43,7 @@ export const EventConfigSchema = z.object({
       NftBidBuySchema,
       RealmsVoteActionSchema,
       CustomEventConfigSchema,
+      MarginfiLendActionSchema,
     ])
     .optional(),
 });
