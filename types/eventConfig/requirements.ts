@@ -174,3 +174,17 @@ export const RealmsVoteActionSchema = z.object({
   customProgramId: z.string().optional(),
 });
 export type RealmsVoteAction = z.infer<typeof RealmsVoteActionSchema>;
+
+/**
+ * MARGINFI LEND ACTION
+ */
+export const MarginfiLendIngestSchema = z.object({
+  bankAddress: z.string(),
+  amount: z.coerce.number(),
+});
+export type MarginfiLendIngest = z.infer<typeof MarginfiLendIngestSchema>;
+export const MarginfiLendActionSchema = z.object({
+  tokenAddress: z.string(),
+  amount: z.coerce.number(),
+});
+export type MarginfiLendAction = z.infer<typeof MarginfiLendActionSchema>;

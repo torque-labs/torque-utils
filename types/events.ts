@@ -47,6 +47,11 @@ export const OnChainEventRequestSchema = z.discriminatedUnion("eventType", [
     proposalPubKey: z.string(),
     customProgramId: z.string().optional(),
   }),
+  z.object({
+    eventType: z.literal(EventType.MARGINFI_LEND),
+    bankAddress: z.string(),
+    amount: z.number(),
+  }),
 ]);
 
 /**
