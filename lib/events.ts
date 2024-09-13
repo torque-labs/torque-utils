@@ -1,8 +1,11 @@
 import { z } from "zod";
 
 import { CustomEventConfig } from "../types/custom-events/events";
+import { MemoAction } from "../types/eventConfig/requirements";
 
-export function eventConfigToValidationSchema(config: CustomEventConfig) {
+export function eventConfigToValidationSchema(
+  config: CustomEventConfig | MemoAction
+) {
   const fields = config.fields.map((field) => {
     let validation: z.ZodSchema;
 

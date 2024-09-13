@@ -26,7 +26,7 @@ export const OnChainEventRequestSchema = z.discriminatedUnion("eventType", [
     price: z.number(),
   }),
   z.object({
-    eventType: z.literal(EventType.SIGN_UP),
+    eventType: z.literal(EventType.MEMO),
     message: z.string(),
   }),
   z.object({

@@ -1,4 +1,9 @@
 import { z } from "zod";
+import {
+  CustomEventBooleanConfigSchema,
+  CustomEventNumberConfigSchema,
+  CustomEventStringConfigSchema,
+} from "../custom-events/events";
 
 /**
  * SWAP ACTIONS
@@ -137,33 +142,22 @@ export const ClickActionSchema = z.object({
 export type ClickAction = z.infer<typeof ClickActionSchema>;
 
 /**
- * Generic memo action input param schema
+ * Memo action config schema
  */
-const solanaActionParamSchema = z.object({
-  label: z.string(),
-  paramName: z.string(),
-  required: z.boolean(),
+export const MemoActionSchema = z.object({
+  fields: z.array(
+    z.union([
+      CustomEventStringConfigSchema,
+      CustomEventNumberConfigSchema,
+      CustomEventBooleanConfigSchema,
+    ])
+  ),
 });
 
 /**
- * Memo action param input type
+ * Memo action config type
  */
-export type SolanaActionParam = z.infer<typeof solanaActionParamSchema>;
-
-/**
- * Sign up action schema
- *
- * TODO: Rename this to generic instead of sign up
- * TODO: Add true sign up schema with required email field
- */
-export const SignUpActionSchema = z.object({
-  inputFields: z.array(solanaActionParamSchema),
-});
-
-/**
- * Sign up action type
- */
-export type SignUpAction = z.infer<typeof SignUpActionSchema>;
+export type MemoAction = z.infer<typeof MemoActionSchema>;
 
 /**
  * REALMS VOTE ACTION
@@ -182,11 +176,14 @@ export const MarginfiLendIngestSchema = z.object({
   bankAddress: z.string(),
   amount: z.coerce.number(),
 });
+
 export type MarginfiLendIngest = z.infer<typeof MarginfiLendIngestSchema>;
+
 export const MarginfiLendActionSchema = z.object({
   tokenAddress: z.string(),
   amount: z.coerce.number(),
 });
+
 export type MarginfiLendAction = z.infer<typeof MarginfiLendActionSchema>;
 
 export const KaminoLendActionSchema = z.object({
