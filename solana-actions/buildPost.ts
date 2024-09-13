@@ -44,9 +44,6 @@ export const memoPost = async (
   memoAction: MemoAction,
   query: { [key: string]: string }
 ): Promise<string> => {
-  console.log("memoAction", memoAction);
-  console.log("query", query);
-
   const validationSchema = eventConfigToValidationSchema(memoAction);
 
   const result = validationSchema.safeParse(query);
