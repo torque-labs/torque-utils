@@ -3,11 +3,11 @@ import { getTokenDetails } from "../tokens.js";
 import {
   SwapAction,
   NftCollectionTradeAction,
-  SignUpAction,
   ClickAction,
   EventType,
   NftBidBuy,
   RealmsVoteAction,
+  MemoAction,
 } from "../types/index.js";
 import { getTensorSlugFromCollectionAddress, TORQUE_API_URL } from "./util.js";
 
@@ -85,8 +85,8 @@ export const convertBlinkToTorqueBlink = async (
   let title =
     eventType === EventType.SWAP || eventType === EventType.NFT_COLLECTION_TRADE
       ? await buildTitle(eventType, eventConfig, blink)
-      : eventType === EventType.SIGN_UP
-      ? "Sign Up"
+      : eventType === EventType.MEMO
+      ? "Complete the Form"
       : blink.title;
 
   let description = "";
@@ -136,13 +136,14 @@ export const convertBlinkToTorqueBlink = async (
       ? "TRADE NFT"
       : EventType.CLICK === eventType
       ? "CLICK"
-      : EventType.SIGN_UP === eventType
-      ? "SIGN UP"
+      : EventType.MEMO === eventType
+      ? "SUBMIT"
       : blink.label;
 
   if (EventType.NFT_BUY_BID === eventType && blink.links?.actions.length) {
     blink.links.actions = [blink.links.actions[0]];
   }
+
   return {
     title: `${title} 🔧 ${
       eventType !== EventType.REALMS_VOTE
@@ -162,7 +163,7 @@ export const convertBlinkToTorqueBlink = async (
       ? {
           ...blink.links,
           actions: blink.links?.actions.length
-            ? blink.links?.actions.map((action: any) => {
+            ? blink.links?.actions.map((action) => {
                 const [route, params] = action.href.split("?");
                 return {
                   label: action.label,
@@ -218,6 +219,7 @@ export const swapGet = async (
       ],
     },
   } as ActionGetResponse;
+
   return convertBlinkToTorqueBlink(
     blink,
     EventType.SWAP,
@@ -306,7 +308,7 @@ export const nftBidBuyGet = async (
 };
 
 export const memoGet = async (
-  signUpData: SignUpAction,
+  memoData: MemoAction,
   offerId: string,
   title: string,
   publisherHandle: string,
@@ -320,33 +322,56 @@ export const memoGet = async (
   raffleRewardToken?: string,
   raffleRewardAmount?: number
 ) => {
+  const hrefParams = memoData.fields
+    .map((field) => {
+      return `${field.name}={${field.name}}`;
+    })
+    .join("&");
+
   const blink = {
     title,
     icon: imageUrl
       ? imageUrl
       : "https://torque-assets.s3.us-east-1.amazonaws.com/clicky.png",
     description: description,
-    label: "Sign Up",
+    label: "Complete the Form",
     links: {
-      actions: signUpData.inputFields.map((field: any) => {
-        return {
-          label: field.label,
-          href: `${TORQUE_API_URL}/actions/${publisherHandle}/${offerId}?campaignId=${offerId}&${field.paramName}={${field.paramName}}`,
-          parameters: [
-            {
-              name: field.paramName,
-              label: field.label,
-              required: field.required,
-            },
-          ],
-        };
-      }),
+      actions: [
+        {
+          label: "Complete the Form",
+          href: `${TORQUE_API_URL}/actions/${publisherHandle}/${offerId}?campaignId=${offerId}&${hrefParams}`,
+          parameters: memoData.fields.map((field) => {
+            const type =
+              field.type === "boolean"
+                ? "checkbox"
+                : field.type === "number"
+                ? "number"
+                : "text";
+
+            const min =
+              field.type === "number" ? field.validation?.min : undefined;
+
+            const max =
+              field.type === "number" ? field.validation?.max : undefined;
+
+            return {
+              type,
+              name: field.name,
+              label: field.label ?? field.name,
+              required: false, // Will be validated on the server
+              ...(min ? { min } : {}), // only add if min is defined
+              ...(max ? { max } : {}), // only add if max is defined
+            };
+          }),
+        },
+      ],
     },
   } as ActionGetResponse;
+
   return convertBlinkToTorqueBlink(
     blink,
-    EventType.SIGN_UP,
-    signUpData,
+    EventType.MEMO,
+    memoData,
     offerId,
     publisherHandle,
     remainingConversions,

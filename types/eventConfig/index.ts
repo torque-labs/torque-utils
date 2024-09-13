@@ -2,13 +2,13 @@ import { z } from "zod";
 import {
   SwapActionSchema,
   NftCollectionTradeSchema,
-  SignUpActionSchema,
   ClickActionSchema,
   TensorActionSchema,
   DriftDepositActionSchema,
   NftBidBuySchema,
   RealmsVoteActionSchema,
   MarginfiLendActionSchema,
+  MemoActionSchema,
 } from "./requirements";
 
 import { CustomEventConfigSchema } from "../custom-events/events";
@@ -20,7 +20,6 @@ export enum EventType {
   CLICK = "CLICK",
   SWAP = "SWAP",
   NFT_COLLECTION_TRADE = "NFT_COLLECTION_TRADE",
-  SIGN_UP = "SIGN_UP",
   TENSOR_BUY = "TENSOR_BUY",
   TENSOR_BID = "TENSOR_BID",
   DRIFT_DEPOSIT = "DRIFT_DEPOSIT",
@@ -29,6 +28,7 @@ export enum EventType {
   REALMS_VOTE = "REALMS_VOTE",
   MARGINFI_LEND = "MARGINFI_LEND",
   KAMINO_LEND = "KAMINO_LEND",
+  MEMO = "MEMO",
 }
 
 export const EventConfigSchema = z.object({
@@ -37,7 +37,7 @@ export const EventConfigSchema = z.object({
     .union([
       SwapActionSchema,
       NftCollectionTradeSchema,
-      SignUpActionSchema,
+      MemoActionSchema,
       ClickActionSchema,
       TensorActionSchema,
       DriftDepositActionSchema,

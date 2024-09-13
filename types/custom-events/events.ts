@@ -1,37 +1,45 @@
 import { z } from "zod";
 
-export const CustomEventStringConfigSchema = z.object({
+const CustomEventConfigSchemaBase = z.object({
   name: z.string(),
-  type: z.literal("string"),
-  validation: z.object({
-    match: z.string().nullish(),
-  }),
+  label: z.string().nullish(),
 });
+
+export const CustomEventStringConfigSchema = CustomEventConfigSchemaBase.and(
+  z.object({
+    type: z.literal("string"),
+    validation: z.object({
+      match: z.string().nullish(),
+    }),
+  })
+);
+
+export const CustomEventNumberConfigSchema = CustomEventConfigSchemaBase.and(
+  z.object({
+    type: z.literal("number"),
+    validation: z.object({
+      min: z.coerce.number().nullish(),
+      max: z.coerce.number().nullish(),
+    }),
+  })
+);
+
+export const CustomEventBooleanConfigSchema = CustomEventConfigSchemaBase.and(
+  z.object({
+    type: z.literal("boolean"),
+    validation: z.object({
+      match: z.boolean().nullish(),
+    }),
+  })
+);
 
 export type CustomEventStringConfig = z.infer<
   typeof CustomEventStringConfigSchema
 >;
 
-export const CustomEventNumberConfigSchema = z.object({
-  name: z.string(),
-  type: z.literal("number"),
-  validation: z.object({
-    min: z.coerce.number().nullish(),
-    max: z.coerce.number().nullish(),
-  }),
-});
-
 export type CustomEventNumberConfig = z.infer<
   typeof CustomEventNumberConfigSchema
 >;
-
-export const CustomEventBooleanConfigSchema = z.object({
-  name: z.string(),
-  type: z.literal("boolean"),
-  validation: z.object({
-    match: z.boolean().nullish(),
-  }),
-});
 
 export type CustomEventBooleanConfig = z.infer<
   typeof CustomEventBooleanConfigSchema

@@ -1,11 +1,11 @@
+import { eventConfigToValidationSchema } from "../lib/events.js";
 import { fetchSingleCollectionDetails } from "../lib/tensor-api.js";
 import {
   SwapAction,
   NftCollectionTradeAction,
-  SignUpAction,
-  SolanaActionParam,
   ClickAction,
   RealmsVoteAction,
+  MemoAction,
 } from "../types/index.js";
 import { getTensorSlugFromCollectionAddress, TORQUE_API_URL } from "./util.js";
 
@@ -40,29 +40,29 @@ export const nftBidBuyPost = (mint: string): string => {
   return `https://tensor.dial.to/bid/${mint}`;
 };
 
-const validateMemoInputs = (query: { [key: string]: string }) => {
-  const keys = Object.keys(query).map((x) => x.toLowerCase());
-  for (let i = 0; i < keys.length; i++) {
-    if (keys[i] === "email") {
-      const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(query[keys[i]]);
-      if (!isValidEmail) {
-        throw new Error("Invalid email address.");
-      }
-    }
-  }
-};
 export const memoPost = async (
-  signUpAction: SignUpAction,
+  memoAction: MemoAction,
   query: { [key: string]: string }
 ): Promise<string> => {
-  validateMemoInputs(query);
-  const { inputFields } = signUpAction;
-  let url = `${TORQUE_API_URL}/actions/memo?campaignId=${query.campaignId}&`;
-  inputFields.forEach((field: SolanaActionParam) => {
-    if (query[field.paramName]) {
-      url += `${field.paramName}=${query[field.paramName]}&`;
-    }
-  });
+  const validationSchema = eventConfigToValidationSchema(memoAction);
+
+  const result = validationSchema.safeParse(query);
+
+  if (!result.success) {
+    console.error(result.error);
+
+    throw new Error("Some fields were not valid.");
+  }
+
+  const { fields } = memoAction;
+
+  const params = fields
+    .filter((field) => !!query[field.name])
+    .map((field) => `${field.name}=${query[field.name]}`)
+    .join("&");
+
+  const url = `${TORQUE_API_URL}/actions/memo?campaignId=${query.campaignId}&${params}`;
+
   return url;
 };
 
