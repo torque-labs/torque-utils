@@ -9,6 +9,7 @@ export const CustomEventStringConfigSchema = CustomEventConfigSchemaBase.and(
   z.object({
     type: z.literal("string"),
     validation: z.object({
+      required: z.boolean().nullish(),
       match: z.string().nullish(),
     }),
   })
