@@ -10,12 +10,12 @@ export function eventConfigToValidationSchema(
     let validation: z.ZodSchema;
 
     if (field.type === "string") {
-      validation = field.validation.match
-        ? z.literal(field.validation.match)
-        : z.string();
-
-      if (!field.validation.match) {
-        validation = validation.nullish();
+      if (field.validation.match) {
+        validation = z.literal(field.validation.match);
+      } else if (field.validation.required) {
+        validation = z.string().min(1);
+      } else {
+        validation = z.string().nullish();
       }
 
       return {
