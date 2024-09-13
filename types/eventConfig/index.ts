@@ -9,6 +9,7 @@ import {
   RealmsVoteActionSchema,
   MarginfiLendActionSchema,
   MemoActionSchema,
+  KaminoLendActionSchema,
 } from "./requirements";
 
 import { CustomEventConfigSchema } from "../custom-events/events";
