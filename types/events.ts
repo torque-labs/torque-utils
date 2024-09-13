@@ -52,6 +52,11 @@ export const OnChainEventRequestSchema = z.discriminatedUnion("eventType", [
     bankAddress: z.string(),
     amount: z.number(),
   }),
+  z.object({
+    eventType: z.literal(EventType.KAMINO_LEND),
+    tokenAddress: z.string(),
+    amount: z.number(),
+  }),
 ]);
 
 /**

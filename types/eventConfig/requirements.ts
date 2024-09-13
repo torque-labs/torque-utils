@@ -188,3 +188,9 @@ export const MarginfiLendActionSchema = z.object({
   amount: z.coerce.number(),
 });
 export type MarginfiLendAction = z.infer<typeof MarginfiLendActionSchema>;
+
+export const KaminoLendActionSchema = z.object({
+  tokenAddress: z.string(),
+  amount: z.coerce.number(),
+});
+export type KaminoLendAction = z.infer<typeof KaminoLendActionSchema>;

@@ -28,6 +28,7 @@ export enum EventType {
   CUSTOM_EVENT = "CUSTOM_EVENT",
   REALMS_VOTE = "REALMS_VOTE",
   MARGINFI_LEND = "MARGINFI_LEND",
+  KAMINO_LEND = "KAMINO_LEND",
 }
 
 export const EventConfigSchema = z.object({
@@ -44,6 +45,7 @@ export const EventConfigSchema = z.object({
       RealmsVoteActionSchema,
       CustomEventConfigSchema,
       MarginfiLendActionSchema,
+      KaminoLendActionSchema,
     ])
     .optional(),
 });
