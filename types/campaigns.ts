@@ -69,6 +69,7 @@ export const AsymmetricRewardSchema = z.object({
   amount: z.string(),
   userPubKey: z.string().nullish(),
   participants: z.nativeEnum(RaffleParticipants).nullish(),
+  payoutTx: z.string().nullish(),
 });
 
 /**
