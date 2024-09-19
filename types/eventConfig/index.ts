@@ -13,6 +13,7 @@ import {
 } from "./requirements";
 
 import { CustomEventConfigSchema } from "../custom-events/events";
+import { TimeConfigSchema } from "../timeConfig";
 
 /**
  * Event types for for campaign conversion requirements
@@ -49,4 +50,5 @@ export const EventConfigSchema = z.object({
       KaminoLendActionSchema,
     ])
     .optional(),
+  timeConfig: TimeConfigSchema.optional(),
 });
