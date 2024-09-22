@@ -191,3 +191,9 @@ export const KaminoLendActionSchema = z.object({
   amount: z.coerce.number(),
 });
 export type KaminoLendAction = z.infer<typeof KaminoLendActionSchema>;
+
+export const DriftBetActionSchema = z.object({
+  marketIndex: z.number(),
+  shares: z.coerce.number(),
+});
+export type DriftBetAction = z.infer<typeof DriftBetActionSchema>;
