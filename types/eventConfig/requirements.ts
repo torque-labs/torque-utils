@@ -137,7 +137,7 @@ export type DriftDepositAction = z.infer<typeof DriftDepositActionSchema>;
  */
 export const ClickActionSchema = z.object({
   enableBlink: z.boolean(),
-  targetUrl: z.string(),
+  targetUrl: z.string().min(1).url(),
 });
 
 export type ClickAction = z.infer<typeof ClickActionSchema>;
