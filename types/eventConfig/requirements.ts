@@ -137,6 +137,7 @@ export type DriftDepositAction = z.infer<typeof DriftDepositActionSchema>;
  */
 export const ClickActionSchema = z.object({
   enableBlink: z.boolean(),
+  targetUrl: z.string(),
 });
 
 export type ClickAction = z.infer<typeof ClickActionSchema>;
@@ -191,3 +192,9 @@ export const KaminoLendActionSchema = z.object({
   amount: z.coerce.number(),
 });
 export type KaminoLendAction = z.infer<typeof KaminoLendActionSchema>;
+
+export const DriftBetActionSchema = z.object({
+  marketIndex: z.number(),
+  shares: z.coerce.number(),
+});
+export type DriftBetAction = z.infer<typeof DriftBetActionSchema>;

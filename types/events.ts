@@ -57,6 +57,11 @@ export const OnChainEventRequestSchema = z.discriminatedUnion("eventType", [
     tokenAddress: z.string(),
     amount: z.number(),
   }),
+  z.object({
+    eventType: z.literal(EventType.DRIFT_BET),
+    marketIndex: z.number(),
+    shares: z.number(),
+  }),
 ]);
 
 /**
