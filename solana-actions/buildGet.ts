@@ -167,7 +167,9 @@ export const convertBlinkToTorqueBlink = async (
                 const [route, params] = action.href.split("?");
                 return {
                   label: action.label,
-                  href: `${TORQUE_API_URL}/actions/${publisherHandle}/${offerId}?${params}`,
+                  href: `${TORQUE_API_URL}/actions/${publisherHandle}/${offerId}${
+                    params ? `?${params}` : ""
+                  }`,
                   parameters: action.parameters,
                 };
               })
@@ -466,4 +468,108 @@ export const realmsVoteGet = async (
     raffleRewardToken,
     raffleRewardAmount
   );
+};
+
+const buildRequirementLabel = async (requirement: BlinkRequirement) => {
+  switch (requirement.type) {
+    case EventType.NFT_COLLECTION_TRADE:
+    case EventType.NFT_BUY_BID:
+      return "TRADE NFT";
+    case EventType.REALMS_VOTE:
+      return "VOTE ON PROPOSAL";
+    case EventType.SWAP:
+      let inDetails, outDetails;
+      outDetails = await getTokenDetails(requirement.eventConfig.outToken);
+      if (requirement.eventConfig.inToken) {
+        inDetails = await getTokenDetails(requirement.eventConfig.inToken);
+        return `SELL ${requirement.eventConfig.inAmount} ${inDetails.symbol} for ${requirement.eventConfig.outAmount} ${outDetails.symbol}`;
+      } else {
+        return `BUY ${requirement.eventConfig.outAmount} ${outDetails.symbol}`;
+      }
+    case EventType.CLICK:
+      if (requirement.eventConfig.enableBlink) {
+        return "CLICK ME";
+      } else {
+        return null;
+      }
+    default:
+      return null;
+  }
+};
+
+export type BlinkRequirement = {
+  type: EventType;
+  eventConfig: any;
+  timeConfig?: any;
+};
+export const buildMultiStepGet = async (
+  requirements: BlinkRequirement[],
+  offerId: string,
+  publisherHandle: string,
+  title: string,
+  imageUrl?: string,
+  userRewardType?: string,
+  userRewardToken?: string,
+  userRewardAmount?: number,
+  raffleRewardType?: string,
+  raffleRewardToken?: string,
+  raffleRewardAmount?: number
+) => {
+  // DESCRIPTION
+  let description;
+  if (userRewardType === "TOKENS" && userRewardToken && userRewardAmount) {
+    const rewardDetails = await getTokenDetails(userRewardToken);
+    description = `🤑 Reward: ${
+      userRewardAmount / 10 ** rewardDetails.decimals
+    } $${
+      rewardDetails.symbol
+    }. Claim the reward by completing the requirements below!`;
+  } else if (
+    raffleRewardType === "TOKENS" &&
+    raffleRewardToken &&
+    raffleRewardAmount
+  ) {
+    const rewardDetails = await getTokenDetails(raffleRewardToken);
+    description = `🎟️ Raffle Prize: ${
+      raffleRewardAmount / 10 ** rewardDetails.decimals
+    } $${
+      rewardDetails.symbol
+    }. Enter to win by completing the requirements below!`;
+  } else {
+    description = `Complete the requirements below!`;
+  }
+
+  // ACTIONS
+  const actions = await Promise.all(
+    requirements.map(async (requirement, index) => {
+      return {
+        label: await buildRequirementLabel(requirement),
+        href: `${TORQUE_API_URL}/actions/${publisherHandle}/${offerId}?campaignId=${offerId}&index=${index}`,
+      };
+    })
+  );
+  let nonBlinkActions = false;
+  const filteredActions = actions.filter((action) => {
+    if (action === null) {
+      nonBlinkActions = true;
+    }
+    return action !== null;
+  });
+
+  // BLANK
+  return {
+    title,
+    icon: imageUrl
+      ? imageUrl
+      : "https://torque-assets.s3.us-east-1.amazonaws.com/clicky.png",
+    description:
+      description +
+      (nonBlinkActions
+        ? " ** There are additional requirements that are not displayed here, navigate to the offer page to complete them **"
+        : ""),
+    label: "TODO: not sure",
+    links: {
+      actions: filteredActions,
+    },
+  } as ActionGetResponse;
 };
