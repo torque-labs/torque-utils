@@ -80,7 +80,8 @@ export const convertBlinkToTorqueBlink = async (
   raffleRewardToken?: string,
   raffleRewardAmount?: number,
   holdForSeconds?: number,
-  currentConversions?: number
+  currentConversions?: number,
+  index?: number
 ): Promise<ActionGetResponse> => {
   let title =
     eventType === EventType.SWAP || eventType === EventType.NFT_COLLECTION_TRADE
@@ -166,8 +167,9 @@ export const convertBlinkToTorqueBlink = async (
             ? blink.links?.actions.map((action) => {
                 const [route, params] = action.href.split("?");
                 return {
+                  type: eventType === EventType.CLICK && eventConfig.enableBlink ? "external-link" : "transaction",
                   label: action.label,
-                  href: `${TORQUE_API_URL}/actions/${publisherHandle}/${offerId}?${params}`,
+                  href: `${TORQUE_API_URL}/actions/${publisherHandle}/${offerId}?${params ? params : ''}${index ? `&index=${index}` : ''}`,
                   parameters: action.parameters,
                 };
               })
@@ -259,7 +261,18 @@ export const nftCollectionTradeGet = async (
   const response = await fetch(
     `https://tensor.dial.to/buy-floor/${collectionSlug}`
   );
-  const details: ActionGetResponse = await response.json();
+  let details: ActionGetResponse = await response.json();
+  if (!details.links?.actions?.length) {
+    details.links = {
+      actions: [
+        {
+          type: 'transaction',
+          label: details.label,
+          href: `${TORQUE_API_URL}/actions/${publisherHandle}/${offerId}`,
+        },
+      ],
+    };
+  }
   return convertBlinkToTorqueBlink(
     details,
     EventType.NFT_COLLECTION_TRADE,
@@ -399,9 +412,6 @@ export const clickGet = async (
   raffleRewardToken?: string,
   raffleRewardAmount?: number
 ) => {
-  if (!clickData.enableBlink) {
-    throw new Error("Click action must have enableBlink set to true.");
-  }
   const blink = {
     title,
     icon: imageUrl
@@ -412,7 +422,8 @@ export const clickGet = async (
     links: {
       actions: [
         {
-          label: "CLICK", // button text
+          type: clickData.enableBlink ? 'transaction' : 'external-link',
+          label: "CLICK HERE", // button text
           href: `${TORQUE_API_URL}/actions/${publisherHandle}/${offerId}?campaignId=${offerId}`,
         },
       ],
