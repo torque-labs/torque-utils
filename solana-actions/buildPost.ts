@@ -70,10 +70,11 @@ export const clickPost = async (
   clickData: ClickAction,
   query: { [key: string]: string }
 ): Promise<string> => {
-  if (!clickData.enableBlink) {
-    throw new Error("Click action must have enableBlink set to true.");
+  if (clickData.enableBlink) {
+    return `${TORQUE_API_URL}/actions/memo?campaignId=${query.campaignId}&`;
+  } else {
+    return `${TORQUE_API_URL}/actions/click?campaignId=${query.campaignId}&`;
   }
-  return `${TORQUE_API_URL}/actions/memo?campaignId=${query.campaignId}&`;
 };
 
 export const realmsVotePost = (
