@@ -39,6 +39,7 @@ export const EventConfigSchema = z.object({
   type: z.nativeEnum(EventType),
   requirement: z
     .union([
+      CustomEventConfigSchema,
       SwapActionSchema,
       NftCollectionTradeSchema,
       MemoActionSchema,
@@ -47,7 +48,6 @@ export const EventConfigSchema = z.object({
       DriftDepositActionSchema,
       NftBidBuySchema,
       RealmsVoteActionSchema,
-      CustomEventConfigSchema,
       MarginfiLendActionSchema,
       KaminoLendActionSchema,
       DriftBetActionSchema,
