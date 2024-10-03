@@ -19,6 +19,14 @@ export enum CampaignType {
 }
 
 /**
+ * Offer Themes
+ */
+export enum OfferTheme {
+  DARK = "DARK",
+  LIGHT = "LIGHT",
+}
+
+/**
  * Reward types for campaign conversions
  */
 export enum RewardType {
@@ -104,6 +112,10 @@ export const CreateCampaignInputSchema = z.object({
   campaignImage: z.string().nullish(),
   landingPage: z.string(),
   blinkOnly: z.boolean().nullish(),
+
+  // Offer Customization
+  offerTheme: z.nativeEnum(OfferTheme),
+  offerBgImage: z.string().nullish(),
 
   // Conversion Details
   eventConfig: z.array(EventConfigSchema),
