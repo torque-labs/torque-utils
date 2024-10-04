@@ -32,6 +32,7 @@
   },
   "dependencies": {
     "@solana/actions": "^1.0.2",
+    "@solana/actions-spec": "^2.4.0",
     "@tensor-foundation/whitelist": "^0.1.0",
     "solana2.0": "npm:@solana/web3.js@2.0.0-preview.3",
     "zod": "^3.23.8"

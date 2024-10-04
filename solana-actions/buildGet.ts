@@ -167,9 +167,14 @@ export const convertBlinkToTorqueBlink = async (
             ? blink.links?.actions.map((action) => {
                 const [route, params] = action.href.split("?");
                 return {
-                  type: eventType === EventType.CLICK && eventConfig.enableBlink ? "external-link" : "transaction",
+                  type:
+                    eventType === EventType.CLICK && eventConfig.enableBlink
+                      ? "external-link"
+                      : "transaction",
                   label: action.label,
-                  href: `${TORQUE_API_URL}/actions/${publisherHandle}/${offerId}?${params ? params : ''}${index ? `&index=${index}` : ''}`,
+                  href: `${TORQUE_API_URL}/actions/${publisherHandle}/${offerId}?${
+                    params ? params : ""
+                  }${index ? `&index=${index}` : ""}`,
                   parameters: action.parameters,
                 };
               })
@@ -266,7 +271,7 @@ export const nftCollectionTradeGet = async (
     details.links = {
       actions: [
         {
-          type: 'transaction',
+          type: "transaction",
           label: details.label,
           href: `${TORQUE_API_URL}/actions/${publisherHandle}/${offerId}`,
         },
@@ -410,7 +415,9 @@ export const clickGet = async (
   userRewardAmount?: number,
   raffleRewardType?: string,
   raffleRewardToken?: string,
-  raffleRewardAmount?: number
+  raffleRewardAmount?: number,
+  requireSignature?: boolean,
+  antiSybilFee?: number
 ) => {
   const blink = {
     title,
@@ -422,11 +429,22 @@ export const clickGet = async (
     links: {
       actions: [
         {
-          type: clickData.enableBlink ? 'transaction' : 'external-link',
+          type: clickData.requireSignature
+            ? clickData.antiSybilFee && clickData.antiSybilFee > 0
+              ? "transaction"
+              : "message"
+            : "external-link",
           label: "CLICK HERE", // button text
           href: `${TORQUE_API_URL}/actions/${publisherHandle}/${offerId}?campaignId=${offerId}`,
         },
       ],
+      next:
+        requireSignature && !antiSybilFee
+          ? {
+              type: "post",
+              href: `/actions/callback?campaignId=${offerId}`,
+            }
+          : undefined,
     },
   } as ActionGetResponse;
 
