@@ -8,6 +8,7 @@ import {
   NftBidBuy,
   RealmsVoteAction,
   MemoAction,
+  StakeSolanaAction,
 } from "../types/index.js";
 import { getTensorSlugFromCollectionAddress, TORQUE_API_URL } from "./util.js";
 
@@ -480,4 +481,39 @@ export const realmsVoteGet = async (
     raffleRewardToken,
     raffleRewardAmount
   );
+};
+
+export const stakeSolanaGet = async (
+  stakeSolanaAction: StakeSolanaAction,
+  offerId: string,
+  title: string,
+  publisherHandle: string,
+  remainingConversions?: number,
+  imageUrl?: string,
+  description?: string,
+  userRewardType?: string,
+  userRewardToken?: string,
+  userRewardAmount?: number,
+  raffleRewardType?: string,
+  raffleRewardToken?: string,
+  raffleRewardAmount?: number
+) => {
+  const { amount } = stakeSolanaAction;
+  return {
+    title,
+    icon: imageUrl
+      ? imageUrl
+      : "https://torque-assets.s3.us-east-1.amazonaws.com/clicky.png",
+    description: description,
+    label: "Stake $SOL",
+    links: {
+      actions: [
+        {
+          type: "transaction",
+          label: `STAKE ${amount} $SOL`, // button text
+          href: `${TORQUE_API_URL}/actions/stake/${offerId}?campaignId=${offerId}&validator=${stakeSolanaAction.validator}&amount=${amount}`,
+        },
+      ],
+    },
+  } as ActionGetResponse;
 };
