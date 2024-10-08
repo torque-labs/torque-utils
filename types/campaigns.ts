@@ -137,6 +137,9 @@ export const CreateCampaignInputSchema = z.object({
   // Audience Details
   audience: z.string().optional().nullable(),
   conversionAudience: ConversionAudienceSchema.optional(),
+
+  // group
+  groupId: z.string().optional(),
 });
 
 /**

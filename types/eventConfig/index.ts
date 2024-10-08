@@ -11,6 +11,7 @@ import {
   MemoActionSchema,
   KaminoLendActionSchema,
   DriftBetActionSchema,
+  GroupCompletionActionSchema,
 } from "./requirements";
 
 import { CustomEventConfigSchema } from "../custom-events/events";
@@ -33,6 +34,7 @@ export enum EventType {
   KAMINO_LEND = "KAMINO_LEND",
   MEMO = "MEMO",
   DRIFT_BET = "DRIFT_BET",
+  GROUP_COMPLETION = "GROUP_COMPLETION",
 }
 
 export const EventConfigSchema = z.object({
@@ -51,6 +53,7 @@ export const EventConfigSchema = z.object({
       MarginfiLendActionSchema,
       KaminoLendActionSchema,
       DriftBetActionSchema,
+      GroupCompletionActionSchema,
     ])
     .optional(),
   timeConfig: TimeConfigSchema.optional(),

@@ -198,3 +198,9 @@ export const DriftBetActionSchema = z.object({
   shares: z.coerce.number(),
 });
 export type DriftBetAction = z.infer<typeof DriftBetActionSchema>;
+
+export const GroupCompletionActionSchema = z.object({
+  groupId: z.string(),
+  requiredCompletions: z.number(),
+});
+export type GroupCompletionAction = z.infer<typeof GroupCompletionActionSchema>;
