@@ -499,7 +499,7 @@ export const stakeSolanaGet = async (
   raffleRewardAmount?: number
 ) => {
   const { amount } = stakeSolanaAction;
-  return {
+  const details: ActionGetResponse = {
     title,
     icon: imageUrl
       ? imageUrl
@@ -511,9 +511,24 @@ export const stakeSolanaGet = async (
         {
           type: "transaction",
           label: `STAKE ${amount} $SOL`, // button text
-          href: `${TORQUE_API_URL}/actions/stake/${offerId}?campaignId=${offerId}&validator=${stakeSolanaAction.validator}&amount=${amount}`,
+          href: `${TORQUE_API_URL}/actions/${publisherHandle}/${offerId}?validator=${stakeSolanaAction.validator}&amount=${amount}`,
         },
       ],
     },
   } as ActionGetResponse;
+  return convertBlinkToTorqueBlink(
+    details,
+    EventType.STAKE_SOL,
+    stakeSolanaAction,
+    offerId,
+    publisherHandle,
+    remainingConversions,
+    userRewardType,
+    userRewardToken,
+    userRewardAmount,
+    raffleRewardType,
+    raffleRewardToken,
+    raffleRewardAmount,
+    undefined
+  );
 };
