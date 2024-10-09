@@ -62,6 +62,13 @@ export const OnChainEventRequestSchema = z.discriminatedUnion("eventType", [
     marketIndex: z.number(),
     shares: z.number(),
   }),
+  z.object({
+    eventType: z.literal(EventType.STAKE_SOL),
+    stakeAuthority: z.string(),
+    validator: z.string(),
+    amount: z.number(),
+    stakeAccount: z.string(),
+  }),
 ]);
 
 /**

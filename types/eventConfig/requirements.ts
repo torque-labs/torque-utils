@@ -202,5 +202,6 @@ export type DriftBetAction = z.infer<typeof DriftBetActionSchema>;
 export const StakeSolanaActionSchema = z.object({
   amount: z.coerce.number(),
   validator: z.string(),
+  epochs: z.number(),
 });
 export type StakeSolanaAction = z.infer<typeof StakeSolanaActionSchema>;
