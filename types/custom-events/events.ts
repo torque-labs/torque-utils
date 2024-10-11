@@ -3,6 +3,7 @@ import { z } from "zod";
 const CustomEventConfigSchemaBase = z.object({
   name: z.string(),
   label: z.string().nullish(),
+  description: z.string().nullish(),
 });
 
 export const CustomEventStringConfigSchema = CustomEventConfigSchemaBase.and(
@@ -48,6 +49,8 @@ export type CustomEventBooleanConfig = z.infer<
 
 export const CustomEventConfigSchema = z.object({
   eventName: z.string(),
+  description: z.string().nullish(),
+  formEnabled: z.boolean(),
   fields: z.array(
     z.union([
       CustomEventStringConfigSchema,
