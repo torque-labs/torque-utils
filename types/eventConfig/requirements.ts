@@ -136,8 +136,9 @@ export type DriftDepositAction = z.infer<typeof DriftDepositActionSchema>;
  * Click action schema for memo
  */
 export const ClickActionSchema = z.object({
-  enableBlink: z.boolean(),
   targetUrl: z.string().min(1).url(),
+  requireSignature: z.boolean(),
+  antiSybilFee: z.number().optional(), // lamports
 });
 
 export type ClickAction = z.infer<typeof ClickActionSchema>;

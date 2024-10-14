@@ -67,15 +67,8 @@ export const memoPost = async (
   return url;
 };
 
-export const clickPost = async (
-  clickData: ClickAction,
-  query: { [key: string]: string }
-): Promise<string> => {
-  if (clickData.enableBlink) {
-    return `${TORQUE_API_URL}/actions/memo?campaignId=${query.campaignId}&`;
-  } else {
-    return `${TORQUE_API_URL}/actions/click?campaignId=${query.campaignId}&`;
-  }
+export const clickPost = (campaignId: string): string => {
+  return `${TORQUE_API_URL}/actions/click?campaignId=${campaignId}`;
 };
 
 export const realmsVotePost = (
