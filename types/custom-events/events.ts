@@ -4,6 +4,7 @@ const CustomEventConfigSchemaBase = z.object({
   name: z.string(),
   label: z.string().nullish(),
   description: z.string().nullish(),
+  image: z.string().nullish(),
 });
 
 export const CustomEventStringConfigSchema = CustomEventConfigSchemaBase.and(

@@ -12,10 +12,20 @@ export function eventConfigToValidationSchema(
     if (field.type === "string") {
       if (field.validation.match) {
         validation = z.literal(field.validation.match);
-      } else if (field.validation.required) {
-        validation = z.string().min(1);
       } else {
-        validation = z.string().nullish();
+        validation = z.string();
+
+        if (field.name === "email") {
+          validation = (validation as z.ZodString).email();
+        }
+
+        if (field.validation.required) {
+          validation = (validation as z.ZodString).min(1);
+        }
+
+        if (!field.validation.required) {
+          validation = validation.nullish();
+        }
       }
 
       return {
