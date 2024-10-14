@@ -6,6 +6,7 @@ import {
   ClickAction,
   RealmsVoteAction,
   MemoAction,
+  StakeSolanaAction,
 } from "../types/index.js";
 import { getTensorSlugFromCollectionAddress, TORQUE_API_URL } from "./util.js";
 
@@ -79,4 +80,12 @@ export const realmsVotePost = (
   }
   const { daoPubKey, proposalPubKey } = realmsVoteAction;
   return `https://realms.dial.to/vote/dao/${daoPubKey}/proposal/${proposalPubKey}/${voteIndex}`;
+};
+
+export const stakeSolanaPost = (
+  stakeSolanaAction: StakeSolanaAction,
+  offerId: string
+): string => {
+  const { amount, validator } = stakeSolanaAction;
+  return `${TORQUE_API_URL}/actions/stake/${offerId}?amount=${amount}&validator=${validator}`;
 };

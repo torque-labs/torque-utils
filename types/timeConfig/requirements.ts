@@ -20,3 +20,8 @@ export const OpenPositionTimeConfigSchema = z.object({
 export type OpenPositionTimeConfig = z.infer<
   typeof OpenPositionTimeConfigSchema
 >;
+
+export const StakeSolTimeConfigSchema = z.object({
+  epochs: z.number(),
+});
+export type StakeSolTimeConfig = z.infer<typeof StakeSolTimeConfigSchema>;
