@@ -31,17 +31,17 @@
     "prepack": "npm run build"
   },
   "dependencies": {
-    "@solana/actions": "^1.0.2",
-    "@solana/actions-spec": "^2.4.0",
+    "@solana/actions": "^1.6.5",
+    "@solana/actions-spec": "^2.4.1",
     "@tensor-foundation/whitelist": "^0.1.0",
-    "solana2.0": "npm:@solana/web3.js@2.0.0-preview.3",
+    "solana2.0": "npm:@solana/web3.js@^2.0.0-preview.3",
     "zod": "^3.23.8"
   },
   "devDependencies": {
     "@alcalzone/esm2cjs": "^1.1.2",
-    "@types/node": "^20.14.11",
+    "@types/node": "^20.16.11",
     "tsc-alias": "^1.8.10",
-    "tsx": "^4.16.5",
-    "typescript": "^5.5.3"
+    "tsx": "^4.19.1",
+    "typescript": "^5.6.3"
   }
 }
