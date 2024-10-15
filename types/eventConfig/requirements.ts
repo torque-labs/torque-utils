@@ -4,6 +4,7 @@ import {
   CustomEventNumberConfigSchema,
   CustomEventStringConfigSchema,
 } from "../custom-events/events";
+import { ActionParameterType } from "@solana/actions-spec";
 
 /**
  * SWAP ACTIONS
@@ -138,7 +139,7 @@ export type DriftDepositAction = z.infer<typeof DriftDepositActionSchema>;
 export const ClickActionSchema = z.object({
   targetUrl: z.string().min(1).url(),
   requireSignature: z.boolean(),
-  antiSybilFee: z.number().optional(), // lamports
+  antiSybilFee: z.coerce.number().optional(), // lamports
 });
 
 export type ClickAction = z.infer<typeof ClickActionSchema>;
@@ -206,3 +207,33 @@ export const StakeSolanaActionSchema = z.object({
   epochs: z.number(),
 });
 export type StakeSolanaAction = z.infer<typeof StakeSolanaActionSchema>;
+
+export enum FormFieldType {
+  TEXT = "text",
+  EMAIL = "email",
+  ULR = "url",
+  NUMBER = "number",
+  TEXT_AREAD = "textarea",
+  SELECT = "select",
+  CHECK_BOX = "checkbox",
+}
+export const FormSubmissionActionSchema = z.object({
+  fields: z.array(
+    z.object({
+      name: z.string(),
+      label: z.string(),
+      type: z.nativeEnum(FormFieldType),
+      required: z.boolean().nullish(),
+      options: z
+        .array(
+          z.object({
+            label: z.string(),
+            value: z.string(),
+          })
+        )
+        .optional(),
+    })
+  ),
+  antiSybilFee: z.coerce.number().optional(),
+});
+export type FormSubmissionAction = z.infer<typeof FormSubmissionActionSchema>;
