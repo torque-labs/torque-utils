@@ -4,7 +4,6 @@ import {
   CustomEventNumberConfigSchema,
   CustomEventStringConfigSchema,
 } from "../custom-events/events";
-import { ActionParameterType } from "@solana/actions-spec";
 
 /**
  * SWAP ACTIONS
@@ -213,27 +212,25 @@ export enum FormFieldType {
   EMAIL = "email",
   ULR = "url",
   NUMBER = "number",
-  TEXT_AREAD = "textarea",
+  TEXT_AREA = "textarea",
   SELECT = "select",
-  CHECK_BOX = "checkbox",
 }
+export const FormFieldSchema = z.object({
+  name: z.string(),
+  label: z.string(),
+  type: z.nativeEnum(FormFieldType),
+  required: z.boolean().nullish(),
+  options: z
+    .array(
+      z.object({
+        label: z.string(),
+        value: z.string(),
+      })
+    )
+    .optional(),
+});
 export const FormSubmissionActionSchema = z.object({
-  fields: z.array(
-    z.object({
-      name: z.string(),
-      label: z.string(),
-      type: z.nativeEnum(FormFieldType),
-      required: z.boolean().nullish(),
-      options: z
-        .array(
-          z.object({
-            label: z.string(),
-            value: z.string(),
-          })
-        )
-        .optional(),
-    })
-  ),
+  fields: z.array(FormFieldSchema),
   antiSybilFee: z.coerce.number().optional(),
 });
 export type FormSubmissionAction = z.infer<typeof FormSubmissionActionSchema>;

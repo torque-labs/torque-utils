@@ -1,5 +1,6 @@
 import { custom, z } from "zod";
 import { EventType } from "./eventConfig";
+import { FormFieldSchema } from "../types";
 
 /**
  * On-chain event request schema used to validate the request body sent to API from lambda
