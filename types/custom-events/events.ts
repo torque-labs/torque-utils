@@ -5,7 +5,6 @@ const CustomEventConfigSchemaBase = z.object({
   label: z.string().nullish(),
   description: z.string().nullish(),
   image: z.string().nullish(),
-  link: z.string().url().nullish(),
 });
 
 export const CustomEventStringConfigSchema = CustomEventConfigSchemaBase.and(
@@ -53,6 +52,7 @@ export const CustomEventConfigSchema = z.object({
   eventName: z.string(),
   description: z.string().nullish(),
   formEnabled: z.boolean(),
+  targetUrl: z.string().url().nullish(),
   fields: z.array(
     z.union([
       CustomEventStringConfigSchema,
