@@ -5,6 +5,7 @@ const CustomEventConfigSchemaBase = z.object({
   label: z.string().nullish(),
   description: z.string().nullish(),
   image: z.string().nullish(),
+  link: z.string().url().nullish(),
 });
 
 export const CustomEventStringConfigSchema = CustomEventConfigSchemaBase.and(
