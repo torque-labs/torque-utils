@@ -21,10 +21,8 @@ export function eventConfigToValidationSchema(
 
         if (field.validation.required) {
           validation = (validation as z.ZodString).min(1);
-        }
-
-        if (!field.validation.required) {
-          validation = validation.nullish();
+        } else {
+          validation = validation.nullish().or(z.literal(""));
         }
       }
 

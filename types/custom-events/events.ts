@@ -52,7 +52,7 @@ export const CustomEventConfigSchema = z.object({
   eventName: z.string(),
   description: z.string().nullish(),
   formEnabled: z.boolean(),
-  targetUrl: z.string().url().nullish(),
+  targetUrl: z.string().url().nullish().or(z.literal("")),
   fields: z.array(
     z.union([
       CustomEventStringConfigSchema,
