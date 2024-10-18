@@ -12,6 +12,7 @@ import {
   KaminoLendActionSchema,
   DriftBetActionSchema,
   StakeSolanaActionSchema,
+  FormSubmissionActionSchema,
 } from "./requirements";
 
 import { CustomEventConfigSchema } from "../custom-events/events";
@@ -35,6 +36,7 @@ export enum EventType {
   MEMO = "MEMO",
   DRIFT_BET = "DRIFT_BET",
   STAKE_SOL = "STAKE_SOL",
+  FORM_SUBMISSION = "FORM_SUBMISSION",
 }
 
 export const EventConfigSchema = z.object({
@@ -54,6 +56,7 @@ export const EventConfigSchema = z.object({
       KaminoLendActionSchema,
       DriftBetActionSchema,
       StakeSolanaActionSchema,
+      FormSubmissionActionSchema,
     ])
     .optional(),
   timeConfig: TimeConfigSchema.optional(),

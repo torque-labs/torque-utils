@@ -414,7 +414,9 @@ export const clickGet = async (
   userRewardAmount?: number,
   raffleRewardType?: string,
   raffleRewardToken?: string,
-  raffleRewardAmount?: number
+  raffleRewardAmount?: number,
+  requireSignature?: boolean,
+  antiSybilFee?: number
 ) => {
   const blink = {
     title,
@@ -426,11 +428,22 @@ export const clickGet = async (
     links: {
       actions: [
         {
-          type: clickData.enableBlink ? "transaction" : "external-link",
+          type: clickData.requireSignature
+            ? clickData.antiSybilFee && clickData.antiSybilFee > 0
+              ? "transaction"
+              : "message"
+            : "external-link",
           label: "CLICK HERE", // button text
           href: `${TORQUE_API_URL}/actions/${publisherHandle}/${offerId}?campaignId=${offerId}`,
         },
       ],
+      next:
+        requireSignature && !antiSybilFee
+          ? {
+              type: "post",
+              href: `/actions/callback?campaignId=${offerId}`,
+            }
+          : undefined,
     },
   } as ActionGetResponse;
 

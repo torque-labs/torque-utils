@@ -105,7 +105,7 @@ export const fetchSingleCollectionDetails = async (collectionId: string) => {
       .then((response) => response.json())
       .catch((err) => console.error(err)),
     fetch(
-      "https://api.mainnet.tensordev.io/api/v1/mint/collection?collId=136f3198-c4c1-4ccf-966f-a5431a091581&sortBy=ListingPriceAsc&limit=1",
+      `https://api.mainnet.tensordev.io/api/v1/mint/collection?collId=${collectionId}&sortBy=ListingPriceAsc&limit=1`,
       tensorGetOptions
     )
       .then((response) => response.json())

@@ -136,8 +136,9 @@ export type DriftDepositAction = z.infer<typeof DriftDepositActionSchema>;
  * Click action schema for memo
  */
 export const ClickActionSchema = z.object({
-  enableBlink: z.boolean(),
   targetUrl: z.string().min(1).url(),
+  requireSignature: z.boolean(),
+  antiSybilFee: z.coerce.number().optional(), // lamports
 });
 
 export type ClickAction = z.infer<typeof ClickActionSchema>;
@@ -205,3 +206,31 @@ export const StakeSolanaActionSchema = z.object({
   epochs: z.number(),
 });
 export type StakeSolanaAction = z.infer<typeof StakeSolanaActionSchema>;
+
+export enum FormFieldType {
+  TEXT = "text",
+  EMAIL = "email",
+  ULR = "url",
+  NUMBER = "number",
+  TEXT_AREA = "textarea",
+  SELECT = "select",
+}
+export const FormFieldSchema = z.object({
+  name: z.string(),
+  label: z.string(),
+  type: z.nativeEnum(FormFieldType),
+  required: z.boolean().nullish(),
+  options: z
+    .array(
+      z.object({
+        label: z.string(),
+        value: z.string(),
+      })
+    )
+    .optional(),
+});
+export const FormSubmissionActionSchema = z.object({
+  fields: z.array(FormFieldSchema),
+  antiSybilFee: z.coerce.number().optional(),
+});
+export type FormSubmissionAction = z.infer<typeof FormSubmissionActionSchema>;
