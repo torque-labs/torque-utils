@@ -61,7 +61,9 @@ export const OnChainEventRequestSchema = z.discriminatedUnion("eventType", [
   z.object({
     eventType: z.literal(EventType.DRIFT_BET),
     marketIndex: z.number(),
+    better: z.string(),
     shares: z.number(),
+    depositAmount: z.number(),
   }),
   z.object({
     eventType: z.literal(EventType.STAKE_SOL),
