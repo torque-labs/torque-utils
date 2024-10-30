@@ -9,3 +9,4 @@ export * from "./events.js";
 export * from "./custom-events/events.js";
 export * from "./tokens.js";
 export * from "./errors.js";
+export * from "./lootBox.js";
