@@ -86,6 +86,20 @@ export const AsymmetricRewardSchema = z.object({
 export type AsymmetricReward = z.infer<typeof AsymmetricRewardSchema>;
 
 /**
+ * Loot Box Reward Schema
+ */
+export const LootBoxRewardSchema = z.object({
+  tokenAddress: z.string(),
+  payouts: z.array(z.number()),
+  payoutsAvailable: z.array(z.number()),
+});
+
+/**
+ * Loot Box Reward Schematype
+ */
+export type LootBoxReward = z.infer<typeof LootBoxRewardSchema>;
+
+/**
  * Campaign filter schema
  */
 export const CampaignRequestParamsSchema = z.object({
@@ -129,6 +143,7 @@ export const CreateCampaignInputSchema = z.object({
   userTokenAddress: z.string().optional(),
   userPayoutPerConversion: z.number().optional(),
   asymmetricRewards: z.array(AsymmetricRewardSchema).optional(),
+  lootBoxRewards: LootBoxRewardSchema.optional(),
 
   // Time Details
   startTime: z.number(),
