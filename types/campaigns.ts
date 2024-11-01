@@ -89,8 +89,10 @@ export type AsymmetricReward = z.infer<typeof AsymmetricRewardSchema>;
  * Loot Box Reward Schema
  */
 export const LootBoxRewardSchema = z.object({
-  tokenAddress: z.string(),
-  rewards: z.array(z.object({ amount: z.number(), users: z.number() })),
+  tokenAddress: z.string().min(1, "Token address is required"),
+  rewards: z.array(
+    z.object({ amount: z.coerce.number(), users: z.coerce.number() })
+  ),
 });
 
 /**
