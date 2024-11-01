@@ -167,6 +167,7 @@ export const convertBlinkToTorqueBlink = async (
                 const [route, params] = action.href.split("?");
                 return {
                   type:
+                    // TODO: enableBlink updated to needs signature??
                     eventType === EventType.CLICK && eventConfig.enableBlink
                       ? "external-link"
                       : "transaction",
