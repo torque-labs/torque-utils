@@ -86,6 +86,40 @@ export const AsymmetricRewardSchema = z.object({
 export type AsymmetricReward = z.infer<typeof AsymmetricRewardSchema>;
 
 /**
+ * Loot Box Reward Schema
+ */
+export const LootBoxRewardSchema = z.object({
+  tokenAddress: z.string().min(1, "Token address is required"),
+  rewards: z.array(
+    z.object({ amount: z.coerce.number(), users: z.coerce.number() })
+  ),
+});
+
+/**
+ * Loot Box Reward Schematype
+ */
+export type LootBoxReward = z.infer<typeof LootBoxRewardSchema>;
+
+/**
+ * Loot Box form input schema for creating a new campaign
+ */
+export const LootBoxRewardInputSchema = z.discriminatedUnion("enabled", [
+  z
+    .object({
+      enabled: z.literal(true),
+    })
+    .merge(LootBoxRewardSchema),
+  z.object({
+    enabled: z.literal(false),
+  }),
+]);
+
+/**
+ * Loot Box form input type
+ */
+export type LootBoxRewardInput = z.infer<typeof LootBoxRewardInputSchema>;
+
+/**
  * Campaign filter schema
  */
 export const CampaignRequestParamsSchema = z.object({
@@ -129,6 +163,7 @@ export const CreateCampaignInputSchema = z.object({
   userTokenAddress: z.string().optional(),
   userPayoutPerConversion: z.number().optional(),
   asymmetricRewards: z.array(AsymmetricRewardSchema).optional(),
+  lootBoxRewards: LootBoxRewardInputSchema,
 
   // Time Details
   startTime: z.number(),
