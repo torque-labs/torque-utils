@@ -74,10 +74,8 @@ export type ConversionAudience = z.infer<typeof ConversionAudienceSchema>;
  */
 export const AsymmetricRewardSchema = z.object({
   tokenAddress: z.string(),
-  amount: z.string(),
-  userPubKey: z.string().nullish(),
+  amount: z.coerce.number(),
   participants: z.nativeEnum(RaffleParticipants).nullish(),
-  payoutTx: z.string().nullish(),
 });
 
 /**
@@ -148,22 +146,24 @@ export const CreateCampaignInputSchema = z.object({
   blinkOnly: z.boolean().nullish(),
 
   // Offer Customization
-  offerTheme: z.nativeEnum(OfferTheme),
+  offerTheme: z.nativeEnum(OfferTheme).optional(),
   offerBgImage: z.string().nullish(),
 
   // Conversion Details
   eventConfig: z.array(EventConfigSchema),
 
   // Reward Details
-  conversionCount: z.number().optional().nullable(),
-  publisherRewardType: z.nativeEnum(RewardType),
+  conversionCount: z.number(),
+  publisherRewardType: z.nativeEnum(RewardType).optional(),
   publisherTokenAddress: z.string().optional(),
-  publisherPayoutPerConversion: z.number(),
+  publisherPayoutPerConversion: z.number().optional(),
+
   userRewardType: z.nativeEnum(RewardType).optional(),
   userTokenAddress: z.string().optional(),
   userPayoutPerConversion: z.number().optional(),
+
   asymmetricRewards: z.array(AsymmetricRewardSchema).optional(),
-  lootBoxRewards: LootBoxRewardInputSchema,
+  lootBoxRewards: LootBoxRewardInputSchema.optional(),
 
   // Time Details
   startTime: z.number(),
