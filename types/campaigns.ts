@@ -82,9 +82,17 @@ export const AsymmetricRewardSchema = z.object({
    */
   amount: z.coerce.number(),
   /**
+   * The user public key that will be populated in the payout transaction
+   */
+  userPubKey: z.string().nullish(),
+  /**
    * Who can participate in the raffle, users, publishers, or both
    */
   participants: z.nativeEnum(RaffleParticipants).nullish(),
+  /**
+   * The transaction hash of the payout transaction
+   */
+  payoutTx: z.string().nullish(),
 });
 
 /**
@@ -230,8 +238,12 @@ export const CreateCampaignInputSchema = z.object({
   userPayoutPerConversion: z.coerce.number().optional(),
   /**
    * The asymmetric/raffle rewards to distribute
+   *
+   * NOTE: The userPubKey and payoutTx are omitted from schema for campaign creation
    */
-  asymmetricRewards: z.array(AsymmetricRewardSchema).optional(),
+  asymmetricRewards: z
+    .array(AsymmetricRewardSchema.omit({ userPubKey: true, payoutTx: true }))
+    .optional(),
   /**
    * The lootbox rewards to distribute
    */
