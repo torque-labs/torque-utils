@@ -1,6 +1,6 @@
 {
   "name": "@torque-labs/torque-utils",
-  "version": "1.1.46",
+  "version": "1.1.46-alpha.0",
   "description": "Torque Labs utility library.",
   "author": "Torque Labs",
   "license": "MIT",
@@ -28,7 +28,8 @@
     "build": "tsc && tsc-alias -p tsconfig.json",
     "dev": "tsc --watch && tsc-alias -p tsconfig.json",
     "postbuild": "esm2cjs --in dist/esm --out dist/cjs -l error",
-    "prepack": "npm run build"
+    "prepack": "npm run build && npm run docs",
+    "docs": "typedoc --options typedoc.json"
   },
   "dependencies": {
     "@solana/actions": "^1.6.5",
@@ -42,6 +43,9 @@
     "@types/node": "^20.16.11",
     "tsc-alias": "^1.8.10",
     "tsx": "^4.19.1",
+    "typedoc": "^0.26.11",
+    "typedoc-plugin-markdown": "^4.2.10",
+    "typedoc-plugin-zod": "^1.2.1",
     "typescript": "^5.6.3"
   }
 }

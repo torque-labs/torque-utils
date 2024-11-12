@@ -1,0 +1,12 @@
+{
+  "$schema": "https://typedoc-plugin-markdown.org/schema.json",
+  "entryPointStrategy": "expand",
+  "plugin": ["typedoc-plugin-zod", "typedoc-plugin-markdown"],
+  "out": "docs",
+  "skipErrorChecking": true,
+  "entryPoints": ["./index.ts"],
+  "parametersFormat": "table",
+  "propertiesFormat": "htmlTable",
+  "enumMembersFormat": "table",
+  "typeDeclarationFormat": "htmlTable"
+}

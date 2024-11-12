@@ -165,8 +165,6 @@ export type CampaignRequestParams = z.infer<typeof CampaignRequestParamsSchema>;
  * Schema for creating a new campaign
  */
 export const CreateCampaignInputSchema = z.object({
-  // Campaign Details
-
   /**
    * The name of the campaign
    */
@@ -196,8 +194,6 @@ export const CreateCampaignInputSchema = z.object({
    * Deprecated: Whether the offer/campaign is blink only or not
    */
   blinkOnly: z.boolean().nullish(),
-
-  // Offer Customization
   /**
    * The theme of the offer/campaign
    */
@@ -206,14 +202,12 @@ export const CreateCampaignInputSchema = z.object({
    * The background image for the offer/campaign
    */
   offerBgImage: z.string().nullish(),
-
-  // Conversion Details
   /**
    * The event requirements for the offer/campaign
+   *
+   * {@link EventRequirementConfig}
    */
   eventConfig: z.array(EventRequirementConfigSchema),
-
-  // Reward Details
   /**
    * The total number of conversions
    */
@@ -250,8 +244,6 @@ export const CreateCampaignInputSchema = z.object({
    * The lootbox rewards to distribute
    */
   lootBoxRewards: LootBoxRewardInputSchema,
-
-  // Time Details
   /**
    * The start time of the campaign/offer in Unix timestamp
    */
@@ -260,8 +252,6 @@ export const CreateCampaignInputSchema = z.object({
    * The end time of the campaign/offer in Unix timestamp
    */
   endTime: z.number(),
-
-  // Audience Details
   /**
    * The audiences that the offer/campaign is available to
    */
@@ -274,6 +264,6 @@ export const CreateCampaignInputSchema = z.object({
 });
 
 /**
- * The create campaign input type
+ * The create campaign input type.
  */
 export type CreateCampaignInput = z.infer<typeof CreateCampaignInputSchema>;

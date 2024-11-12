@@ -40,7 +40,7 @@ const SwapActionBaseSchema = z.object({
 /**
  * Refined schema for swap action with valid combinations
  *
- * @description
+ * @remarks
  * sell -> token and amount
  * buy -> token and amount
  * swap -> both token and one amount
