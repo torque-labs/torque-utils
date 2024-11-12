@@ -1,3 +1,6 @@
+/**
+ * Token type
+ */
 export type Token = {
   name: string;
   logo: string;

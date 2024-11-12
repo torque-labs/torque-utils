@@ -1,12 +1,12 @@
-export * from "./campaigns.js";
-export * from "./tarp.js";
-export * from "./eventConfig/index.js";
-export * from "./eventConfig/requirements.js";
-export * from "./timeConfig/index.js";
-export * from "./timeConfig/requirements.js";
-export * from "./timeConfig/validationInput.js";
-export * from "./events.js";
-export * from "./custom-events/events.js";
-export * from "./tokens.js";
-export * from "./errors.js";
-export * from "./lootBox.js";
+// Folders
+export * from "./custom-events";
+export * from "./eventConfig";
+export * from "./timeConfig";
+
+// Files
+export * from "./campaigns";
+export * from "./errors";
+export * from "./events";
+export * from "./lootBox";
+export * from "./tarp";
+export * from "./tokens";
