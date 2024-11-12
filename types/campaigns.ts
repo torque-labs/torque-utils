@@ -73,10 +73,25 @@ export type ConversionAudience = z.infer<typeof ConversionAudienceSchema>;
  * Asymmetric Reward Schema
  */
 export const AsymmetricRewardSchema = z.object({
+  /**
+   * The token address to reward
+   */
   tokenAddress: z.string(),
+  /**
+   * The amount to reward
+   */
   amount: z.string(),
+  /**
+   * Leave blank: The user public key that will be populated in the payout transaction
+   */
   userPubKey: z.string().nullish(),
+  /**
+   * Who can participate in the raffle, users, publishers, or both
+   */
   participants: z.nativeEnum(RaffleParticipants).nullish(),
+  /**
+   * Leave blank: The transaction hash of the payout transaction
+   */
   payoutTx: z.string().nullish(),
 });
 
@@ -89,7 +104,13 @@ export type AsymmetricReward = z.infer<typeof AsymmetricRewardSchema>;
  * Loot Box Reward Schema
  */
 export const LootBoxRewardSchema = z.object({
+  /**
+   * The token address to reward
+   */
   tokenAddress: z.string().min(1, "Token address is required"),
+  /**
+   * The groups of rewards to distribute
+   */
   rewards: z.array(
     z.object({ amount: z.coerce.number(), users: z.coerce.number() })
   ),
@@ -106,10 +127,16 @@ export type LootBoxReward = z.infer<typeof LootBoxRewardSchema>;
 export const LootBoxRewardInputSchema = z.discriminatedUnion("enabled", [
   z
     .object({
+      /**
+       * Whether the loot box reward is enabled or not
+       */
       enabled: z.literal(true),
     })
     .merge(LootBoxRewardSchema),
   z.object({
+    /**
+     * Wether the loot box reward is disabled or not
+     */
     enabled: z.literal(false),
   }),
 ]);
@@ -139,42 +166,114 @@ export type CampaignRequestParams = z.infer<typeof CampaignRequestParamsSchema>;
  */
 export const CreateCampaignInputSchema = z.object({
   // Campaign Details
+
+  /**
+   * The name of the campaign
+   */
   campaignName: z.string(),
-  campaignType: z.string(),
+  /**
+   * The type of campaign
+   */
+  campaignType: z.nativeEnum(CampaignType),
+  /**
+   * A short description of the offer/campaign
+   */
   campaignDescription: z.string().max(250).nullish(),
+  /**
+   * Full campaign content of the offer/campaign in Markdown
+   * This supports large format content such as images, videos, in Markdown format
+   */
   campaignContent: z.string().nullish(),
+  /**
+   * The featured image for the offer/campaign
+   */
   campaignImage: z.string().nullish(),
+  /**
+   * Default launding page for the offer/campaign to link users to
+   */
   landingPage: z.string(),
+  /**
+   * Deprecated: Whether the offer/campaign is blink only or not
+   */
   blinkOnly: z.boolean().nullish(),
 
   // Offer Customization
+  /**
+   * The theme of the offer/campaign
+   */
   offerTheme: z.nativeEnum(OfferTheme),
+  /**
+   * The background image for the offer/campaign
+   */
   offerBgImage: z.string().nullish(),
 
   // Conversion Details
+  /**
+   * The event requirements for the offer/campaign
+   */
   eventConfig: z.array(EventRequirementConfigSchema),
 
   // Reward Details
+  /**
+   * The total number of conversions
+   */
   conversionCount: z.number().optional().nullable(),
+  /**
+   * The publisher reward type
+   */
   publisherRewardType: z.nativeEnum(RewardType),
+  /**
+   * The publisher token address
+   */
   publisherTokenAddress: z.string().optional(),
+  /**
+   * The payout per conversion for each referral by a publisher
+   */
   publisherPayoutPerConversion: z.number(),
+  /**
+   * The user reward type
+   */
   userRewardType: z.nativeEnum(RewardType).optional(),
+  /**
+   * The user token address
+   */
   userTokenAddress: z.string().optional(),
+  /**
+   * The payout per conversion for each user
+   */
   userPayoutPerConversion: z.number().optional(),
+  /**
+   * The asymmetric/raffle rewards to distribute
+   */
   asymmetricRewards: z.array(AsymmetricRewardSchema).optional(),
+  /**
+   * The lootbox rewards to distribute
+   */
   lootBoxRewards: LootBoxRewardInputSchema,
 
   // Time Details
+  /**
+   * The start time of the campaign/offer in Unix timestamp
+   */
   startTime: z.number(),
+  /**
+   * The end time of the campaign/offer in Unix timestamp
+   */
   endTime: z.number(),
 
   // Audience Details
+  /**
+   * The audiences that the offer/campaign is available to
+   */
   audience: z.string().optional().nullable(),
+  /**
+   * If set, the offer can only be completed by user's who have completed
+   * a conversion for the given offers prior
+   */
   conversionAudience: ConversionAudienceSchema.optional(),
 });
 
 /**
- *
+ * The create campaign input type
  */
 export type CreateCampaignInput = z.infer<typeof CreateCampaignInputSchema>;
