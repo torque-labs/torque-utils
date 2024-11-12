@@ -1,6 +1,6 @@
 **@torque-labs/torque-utils** • **Docs**
 
-***
+---
 
 # @torque-labs/torque-utils
 
@@ -136,7 +136,7 @@
 - [StakeSolTimeConfigSchema](variables/StakeSolTimeConfigSchema.md)
 - [SwapActionSchema](variables/SwapActionSchema.md)
 - [SwapRequirementSchema](variables/SwapRequirementSchema.md)
-- [TENSOR\_API](variables/TENSOR_API.md)
+- [TENSOR_API](variables/TENSOR_API.md)
 - [TensorActionSchema](variables/TensorActionSchema.md)
 - [TensorBidRequirementSchema](variables/TensorBidRequirementSchema.md)
 - [TensorBuyRequirementSchema](variables/TensorBuyRequirementSchema.md)
@@ -145,7 +145,7 @@
 - [TimeConfigStakeSolSchema](variables/TimeConfigStakeSolSchema.md)
 - [TimeConfigTokenHoldingSchema](variables/TimeConfigTokenHoldingSchema.md)
 - [TokenHoldingTimeConfigSchema](variables/TokenHoldingTimeConfigSchema.md)
-- [TORQUE\_API\_URL](variables/TORQUE_API_URL.md)
+- [TORQUE_API_URL](variables/TORQUE_API_URL.md)
 
 ## Functions
 

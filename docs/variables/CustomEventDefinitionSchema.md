@@ -13,4 +13,4 @@ This is used to save the custom event definition in the database (config JSON fi
 
 ## Defined in
 
-[types/custom-events/events.ts:172](https://github.com/torque-labs/torque-utils/blob/c76fb4101d477d1e8e6fb4f5de7a277964527c27/types/custom-events/events.ts#L172)
+[types/custom-events/events.ts:172](https://github.com/torque-labs/torque-utils/blob/a612e615fa21888d00ebb7bf70f9910fab4be80a/types/custom-events/events.ts#L172)

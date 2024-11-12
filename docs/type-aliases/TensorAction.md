@@ -12,10 +12,10 @@ Tensor action type
 
 ## Type declaration
 
-| Name | Type | Description | Defined in |
-| ------ | ------ | ------ | ------ |
-| `collectionIds` | `string`[] | The collection ID of the tension collection for the requirement | [types/eventConfig/requirements.ts:144](https://github.com/torque-labs/torque-utils/blob/c76fb4101d477d1e8e6fb4f5de7a277964527c27/types/eventConfig/requirements.ts#L144) |
+| Name | Type | Description |
+| ------ | ------ | ------ |
+| `collectionIds` | `string`[] | The collection ID of the tension collection for the requirement |
 
 ## Defined in
 
-[types/eventConfig/requirements.ts:150](https://github.com/torque-labs/torque-utils/blob/c76fb4101d477d1e8e6fb4f5de7a277964527c27/types/eventConfig/requirements.ts#L150)
+[types/eventConfig/requirements.ts:150](https://github.com/torque-labs/torque-utils/blob/a612e615fa21888d00ebb7bf70f9910fab4be80a/types/eventConfig/requirements.ts#L150)

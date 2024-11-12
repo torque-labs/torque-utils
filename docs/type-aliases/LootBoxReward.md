@@ -12,11 +12,11 @@ Loot Box Reward Schematype
 
 ## Type declaration
 
-| Name | Type | Description | Defined in |
-| ------ | ------ | ------ | ------ |
-| `rewards` | `object`[] | The groups of rewards to distribute | [types/campaigns.ts:114](https://github.com/torque-labs/torque-utils/blob/c76fb4101d477d1e8e6fb4f5de7a277964527c27/types/campaigns.ts#L114) |
-| `tokenAddress` | `string` | The token address to reward | [types/campaigns.ts:110](https://github.com/torque-labs/torque-utils/blob/c76fb4101d477d1e8e6fb4f5de7a277964527c27/types/campaigns.ts#L110) |
+| Name | Type | Description |
+| ------ | ------ | ------ |
+| `rewards` | `object`[] | The groups of rewards to distribute |
+| `tokenAddress` | `string` | The token address to reward |
 
 ## Defined in
 
-[types/campaigns.ts:122](https://github.com/torque-labs/torque-utils/blob/c76fb4101d477d1e8e6fb4f5de7a277964527c27/types/campaigns.ts#L122)
+[types/campaigns.ts:122](https://github.com/torque-labs/torque-utils/blob/a612e615fa21888d00ebb7bf70f9910fab4be80a/types/campaigns.ts#L122)

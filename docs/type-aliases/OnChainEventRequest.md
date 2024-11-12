@@ -12,4 +12,4 @@ On-chain event request type
 
 ## Defined in
 
-[types/events.ts:92](https://github.com/torque-labs/torque-utils/blob/c76fb4101d477d1e8e6fb4f5de7a277964527c27/types/events.ts#L92)
+[types/events.ts:92](https://github.com/torque-labs/torque-utils/blob/a612e615fa21888d00ebb7bf70f9910fab4be80a/types/events.ts#L92)

@@ -12,13 +12,13 @@ Campaign filter type
 
 ## Type declaration
 
-| Name | Type | Defined in |
-| ------ | ------ | ------ |
-| `advertiserPubKey`? | `string` | [types/campaigns.ts:156](https://github.com/torque-labs/torque-utils/blob/c76fb4101d477d1e8e6fb4f5de7a277964527c27/types/campaigns.ts#L156) |
-| `limit`? | `number` | [types/campaigns.ts:153](https://github.com/torque-labs/torque-utils/blob/c76fb4101d477d1e8e6fb4f5de7a277964527c27/types/campaigns.ts#L153) |
-| `page`? | `number` | [types/campaigns.ts:154](https://github.com/torque-labs/torque-utils/blob/c76fb4101d477d1e8e6fb4f5de7a277964527c27/types/campaigns.ts#L154) |
-| `status`? | `string` | [types/campaigns.ts:155](https://github.com/torque-labs/torque-utils/blob/c76fb4101d477d1e8e6fb4f5de7a277964527c27/types/campaigns.ts#L155) |
+| Name | Type |
+| ------ | ------ |
+| `advertiserPubKey`? | `string` |
+| `limit`? | `number` |
+| `page`? | `number` |
+| `status`? | `string` |
 
 ## Defined in
 
-[types/campaigns.ts:162](https://github.com/torque-labs/torque-utils/blob/c76fb4101d477d1e8e6fb4f5de7a277964527c27/types/campaigns.ts#L162)
+[types/campaigns.ts:162](https://github.com/torque-labs/torque-utils/blob/a612e615fa21888d00ebb7bf70f9910fab4be80a/types/campaigns.ts#L162)

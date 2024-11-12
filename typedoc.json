@@ -6,7 +6,17 @@
   "skipErrorChecking": true,
   "entryPoints": ["./index.ts"],
   "parametersFormat": "table",
-  "propertiesFormat": "htmlTable",
+  "propertiesFormat": "table",
   "enumMembersFormat": "table",
-  "typeDeclarationFormat": "htmlTable"
+  "typeDeclarationFormat": "table",
+  "tableColumnSettings": {
+    "hideDefaults": true,
+    "hideInherited": false,
+    "hideModifiers": true,
+    "hideOverrides": false,
+    "hideSources": true,
+    "hideValues": false,
+    "leftAlignHeaders": false
+  },
+  "excludePrivate": false
 }

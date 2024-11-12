@@ -31,4 +31,4 @@
 
 ## Defined in
 
-[solana-actions/buildGet.ts:297](https://github.com/torque-labs/torque-utils/blob/c76fb4101d477d1e8e6fb4f5de7a277964527c27/solana-actions/buildGet.ts#L297)
+[solana-actions/buildGet.ts:297](https://github.com/torque-labs/torque-utils/blob/a612e615fa21888d00ebb7bf70f9910fab4be80a/solana-actions/buildGet.ts#L297)

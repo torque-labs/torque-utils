@@ -12,11 +12,11 @@ Marginfi lend transaction ingest type (from Shyft)
 
 ## Type declaration
 
-| Name | Type | Defined in |
-| ------ | ------ | ------ |
-| `amount` | `number` | [types/events.ts:9](https://github.com/torque-labs/torque-utils/blob/c76fb4101d477d1e8e6fb4f5de7a277964527c27/types/events.ts#L9) |
-| `bankAddress` | `string` | [types/events.ts:8](https://github.com/torque-labs/torque-utils/blob/c76fb4101d477d1e8e6fb4f5de7a277964527c27/types/events.ts#L8) |
+| Name | Type |
+| ------ | ------ |
+| `amount` | `number` |
+| `bankAddress` | `string` |
 
 ## Defined in
 
-[types/events.ts:15](https://github.com/torque-labs/torque-utils/blob/c76fb4101d477d1e8e6fb4f5de7a277964527c27/types/events.ts#L15)
+[types/events.ts:15](https://github.com/torque-labs/torque-utils/blob/a612e615fa21888d00ebb7bf70f9910fab4be80a/types/events.ts#L15)

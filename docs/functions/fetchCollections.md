@@ -22,4 +22,4 @@ Fetches top 100 collection by 7d volume
 
 ## Defined in
 
-[lib/tensor-api.ts:81](https://github.com/torque-labs/torque-utils/blob/c76fb4101d477d1e8e6fb4f5de7a277964527c27/lib/tensor-api.ts#L81)
+[lib/tensor-api.ts:81](https://github.com/torque-labs/torque-utils/blob/a612e615fa21888d00ebb7bf70f9910fab4be80a/lib/tensor-api.ts#L81)
