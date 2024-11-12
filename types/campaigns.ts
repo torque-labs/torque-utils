@@ -80,7 +80,7 @@ export const AsymmetricRewardSchema = z.object({
   /**
    * The amount to reward
    */
-  amount: z.string(),
+  amount: z.coerce.number(),
   /**
    * Who can participate in the raffle, users, publishers, or both
    */
