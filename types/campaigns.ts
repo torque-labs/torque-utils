@@ -82,17 +82,9 @@ export const AsymmetricRewardSchema = z.object({
    */
   amount: z.string(),
   /**
-   * Leave blank: The user public key that will be populated in the payout transaction
-   */
-  userPubKey: z.string().nullish(),
-  /**
    * Who can participate in the raffle, users, publishers, or both
    */
   participants: z.nativeEnum(RaffleParticipants).nullish(),
-  /**
-   * Leave blank: The transaction hash of the payout transaction
-   */
-  payoutTx: z.string().nullish(),
 });
 
 /**
@@ -197,7 +189,7 @@ export const CreateCampaignInputSchema = z.object({
   /**
    * The theme of the offer/campaign
    */
-  offerTheme: z.nativeEnum(OfferTheme),
+  offerTheme: z.nativeEnum(OfferTheme).optional(),
   /**
    * The background image for the offer/campaign
    */
@@ -211,11 +203,11 @@ export const CreateCampaignInputSchema = z.object({
   /**
    * The total number of conversions
    */
-  conversionCount: z.number().optional().nullable(),
+  conversionCount: z.coerce.number(),
   /**
    * The publisher reward type
    */
-  publisherRewardType: z.nativeEnum(RewardType),
+  publisherRewardType: z.nativeEnum(RewardType).optional(),
   /**
    * The publisher token address
    */
@@ -223,7 +215,7 @@ export const CreateCampaignInputSchema = z.object({
   /**
    * The payout per conversion for each referral by a publisher
    */
-  publisherPayoutPerConversion: z.number(),
+  publisherPayoutPerConversion: z.coerce.number().optional(),
   /**
    * The user reward type
    */
@@ -235,7 +227,7 @@ export const CreateCampaignInputSchema = z.object({
   /**
    * The payout per conversion for each user
    */
-  userPayoutPerConversion: z.number().optional(),
+  userPayoutPerConversion: z.coerce.number().optional(),
   /**
    * The asymmetric/raffle rewards to distribute
    */
@@ -243,15 +235,15 @@ export const CreateCampaignInputSchema = z.object({
   /**
    * The lootbox rewards to distribute
    */
-  lootBoxRewards: LootBoxRewardInputSchema,
+  lootBoxRewards: LootBoxRewardInputSchema.optional(),
   /**
    * The start time of the campaign/offer in Unix timestamp
    */
-  startTime: z.number(),
+  startTime: z.coerce.number(),
   /**
    * The end time of the campaign/offer in Unix timestamp
    */
-  endTime: z.number(),
+  endTime: z.coerce.number(),
   /**
    * The audiences that the offer/campaign is available to
    */
