@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { EventConfigSchema } from "./eventConfig";
+import { EventRequirementConfigSchema } from "./eventConfig";
 import { TimeConfigSchema } from "./timeConfig";
 import { ConversionAudienceSchema } from "./campaigns";
 
@@ -40,7 +40,7 @@ export const CreateTarpInputSchema = z.object({
 
   audience: z.string().nullish(),
   conversionAudience: ConversionAudienceSchema.optional(),
-  eventConfig: EventConfigSchema,
+  eventConfig: EventRequirementConfigSchema,
   timeConfig: TimeConfigSchema.optional(),
   blinkOnly: z.boolean().nullish(),
 
@@ -49,4 +49,5 @@ export const CreateTarpInputSchema = z.object({
   tokenStandard: z.nativeEnum(TokenStandard),
   amount: z.number(),
 });
+
 export type CreateTarpInput = z.infer<typeof CreateTarpInputSchema>;

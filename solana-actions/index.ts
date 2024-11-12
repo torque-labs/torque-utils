@@ -1,3 +1,3 @@
-export * from "./buildGet.js";
-export * from "./buildPost.js";
-export * from "./util.js";
+export * from "./buildGet";
+export * from "./buildPost";
+export * from "./util";

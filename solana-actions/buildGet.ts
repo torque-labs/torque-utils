@@ -1,11 +1,11 @@
 import { ActionGetResponse } from "@solana/actions";
-import { getTokenDetails } from "../tokens.js";
+import { getTokenDetails } from "../lib/tokens";
 import {
   SwapAction,
   NftCollectionTradeAction,
   ClickAction,
   EventType,
-  NftBidBuy,
+  NftBidBuyAction,
   RealmsVoteAction,
   MemoAction,
   StakeSolanaAction,
@@ -295,7 +295,7 @@ export const nftCollectionTradeGet = async (
 };
 
 export const nftBidBuyGet = async (
-  nftBidBuy: NftBidBuy,
+  nftBidBuy: NftBidBuyAction,
   offerId: string,
   publisherHandle: string,
   remainingConversions?: number,

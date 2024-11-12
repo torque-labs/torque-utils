@@ -1,6 +1,18 @@
-import { custom, z } from "zod";
+import { z } from "zod";
 import { EventType } from "./eventConfig";
-import { FormFieldSchema } from "../types";
+
+/**
+ * Marginfi lend transaction ingest schema (from Shyft)
+ */
+export const MarginfiLendIngestSchema = z.object({
+  bankAddress: z.string(),
+  amount: z.coerce.number(),
+});
+
+/**
+ * Marginfi lend transaction ingest type (from Shyft)
+ */
+export type MarginfiLendIngest = z.infer<typeof MarginfiLendIngestSchema>;
 
 /**
  * On-chain event request schema used to validate the request body sent to API from lambda
@@ -48,11 +60,11 @@ export const OnChainEventRequestSchema = z.discriminatedUnion("eventType", [
     proposalPubKey: z.string(),
     customProgramId: z.string().optional(),
   }),
-  z.object({
-    eventType: z.literal(EventType.MARGINFI_LEND),
-    bankAddress: z.string(),
-    amount: z.number(),
-  }),
+  z
+    .object({
+      eventType: z.literal(EventType.MARGINFI_LEND),
+    })
+    .merge(MarginfiLendIngestSchema),
   z.object({
     eventType: z.literal(EventType.KAMINO_LEND),
     tokenAddress: z.string(),

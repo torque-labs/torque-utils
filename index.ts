@@ -1,4 +1,3 @@
-export * from "./solana-actions/index.js";
-export * from "./tokens.js";
-export * from "./types.js";
-export * from "./lib/index.js";
+export * from "./lib";
+export * from "./solana-actions";
+export * from "./types";

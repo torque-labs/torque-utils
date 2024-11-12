@@ -1,5 +1,5 @@
-import { CLICKY_ADDRESS } from "./consants.js";
-import { Token } from "./types.js";
+import { CLICKY_ADDRESS } from "../consants.js";
+import { Token } from "../types/index.js";
 
 export async function getTokenDetails(tokenAddress: string): Promise<Token> {
   if (tokenAddress === CLICKY_ADDRESS) {

@@ -1,2 +1,3 @@
 export * from "./events.js";
-export * from "./tensor-api.js";
+export * from "./tensor-api";
+export * from "./tokens";

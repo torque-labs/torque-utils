@@ -1,5 +1,5 @@
-import { eventConfigToValidationSchema } from "../lib/events.js";
-import { fetchSingleCollectionDetails } from "../lib/tensor-api.js";
+import { eventConfigToValidationSchema } from "../lib/events";
+import { fetchSingleCollectionDetails } from "../lib/tensor-api";
 import {
   SwapAction,
   NftCollectionTradeAction,
@@ -7,8 +7,8 @@ import {
   RealmsVoteAction,
   MemoAction,
   StakeSolanaAction,
-} from "../types/index.js";
-import { getTensorSlugFromCollectionAddress, TORQUE_API_URL } from "./util.js";
+} from "../types/index";
+import { getTensorSlugFromCollectionAddress, TORQUE_API_URL } from "./util";
 
 export const swapPost = async (campaignId: string): Promise<string> => {
   return `${TORQUE_API_URL}/actions/swap/${campaignId}`;

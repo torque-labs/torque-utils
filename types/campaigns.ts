@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { TimeConfigSchema } from "./timeConfig";
-import { EventConfigSchema } from "./eventConfig";
+import { EventRequirementConfigSchema } from "./eventConfig";
 
 /**
  * Offer types for campaigns
@@ -152,7 +152,7 @@ export const CreateCampaignInputSchema = z.object({
   offerBgImage: z.string().nullish(),
 
   // Conversion Details
-  eventConfig: z.array(EventConfigSchema),
+  eventConfig: z.array(EventRequirementConfigSchema),
 
   // Reward Details
   conversionCount: z.number().optional().nullable(),
