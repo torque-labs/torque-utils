@@ -28,7 +28,7 @@
     "build": "tsc && tsc-alias -p tsconfig.json",
     "dev": "tsc --watch && tsc-alias -p tsconfig.json",
     "postbuild": "esm2cjs --in dist/esm --out dist/cjs -l error",
-    "prepack": "npm run build && npm run docs",
+    "prepack": "npm run build",
     "docs": "typedoc --options typedoc.json"
   },
   "dependencies": {
