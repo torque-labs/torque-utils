@@ -14,4 +14,4 @@ Tensor Buy requirement schema
 
 ## Defined in
 
-[types/eventConfig/config.ts:244](https://github.com/torque-labs/torque-utils/blob/3bd29ca22f900f1cf2686f7f240bf82e15337207/types/eventConfig/config.ts#L244)
+[types/eventConfig/config.ts:244](https://github.com/torque-labs/torque-utils/blob/fcba00c7b8994c0932484e8f489988b91291c603/types/eventConfig/config.ts#L244)

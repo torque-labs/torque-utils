@@ -22,14 +22,46 @@ Custom event request type
 
 ## Type declaration
 
-| Name | Type |
-| ------ | ------ |
-| `context`? | `null` \| `Record`\<`string`, `string` \| `number` \| `boolean`\> |
-| `event_data` | `Record`\<`string`, `string` \| `number` \| `boolean`\> |
-| `event_name` | `string` |
-| `timestamp` | `string` \| `number` |
-| `user` | \{ `pubKey`: `string`; \} & `Record`\<`string`, `string` \| `number` \| `boolean`\> |
+### context?
+
+```ts
+optional context: null | Record<string, string | number | boolean>;
+```
+
+### event\_data
+
+```ts
+event_data: Record<string, string | number | boolean>;
+```
+
+### event\_name
+
+```ts
+event_name: string;
+```
+
+### timestamp
+
+```ts
+timestamp: string | number;
+```
+
+### user
+
+```ts
+user: {
+  pubKey: string;
+} & Record<string, string | number | boolean>;
+```
+
+#### Type declaration
+
+##### pubKey
+
+```ts
+pubKey: string;
+```
 
 ## Defined in
 
-[types/events.ts:115](https://github.com/torque-labs/torque-utils/blob/3bd29ca22f900f1cf2686f7f240bf82e15337207/types/events.ts#L115)
+[types/events.ts:115](https://github.com/torque-labs/torque-utils/blob/fcba00c7b8994c0932484e8f489988b91291c603/types/events.ts#L115)

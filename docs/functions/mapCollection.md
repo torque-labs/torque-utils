@@ -42,18 +42,60 @@ function mapCollection(collection): {
 }
 ```
 
-| Name | Type | Default value |
-| ------ | ------ | ------ |
-| `collId` | `any` | collection.collId |
-| `compressed` | `any` | collection.compressed |
-| `imageUri` | `any` | collection.imageUri |
-| `name` | `any` | collection.name |
-| `slugdisplay` | `any` | collection.slugDisplay |
-| `stats` | `any` | collection.stats |
-| `symbol` | `any` | collection.symbol |
-| `tokenStandard` | `any` | collection.tokenStandard |
-| `whitelistPda` | `any` | collection.whitelistPda |
+### collId
+
+```ts
+collId: any = collection.collId;
+```
+
+### compressed
+
+```ts
+compressed: any = collection.compressed;
+```
+
+### imageUri
+
+```ts
+imageUri: any = collection.imageUri;
+```
+
+### name
+
+```ts
+name: any = collection.name;
+```
+
+### slugdisplay
+
+```ts
+slugdisplay: any = collection.slugDisplay;
+```
+
+### stats
+
+```ts
+stats: any = collection.stats;
+```
+
+### symbol
+
+```ts
+symbol: any = collection.symbol;
+```
+
+### tokenStandard
+
+```ts
+tokenStandard: any = collection.tokenStandard;
+```
+
+### whitelistPda
+
+```ts
+whitelistPda: any = collection.whitelistPda;
+```
 
 ## Defined in
 
-[lib/tensor-api.ts:64](https://github.com/torque-labs/torque-utils/blob/3bd29ca22f900f1cf2686f7f240bf82e15337207/lib/tensor-api.ts#L64)
+[lib/tensor-api.ts:64](https://github.com/torque-labs/torque-utils/blob/fcba00c7b8994c0932484e8f489988b91291c603/lib/tensor-api.ts#L64)

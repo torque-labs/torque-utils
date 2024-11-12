@@ -16,10 +16,14 @@ Stake solana time config type
 
 ## Type declaration
 
-| Name | Type | Description |
-| ------ | ------ | ------ |
-| `epochs` | `number` | The number of epochs to stake for |
+### epochs
+
+```ts
+epochs: number;
+```
+
+The number of epochs to stake for
 
 ## Defined in
 
-[types/timeConfig/requirements.ts:67](https://github.com/torque-labs/torque-utils/blob/3bd29ca22f900f1cf2686f7f240bf82e15337207/types/timeConfig/requirements.ts#L67)
+[types/timeConfig/requirements.ts:67](https://github.com/torque-labs/torque-utils/blob/fcba00c7b8994c0932484e8f489988b91291c603/types/timeConfig/requirements.ts#L67)

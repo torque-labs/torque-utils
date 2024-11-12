@@ -18,12 +18,30 @@ Realms vote action type
 
 ## Type declaration
 
-| Name | Type | Description |
-| ------ | ------ | ------ |
-| `customProgramId`? | `string` | The custom program ID for the proposal |
-| `daoPubKey` | `string` | The public key of the DAO |
-| `proposalPubKey` | `string` | The public key of the proposal |
+### customProgramId?
+
+```ts
+optional customProgramId: string;
+```
+
+The custom program ID for the proposal
+
+### daoPubKey
+
+```ts
+daoPubKey: string;
+```
+
+The public key of the DAO
+
+### proposalPubKey
+
+```ts
+proposalPubKey: string;
+```
+
+The public key of the proposal
 
 ## Defined in
 
-[types/eventConfig/requirements.ts:343](https://github.com/torque-labs/torque-utils/blob/3bd29ca22f900f1cf2686f7f240bf82e15337207/types/eventConfig/requirements.ts#L343)
+[types/eventConfig/requirements.ts:343](https://github.com/torque-labs/torque-utils/blob/fcba00c7b8994c0932484e8f489988b91291c603/types/eventConfig/requirements.ts#L343)

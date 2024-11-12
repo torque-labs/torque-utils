@@ -18,13 +18,36 @@ Stake solana time config type
 
 ## Type declaration
 
-| Name | Type | Default value | Description |
-| ------ | ------ | ------ | ------ |
-| `duration` | `number` | - | The duration of the requirement in seconds |
-| `requirement` | \{ `epochs`: `number`; \} | StakeSolTimeConfigSchema | - |
-| `requirement.epochs` | `number` | - | The number of epochs to stake for |
-| `type` | `STAKE_SOL` | - | - |
+### duration
+
+```ts
+duration: number;
+```
+
+The duration of the requirement in seconds
+
+### requirement
+
+```ts
+requirement: {
+  epochs: number;
+ } = StakeSolTimeConfigSchema;
+```
+
+### requirement.epochs
+
+```ts
+epochs: number;
+```
+
+The number of epochs to stake for
+
+### type
+
+```ts
+type: STAKE_SOL;
+```
 
 ## Defined in
 
-[types/timeConfig/config.ts:74](https://github.com/torque-labs/torque-utils/blob/3bd29ca22f900f1cf2686f7f240bf82e15337207/types/timeConfig/config.ts#L74)
+[types/timeConfig/config.ts:74](https://github.com/torque-labs/torque-utils/blob/fcba00c7b8994c0932484e8f489988b91291c603/types/timeConfig/config.ts#L74)

@@ -17,13 +17,37 @@ Kamino Lend requirement type
 
 ## Type declaration
 
-| Name | Type | Default value | Description |
-| ------ | ------ | ------ | ------ |
-| `requirement` | \{ `amount`: `number`; `tokenAddress`: `string`; \} | KaminoLendActionSchema | - |
-| `requirement.amount` | `number` | - | The minimum amount to lend |
-| `requirement.tokenAddress` | `string` | - | The token address to lend |
-| `type` | `KAMINO_LEND` | - | - |
+### requirement
+
+```ts
+requirement: {
+  amount: number;
+  tokenAddress: string;
+ } = KaminoLendActionSchema;
+```
+
+### requirement.amount
+
+```ts
+amount: number;
+```
+
+The minimum amount to lend
+
+### requirement.tokenAddress
+
+```ts
+tokenAddress: string;
+```
+
+The token address to lend
+
+### type
+
+```ts
+type: KAMINO_LEND;
+```
 
 ## Defined in
 
-[types/eventConfig/config.ts:128](https://github.com/torque-labs/torque-utils/blob/3bd29ca22f900f1cf2686f7f240bf82e15337207/types/eventConfig/config.ts#L128)
+[types/eventConfig/config.ts:128](https://github.com/torque-labs/torque-utils/blob/fcba00c7b8994c0932484e8f489988b91291c603/types/eventConfig/config.ts#L128)

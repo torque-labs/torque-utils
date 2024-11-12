@@ -17,14 +17,46 @@ Stake Solana requirement type
 
 ## Type declaration
 
-| Name | Type | Default value | Description |
-| ------ | ------ | ------ | ------ |
-| `requirement` | \{ `amount`: `number`; `epochs`: `number`; `validator`: `string`; \} | StakeSolanaActionSchema | - |
-| `requirement.amount` | `number` | - | The minimum amount to stake |
-| `requirement.epochs` | `number` | - | The minimum number of epochs to stake for |
-| `requirement.validator` | `string` | - | The validator to stake with |
-| `type` | `STAKE_SOL` | - | - |
+### requirement
+
+```ts
+requirement: {
+  amount: number;
+  epochs: number;
+  validator: string;
+ } = StakeSolanaActionSchema;
+```
+
+### requirement.amount
+
+```ts
+amount: number;
+```
+
+The minimum amount to stake
+
+### requirement.epochs
+
+```ts
+epochs: number;
+```
+
+The minimum number of epochs to stake for
+
+### requirement.validator
+
+```ts
+validator: string;
+```
+
+The validator to stake with
+
+### type
+
+```ts
+type: STAKE_SOL;
+```
 
 ## Defined in
 
-[types/eventConfig/config.ts:210](https://github.com/torque-labs/torque-utils/blob/3bd29ca22f900f1cf2686f7f240bf82e15337207/types/eventConfig/config.ts#L210)
+[types/eventConfig/config.ts:210](https://github.com/torque-labs/torque-utils/blob/fcba00c7b8994c0932484e8f489988b91291c603/types/eventConfig/config.ts#L210)

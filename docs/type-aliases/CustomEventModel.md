@@ -18,12 +18,37 @@ Custom event model type
 
 ## Type declaration
 
-| Name | Type | Default value | Description |
-| ------ | ------ | ------ | ------ |
-| `config` | `Record`\<`string`, [`CustomEventFieldType`](../enumerations/CustomEventFieldType.md)\> | CustomEventDefinitionSchema | The custom event defintion as a JSON object. The object should be formatted as follows: `{ "<event property name>": "boolean" | "string" | "number" }` |
-| `id` | `string` | - | The internal ID of the custom event |
-| `name` | `string` | - | The name of the custom event |
+### config
+
+```ts
+config: Record<string, CustomEventFieldType> = CustomEventDefinitionSchema;
+```
+
+The custom event defintion as a JSON object.
+
+The object should be formatted as follows:
+```json
+{
+  "<event property name>": "boolean" | "string" | "number"
+}
+```
+
+### id
+
+```ts
+id: string;
+```
+
+The internal ID of the custom event
+
+### name
+
+```ts
+name: string;
+```
+
+The name of the custom event
 
 ## Defined in
 
-[types/custom-events/events.ts:210](https://github.com/torque-labs/torque-utils/blob/3bd29ca22f900f1cf2686f7f240bf82e15337207/types/custom-events/events.ts#L210)
+[types/custom-events/events.ts:210](https://github.com/torque-labs/torque-utils/blob/fcba00c7b8994c0932484e8f489988b91291c603/types/custom-events/events.ts#L210)

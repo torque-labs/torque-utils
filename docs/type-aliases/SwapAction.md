@@ -20,14 +20,47 @@ Swap action type
 
 ## Type declaration
 
-| Name | Type | Description |
-| ------ | ------ | ------ |
-| `inAmount`? | `null` \| `number` | The amount of tokens to swap from |
-| `inToken`? | `null` \| `string` | The token to swap from |
-| `outAmount`? | `null` \| `number` | The amount of tokens to swap to |
-| `outToken`? | `null` \| `string` | The token to swap to |
-| `usdcValue`? | `null` \| `number` | The USDC value TODO: USDC Value for which token? |
+### inAmount?
+
+```ts
+optional inAmount: null | number;
+```
+
+The amount of tokens to swap from
+
+### inToken?
+
+```ts
+optional inToken: null | string;
+```
+
+The token to swap from
+
+### outAmount?
+
+```ts
+optional outAmount: null | number;
+```
+
+The amount of tokens to swap to
+
+### outToken?
+
+```ts
+optional outToken: null | string;
+```
+
+The token to swap to
+
+### usdcValue?
+
+```ts
+optional usdcValue: null | number;
+```
+
+The USDC value
+TODO: USDC Value for which token?
 
 ## Defined in
 
-[types/eventConfig/requirements.ts:77](https://github.com/torque-labs/torque-utils/blob/3bd29ca22f900f1cf2686f7f240bf82e15337207/types/eventConfig/requirements.ts#L77)
+[types/eventConfig/requirements.ts:77](https://github.com/torque-labs/torque-utils/blob/fcba00c7b8994c0932484e8f489988b91291c603/types/eventConfig/requirements.ts#L77)

@@ -17,11 +17,22 @@ NFT bid buy action type
 
 ## Type declaration
 
-| Name | Type | Description |
-| ------ | ------ | ------ |
-| `minAmount`? | `number` | The minimum amount to bid |
-| `mint` | `string` | The NFT mint to bid or buy |
+### minAmount?
+
+```ts
+optional minAmount: number;
+```
+
+The minimum amount to bid
+
+### mint
+
+```ts
+mint: string;
+```
+
+The NFT mint to bid or buy
 
 ## Defined in
 
-[types/eventConfig/requirements.ts:130](https://github.com/torque-labs/torque-utils/blob/3bd29ca22f900f1cf2686f7f240bf82e15337207/types/eventConfig/requirements.ts#L130)
+[types/eventConfig/requirements.ts:130](https://github.com/torque-labs/torque-utils/blob/fcba00c7b8994c0932484e8f489988b91291c603/types/eventConfig/requirements.ts#L130)

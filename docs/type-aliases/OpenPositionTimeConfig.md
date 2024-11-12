@@ -19,13 +19,38 @@ Open position time config type
 
 ## Type declaration
 
-| Name | Type | Description |
-| ------ | ------ | ------ |
-| `amount` | `number` | The minimum amount to have |
-| `pool`? | `string` | The pool address |
-| `protocol`? | `string` | The protocol address |
-| `token` | `string` | The token to have an open position form |
+### amount
+
+```ts
+amount: number;
+```
+
+The minimum amount to have
+
+### pool?
+
+```ts
+optional pool: string;
+```
+
+The pool address
+
+### protocol?
+
+```ts
+optional protocol: string;
+```
+
+The protocol address
+
+### token
+
+```ts
+token: string;
+```
+
+The token to have an open position form
 
 ## Defined in
 
-[types/timeConfig/requirements.ts:50](https://github.com/torque-labs/torque-utils/blob/3bd29ca22f900f1cf2686f7f240bf82e15337207/types/timeConfig/requirements.ts#L50)
+[types/timeConfig/requirements.ts:50](https://github.com/torque-labs/torque-utils/blob/fcba00c7b8994c0932484e8f489988b91291c603/types/timeConfig/requirements.ts#L50)

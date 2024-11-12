@@ -47,14 +47,55 @@ Individual form field schema
 
 ## Type declaration
 
-| Name | Type | Description |
-| ------ | ------ | ------ |
-| `label` | `ZodString` | The label for the field |
-| `name` | `ZodString` | The name of the field |
-| `options` | `ZodOptional`\<`ZodArray`\<`ZodObject`\<\{ `label`: `ZodString`; `value`: `ZodString`; \}, `"strip"`, `ZodTypeAny`, \{ `label`: `string`; `value`: `string`; \}, \{ `label`: `string`; `value`: `string`; \}\>, `"many"`\>\> | The options for the field (eg. dropdowns/select) |
-| `required` | `ZodOptional`\<`ZodNullable`\<`ZodBoolean`\>\> | Whether the field is required or not |
-| `type` | `ZodNativeEnum`\<*typeof* [`FormFieldType`](../enumerations/FormFieldType.md)\> | The type of field |
+### label
+
+```ts
+label: ZodString;
+```
+
+The label for the field
+
+### name
+
+```ts
+name: ZodString;
+```
+
+The name of the field
+
+### options
+
+```ts
+options: ZodOptional<ZodArray<ZodObject<{
+  label: ZodString;
+  value: ZodString;
+ }, "strip", ZodTypeAny, {
+  label: string;
+  value: string;
+ }, {
+  label: string;
+  value: string;
+}>, "many">>;
+```
+
+The options for the field (eg. dropdowns/select)
+
+### required
+
+```ts
+required: ZodOptional<ZodNullable<ZodBoolean>>;
+```
+
+Whether the field is required or not
+
+### type
+
+```ts
+type: ZodNativeEnum<typeof FormFieldType>;
+```
+
+The type of field
 
 ## Defined in
 
-[types/eventConfig/requirements.ts:260](https://github.com/torque-labs/torque-utils/blob/3bd29ca22f900f1cf2686f7f240bf82e15337207/types/eventConfig/requirements.ts#L260)
+[types/eventConfig/requirements.ts:260](https://github.com/torque-labs/torque-utils/blob/fcba00c7b8994c0932484e8f489988b91291c603/types/eventConfig/requirements.ts#L260)

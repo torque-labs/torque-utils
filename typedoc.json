@@ -8,7 +8,7 @@
   "parametersFormat": "table",
   "propertiesFormat": "table",
   "enumMembersFormat": "table",
-  "typeDeclarationFormat": "table",
+  "typeDeclarationFormat": "list",
   "tableColumnSettings": {
     "hideDefaults": true,
     "hideInherited": false,

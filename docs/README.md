@@ -64,7 +64,7 @@
 | [LootBoxReward](type-aliases/LootBoxReward.md) | Loot Box Reward Schematype |
 | [LootBoxRewardInput](type-aliases/LootBoxRewardInput.md) | Loot Box form input type |
 | [MarginfiLendAction](type-aliases/MarginfiLendAction.md) | Marginfi lend action type |
-| [MarginfiLendIngest](type-aliases/MarginfiLendIngest.md) | Marginfi lend transaction ingest type (from Shyft) |
+| [MarginfiLendIngest](type-aliases/MarginfiLendIngest.md) | Marginfi lend transaction ingest type |
 | [MarginfiLendRequirement](type-aliases/MarginfiLendRequirement.md) | Marginfi Lend requirement type |
 | [MemoAction](type-aliases/MemoAction.md) | Memo action config type |
 | [MemoRequirement](type-aliases/MemoRequirement.md) | Memo requirement type |
@@ -127,7 +127,7 @@
 | [LootBoxRewardInputSchema](variables/LootBoxRewardInputSchema.md) | Loot Box form input schema for creating a new campaign |
 | [LootBoxRewardSchema](variables/LootBoxRewardSchema.md) | Loot Box Reward Schema |
 | [MarginfiLendActionSchema](variables/MarginfiLendActionSchema.md) | Marginfi lend action schema |
-| [MarginfiLendIngestSchema](variables/MarginfiLendIngestSchema.md) | Marginfi lend transaction ingest schema (from Shyft) |
+| [MarginfiLendIngestSchema](variables/MarginfiLendIngestSchema.md) | Marginfi lend transaction ingest schema |
 | [MarginfiLendRequirementSchema](variables/MarginfiLendRequirementSchema.md) | Marginfi Lend requirement schema |
 | [MemoActionSchema](variables/MemoActionSchema.md) | Memo action config schema |
 | [MemoRequirementSchema](variables/MemoRequirementSchema.md) | Memo requirement schema |
