@@ -6,10 +6,12 @@
 
 # Variable: KaminoLendActionSchema
 
-> `const` **KaminoLendActionSchema**: `ZodObject`\<[`KaminoLendAction`](../type-aliases/KaminoLendAction.md)\>
+```ts
+const KaminoLendActionSchema: ZodObject<KaminoLendAction>;
+```
 
 Kamino lend action schema
 
 ## Defined in
 
-[types/eventConfig/requirements.ts:370](https://github.com/torque-labs/torque-utils/blob/a612e615fa21888d00ebb7bf70f9910fab4be80a/types/eventConfig/requirements.ts#L370)
+[types/eventConfig/requirements.ts:370](https://github.com/torque-labs/torque-utils/blob/3bd29ca22f900f1cf2686f7f240bf82e15337207/types/eventConfig/requirements.ts#L370)

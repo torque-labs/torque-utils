@@ -6,7 +6,15 @@
 
 # Type Alias: SwapAction
 
-> **SwapAction**: `object`
+```ts
+type SwapAction: {
+  inAmount: null | number;
+  inToken: null | string;
+  outAmount: null | number;
+  outToken: null | string;
+  usdcValue: null | number;
+};
+```
 
 Swap action type
 
@@ -22,4 +30,4 @@ Swap action type
 
 ## Defined in
 
-[types/eventConfig/requirements.ts:77](https://github.com/torque-labs/torque-utils/blob/a612e615fa21888d00ebb7bf70f9910fab4be80a/types/eventConfig/requirements.ts#L77)
+[types/eventConfig/requirements.ts:77](https://github.com/torque-labs/torque-utils/blob/3bd29ca22f900f1cf2686f7f240bf82e15337207/types/eventConfig/requirements.ts#L77)

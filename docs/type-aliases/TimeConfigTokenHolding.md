@@ -6,7 +6,13 @@
 
 # Type Alias: TimeConfigTokenHolding
 
-> **TimeConfigTokenHolding**: `object`
+```ts
+type TimeConfigTokenHolding: {
+  duration: number;
+  requirement: TokenHoldingTimeConfigSchema;
+  type: TOKEN_HOLDING;
+};
+```
 
 The token holding time config type
 
@@ -15,7 +21,7 @@ The token holding time config type
 | Name | Type | Default value | Description |
 | ------ | ------ | ------ | ------ |
 | `duration` | `number` | - | The duration of the requirement in seconds |
-| `requirement` | `object` | TokenHoldingTimeConfigSchema | - |
+| `requirement` | \{ `amount`: `number`; `token`: `string`; `tokenStandard`: `string`; \} | TokenHoldingTimeConfigSchema | - |
 | `requirement.amount` | `number` | - | The minimum amount to hold |
 | `requirement.token` | `string` | - | The token to hold |
 | `requirement.tokenStandard`? | `string` | - | The token standard of the token |
@@ -23,4 +29,4 @@ The token holding time config type
 
 ## Defined in
 
-[types/timeConfig/config.ts:40](https://github.com/torque-labs/torque-utils/blob/a612e615fa21888d00ebb7bf70f9910fab4be80a/types/timeConfig/config.ts#L40)
+[types/timeConfig/config.ts:40](https://github.com/torque-labs/torque-utils/blob/3bd29ca22f900f1cf2686f7f240bf82e15337207/types/timeConfig/config.ts#L40)

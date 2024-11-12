@@ -6,7 +6,12 @@
 
 # Type Alias: DriftDepositRequirement
 
-> **DriftDepositRequirement**: `object`
+```ts
+type DriftDepositRequirement: {
+  requirement: DriftDepositActionSchema;
+  type: DRIFT_DEPOSIT;
+};
+```
 
 Drift Deposit requirement type
 
@@ -14,11 +19,11 @@ Drift Deposit requirement type
 
 | Name | Type | Default value | Description |
 | ------ | ------ | ------ | ------ |
-| `requirement` | `object` | DriftDepositActionSchema | - |
+| `requirement` | \{ `minAmount`: `number`; `tokenAddress`: `string`; \} | DriftDepositActionSchema | - |
 | `requirement.minAmount` | `number` | - | The minimum amount to deposit |
 | `requirement.tokenAddress` | `string` | - | The token address to deposit |
 | `type` | `DRIFT_DEPOSIT` | - | - |
 
 ## Defined in
 
-[types/eventConfig/config.ts:98](https://github.com/torque-labs/torque-utils/blob/a612e615fa21888d00ebb7bf70f9910fab4be80a/types/eventConfig/config.ts#L98)
+[types/eventConfig/config.ts:98](https://github.com/torque-labs/torque-utils/blob/3bd29ca22f900f1cf2686f7f240bf82e15337207/types/eventConfig/config.ts#L98)

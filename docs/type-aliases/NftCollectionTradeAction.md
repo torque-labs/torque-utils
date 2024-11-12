@@ -6,7 +6,12 @@
 
 # Type Alias: NftCollectionTradeAction
 
-> **NftCollectionTradeAction**: `object`
+```ts
+type NftCollectionTradeAction: {
+  collectionAddress: string;
+  tradeType: NftCollectionTradeType;
+};
+```
 
 NFT collection trade action
 
@@ -19,4 +24,4 @@ NFT collection trade action
 
 ## Defined in
 
-[types/eventConfig/requirements.ts:110](https://github.com/torque-labs/torque-utils/blob/a612e615fa21888d00ebb7bf70f9910fab4be80a/types/eventConfig/requirements.ts#L110)
+[types/eventConfig/requirements.ts:110](https://github.com/torque-labs/torque-utils/blob/3bd29ca22f900f1cf2686f7f240bf82e15337207/types/eventConfig/requirements.ts#L110)

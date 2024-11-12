@@ -6,10 +6,12 @@
 
 # Variable: TimeConfigOpenPositionSchema
 
-> `const` **TimeConfigOpenPositionSchema**: `ZodObject`\<[`TimeConfigOpenPosition`](../type-aliases/TimeConfigOpenPosition.md)\>
+```ts
+const TimeConfigOpenPositionSchema: ZodObject<TimeConfigOpenPosition>;
+```
 
 Open position time config schema
 
 ## Defined in
 
-[types/timeConfig/config.ts:47](https://github.com/torque-labs/torque-utils/blob/a612e615fa21888d00ebb7bf70f9910fab4be80a/types/timeConfig/config.ts#L47)
+[types/timeConfig/config.ts:47](https://github.com/torque-labs/torque-utils/blob/3bd29ca22f900f1cf2686f7f240bf82e15337207/types/timeConfig/config.ts#L47)

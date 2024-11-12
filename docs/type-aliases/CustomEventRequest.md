@@ -6,7 +6,17 @@
 
 # Type Alias: CustomEventRequest
 
-> **CustomEventRequest**: `object`
+```ts
+type CustomEventRequest: {
+  context: null | Record<string, string | number | boolean>;
+  event_data: Record<string, string | number | boolean>;
+  event_name: string;
+  timestamp: string | number;
+  user: {
+     pubKey: string;
+    } & Record<string, string | number | boolean>;
+};
+```
 
 Custom event request type
 
@@ -18,8 +28,8 @@ Custom event request type
 | `event_data` | `Record`\<`string`, `string` \| `number` \| `boolean`\> |
 | `event_name` | `string` |
 | `timestamp` | `string` \| `number` |
-| `user` | `object` & `Record`\<`string`, `string` \| `number` \| `boolean`\> |
+| `user` | \{ `pubKey`: `string`; \} & `Record`\<`string`, `string` \| `number` \| `boolean`\> |
 
 ## Defined in
 
-[types/events.ts:115](https://github.com/torque-labs/torque-utils/blob/a612e615fa21888d00ebb7bf70f9910fab4be80a/types/events.ts#L115)
+[types/events.ts:115](https://github.com/torque-labs/torque-utils/blob/3bd29ca22f900f1cf2686f7f240bf82e15337207/types/events.ts#L115)

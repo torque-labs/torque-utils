@@ -6,7 +6,11 @@
 
 # Type Alias: TensorAction
 
-> **TensorAction**: `object`
+```ts
+type TensorAction: {
+  collectionIds: string[];
+};
+```
 
 Tensor action type
 
@@ -18,4 +22,4 @@ Tensor action type
 
 ## Defined in
 
-[types/eventConfig/requirements.ts:150](https://github.com/torque-labs/torque-utils/blob/a612e615fa21888d00ebb7bf70f9910fab4be80a/types/eventConfig/requirements.ts#L150)
+[types/eventConfig/requirements.ts:150](https://github.com/torque-labs/torque-utils/blob/3bd29ca22f900f1cf2686f7f240bf82e15337207/types/eventConfig/requirements.ts#L150)

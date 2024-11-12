@@ -6,7 +6,20 @@
 
 # Type Alias: CustomEventStringConfig
 
-> **CustomEventStringConfig**: `object` & `object`
+```ts
+type CustomEventStringConfig: {
+  description: null | string;
+  image: null | string;
+  label: null | string;
+  name: string;
+ } & {
+  type: "string";
+  validation: {
+     match: null | string;
+     required: null | boolean;
+    };
+};
+```
 
 Custom event config type for string properties
 
@@ -24,10 +37,10 @@ Custom event config type for string properties
 | Name | Type | Description |
 | ------ | ------ | ------ |
 | `type` | `"string"` | String custom event field type |
-| `validation` | `object` | Validation for this custom event string property |
+| `validation` | \{ `match`: `null` \| `string`; `required`: `null` \| `boolean`; \} | Validation for this custom event string property |
 | `validation.match`? | `null` \| `string` | A specific string value to match against (eg. Video_ID) |
 | `validation.required`? | `null` \| `boolean` | Whether the field is required or not |
 
 ## Defined in
 
-[types/custom-events/events.ts:102](https://github.com/torque-labs/torque-utils/blob/a612e615fa21888d00ebb7bf70f9910fab4be80a/types/custom-events/events.ts#L102)
+[types/custom-events/events.ts:102](https://github.com/torque-labs/torque-utils/blob/3bd29ca22f900f1cf2686f7f240bf82e15337207/types/custom-events/events.ts#L102)

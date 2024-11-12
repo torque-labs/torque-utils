@@ -6,10 +6,12 @@
 
 # Variable: StakeSolanaRequirementSchema
 
-> `const` **StakeSolanaRequirementSchema**: `ZodObject`\<[`StakeSolanaRequirement`](../type-aliases/StakeSolanaRequirement.md)\>
+```ts
+const StakeSolanaRequirementSchema: ZodObject<StakeSolanaRequirement>;
+```
 
 Stake Solana requirement schema
 
 ## Defined in
 
-[types/eventConfig/config.ts:202](https://github.com/torque-labs/torque-utils/blob/a612e615fa21888d00ebb7bf70f9910fab4be80a/types/eventConfig/config.ts#L202)
+[types/eventConfig/config.ts:202](https://github.com/torque-labs/torque-utils/blob/3bd29ca22f900f1cf2686f7f240bf82e15337207/types/eventConfig/config.ts#L202)

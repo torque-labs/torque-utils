@@ -6,10 +6,12 @@
 
 # Variable: CreateTreasuryInputSchema
 
-> `const` **CreateTreasuryInputSchema**: `ZodObject`\<[`CreateTreasuryInput`](../type-aliases/CreateTreasuryInput.md)\>
+```ts
+const CreateTreasuryInputSchema: ZodObject<CreateTreasuryInput>;
+```
 
 The input schema for creating a loot box treasury
 
 ## Defined in
 
-[types/lootBox.ts:6](https://github.com/torque-labs/torque-utils/blob/a612e615fa21888d00ebb7bf70f9910fab4be80a/types/lootBox.ts#L6)
+[types/lootBox.ts:6](https://github.com/torque-labs/torque-utils/blob/3bd29ca22f900f1cf2686f7f240bf82e15337207/types/lootBox.ts#L6)

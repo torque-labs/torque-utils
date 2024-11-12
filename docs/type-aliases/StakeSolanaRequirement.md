@@ -6,7 +6,12 @@
 
 # Type Alias: StakeSolanaRequirement
 
-> **StakeSolanaRequirement**: `object`
+```ts
+type StakeSolanaRequirement: {
+  requirement: StakeSolanaActionSchema;
+  type: STAKE_SOL;
+};
+```
 
 Stake Solana requirement type
 
@@ -14,7 +19,7 @@ Stake Solana requirement type
 
 | Name | Type | Default value | Description |
 | ------ | ------ | ------ | ------ |
-| `requirement` | `object` | StakeSolanaActionSchema | - |
+| `requirement` | \{ `amount`: `number`; `epochs`: `number`; `validator`: `string`; \} | StakeSolanaActionSchema | - |
 | `requirement.amount` | `number` | - | The minimum amount to stake |
 | `requirement.epochs` | `number` | - | The minimum number of epochs to stake for |
 | `requirement.validator` | `string` | - | The validator to stake with |
@@ -22,4 +27,4 @@ Stake Solana requirement type
 
 ## Defined in
 
-[types/eventConfig/config.ts:210](https://github.com/torque-labs/torque-utils/blob/a612e615fa21888d00ebb7bf70f9910fab4be80a/types/eventConfig/config.ts#L210)
+[types/eventConfig/config.ts:210](https://github.com/torque-labs/torque-utils/blob/3bd29ca22f900f1cf2686f7f240bf82e15337207/types/eventConfig/config.ts#L210)

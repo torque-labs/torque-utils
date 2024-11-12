@@ -6,7 +6,12 @@
 
 # Type Alias: MarginfiLendRequirement
 
-> **MarginfiLendRequirement**: `object`
+```ts
+type MarginfiLendRequirement: {
+  requirement: MarginfiLendActionSchema;
+  type: MARGINFI_LEND;
+};
+```
 
 Marginfi Lend requirement type
 
@@ -14,11 +19,11 @@ Marginfi Lend requirement type
 
 | Name | Type | Default value | Description |
 | ------ | ------ | ------ | ------ |
-| `requirement` | `object` | MarginfiLendActionSchema | - |
+| `requirement` | \{ `amount`: `number`; `tokenAddress`: `string`; \} | MarginfiLendActionSchema | - |
 | `requirement.amount` | `number` | - | The minimum amount to lend |
 | `requirement.tokenAddress` | `string` | - | The token address to lend |
 | `type` | `MARGINFI_LEND` | - | - |
 
 ## Defined in
 
-[types/eventConfig/config.ts:141](https://github.com/torque-labs/torque-utils/blob/a612e615fa21888d00ebb7bf70f9910fab4be80a/types/eventConfig/config.ts#L141)
+[types/eventConfig/config.ts:141](https://github.com/torque-labs/torque-utils/blob/3bd29ca22f900f1cf2686f7f240bf82e15337207/types/eventConfig/config.ts#L141)

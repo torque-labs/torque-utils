@@ -6,10 +6,12 @@
 
 # Variable: CustomEventNumberConfigSchema
 
-> `const` **CustomEventNumberConfigSchema**: `ZodIntersection`\<[`CustomEventNumberConfig`](../type-aliases/CustomEventNumberConfig.md)\>
+```ts
+const CustomEventNumberConfigSchema: ZodIntersection<CustomEventNumberConfig>;
+```
 
 Custom event field config schema for number properties
 
 ## Defined in
 
-[types/custom-events/events.ts:56](https://github.com/torque-labs/torque-utils/blob/a612e615fa21888d00ebb7bf70f9910fab4be80a/types/custom-events/events.ts#L56)
+[types/custom-events/events.ts:56](https://github.com/torque-labs/torque-utils/blob/3bd29ca22f900f1cf2686f7f240bf82e15337207/types/custom-events/events.ts#L56)

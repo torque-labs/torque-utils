@@ -6,7 +6,15 @@
 
 # Type Alias: LootBoxReward
 
-> **LootBoxReward**: `object`
+```ts
+type LootBoxReward: {
+  rewards: {
+     amount: number;
+     users: number;
+    }[];
+  tokenAddress: string;
+};
+```
 
 Loot Box Reward Schematype
 
@@ -14,9 +22,9 @@ Loot Box Reward Schematype
 
 | Name | Type | Description |
 | ------ | ------ | ------ |
-| `rewards` | `object`[] | The groups of rewards to distribute |
+| `rewards` | \{ `amount`: `number`; `users`: `number`; \}[] | The groups of rewards to distribute |
 | `tokenAddress` | `string` | The token address to reward |
 
 ## Defined in
 
-[types/campaigns.ts:122](https://github.com/torque-labs/torque-utils/blob/a612e615fa21888d00ebb7bf70f9910fab4be80a/types/campaigns.ts#L122)
+[types/campaigns.ts:122](https://github.com/torque-labs/torque-utils/blob/3bd29ca22f900f1cf2686f7f240bf82e15337207/types/campaigns.ts#L122)

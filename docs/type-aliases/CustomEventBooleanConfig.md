@@ -6,7 +6,19 @@
 
 # Type Alias: CustomEventBooleanConfig
 
-> **CustomEventBooleanConfig**: `object` & `object`
+```ts
+type CustomEventBooleanConfig: {
+  description: null | string;
+  image: null | string;
+  label: null | string;
+  name: string;
+ } & {
+  type: "boolean";
+  validation: {
+     match: null | boolean;
+    };
+};
+```
 
 Custom event config type for boolean properties
 
@@ -24,9 +36,9 @@ Custom event config type for boolean properties
 | Name | Type | Description |
 | ------ | ------ | ------ |
 | `type` | `"boolean"` | Boolean custom event field type |
-| `validation` | `object` | Validation for this custom event boolean property |
+| `validation` | \{ `match`: `null` \| `boolean`; \} | Validation for this custom event boolean property |
 | `validation.match`? | `null` \| `boolean` | A specific boolean value to match against (eg. true) |
 
 ## Defined in
 
-[types/custom-events/events.ts:116](https://github.com/torque-labs/torque-utils/blob/a612e615fa21888d00ebb7bf70f9910fab4be80a/types/custom-events/events.ts#L116)
+[types/custom-events/events.ts:116](https://github.com/torque-labs/torque-utils/blob/3bd29ca22f900f1cf2686f7f240bf82e15337207/types/custom-events/events.ts#L116)

@@ -6,7 +6,12 @@
 
 # Type Alias: KaminoLendRequirement
 
-> **KaminoLendRequirement**: `object`
+```ts
+type KaminoLendRequirement: {
+  requirement: KaminoLendActionSchema;
+  type: KAMINO_LEND;
+};
+```
 
 Kamino Lend requirement type
 
@@ -14,11 +19,11 @@ Kamino Lend requirement type
 
 | Name | Type | Default value | Description |
 | ------ | ------ | ------ | ------ |
-| `requirement` | `object` | KaminoLendActionSchema | - |
+| `requirement` | \{ `amount`: `number`; `tokenAddress`: `string`; \} | KaminoLendActionSchema | - |
 | `requirement.amount` | `number` | - | The minimum amount to lend |
 | `requirement.tokenAddress` | `string` | - | The token address to lend |
 | `type` | `KAMINO_LEND` | - | - |
 
 ## Defined in
 
-[types/eventConfig/config.ts:128](https://github.com/torque-labs/torque-utils/blob/a612e615fa21888d00ebb7bf70f9910fab4be80a/types/eventConfig/config.ts#L128)
+[types/eventConfig/config.ts:128](https://github.com/torque-labs/torque-utils/blob/3bd29ca22f900f1cf2686f7f240bf82e15337207/types/eventConfig/config.ts#L128)

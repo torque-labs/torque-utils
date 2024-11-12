@@ -6,8 +6,10 @@
 
 # Variable: CreateTarpInputSchema
 
-> `const` **CreateTarpInputSchema**: `ZodObject`\<[`CreateTarpInput`](../type-aliases/CreateTarpInput.md)\>
+```ts
+const CreateTarpInputSchema: ZodObject<CreateTarpInput>;
+```
 
 ## Defined in
 
-[types/tarp.ts:29](https://github.com/torque-labs/torque-utils/blob/a612e615fa21888d00ebb7bf70f9910fab4be80a/types/tarp.ts#L29)
+[types/tarp.ts:29](https://github.com/torque-labs/torque-utils/blob/3bd29ca22f900f1cf2686f7f240bf82e15337207/types/tarp.ts#L29)

@@ -6,7 +6,13 @@
 
 # Type Alias: CustomEventModel
 
-> **CustomEventModel**: `object`
+```ts
+type CustomEventModel: {
+  config: CustomEventDefinitionSchema;
+  id: string;
+  name: string;
+};
+```
 
 Custom event model type
 
@@ -20,4 +26,4 @@ Custom event model type
 
 ## Defined in
 
-[types/custom-events/events.ts:210](https://github.com/torque-labs/torque-utils/blob/a612e615fa21888d00ebb7bf70f9910fab4be80a/types/custom-events/events.ts#L210)
+[types/custom-events/events.ts:210](https://github.com/torque-labs/torque-utils/blob/3bd29ca22f900f1cf2686f7f240bf82e15337207/types/custom-events/events.ts#L210)

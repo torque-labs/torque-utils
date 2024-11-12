@@ -6,10 +6,12 @@
 
 # Variable: TensorBidRequirementSchema
 
-> `const` **TensorBidRequirementSchema**: `ZodObject`\<[`TensorBidRequirement`](../type-aliases/TensorBidRequirement.md)\>
+```ts
+const TensorBidRequirementSchema: ZodObject<TensorBidRequirement>;
+```
 
 Tensor Bid requirement schema
 
 ## Defined in
 
-[types/eventConfig/config.ts:231](https://github.com/torque-labs/torque-utils/blob/a612e615fa21888d00ebb7bf70f9910fab4be80a/types/eventConfig/config.ts#L231)
+[types/eventConfig/config.ts:231](https://github.com/torque-labs/torque-utils/blob/3bd29ca22f900f1cf2686f7f240bf82e15337207/types/eventConfig/config.ts#L231)

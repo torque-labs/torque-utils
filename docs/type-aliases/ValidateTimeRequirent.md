@@ -6,7 +6,16 @@
 
 # Type Alias: ValidateTimeRequirent
 
-> **ValidateTimeRequirent**: `object`
+```ts
+type ValidateTimeRequirent: {
+  body: {
+     data: any;
+     initalTransaction: string;
+     timeConfig: TimeConfig;
+     userPublicKey: string;
+    };
+};
+```
 
 Time validation request body when getting time validation
 
@@ -14,7 +23,7 @@ Time validation request body when getting time validation
 
 | Name | Type | Description |
 | ------ | ------ | ------ |
-| `body` | `object` | - |
+| `body` | \{ `data`: `any`; `initalTransaction`: `string`; `timeConfig`: [`TimeConfig`](TimeConfig.md); `userPublicKey`: `string`; \} | - |
 | `body.data`? | `any` | Extra data to pass to the time config |
 | `body.initalTransaction`? | `string` | The initial transaction signature |
 | `body.timeConfig` | [`TimeConfig`](TimeConfig.md) | The time config to validate |
@@ -22,4 +31,4 @@ Time validation request body when getting time validation
 
 ## Defined in
 
-[types/timeConfig/validationInput.ts:6](https://github.com/torque-labs/torque-utils/blob/a612e615fa21888d00ebb7bf70f9910fab4be80a/types/timeConfig/validationInput.ts#L6)
+[types/timeConfig/validationInput.ts:6](https://github.com/torque-labs/torque-utils/blob/3bd29ca22f900f1cf2686f7f240bf82e15337207/types/timeConfig/validationInput.ts#L6)

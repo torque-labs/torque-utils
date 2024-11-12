@@ -6,10 +6,12 @@
 
 # Variable: CampaignRequestParamsSchema
 
-> `const` **CampaignRequestParamsSchema**: `ZodObject`\<[`CampaignRequestParams`](../type-aliases/CampaignRequestParams.md)\>
+```ts
+const CampaignRequestParamsSchema: ZodObject<CampaignRequestParams>;
+```
 
 Campaign filter schema
 
 ## Defined in
 
-[types/campaigns.ts:152](https://github.com/torque-labs/torque-utils/blob/a612e615fa21888d00ebb7bf70f9910fab4be80a/types/campaigns.ts#L152)
+[types/campaigns.ts:152](https://github.com/torque-labs/torque-utils/blob/3bd29ca22f900f1cf2686f7f240bf82e15337207/types/campaigns.ts#L152)

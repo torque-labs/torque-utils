@@ -6,7 +6,12 @@
 
 # Type Alias: NftCollectionTradeRequirement
 
-> **NftCollectionTradeRequirement**: `object`
+```ts
+type NftCollectionTradeRequirement: {
+  requirement: NftCollectionTradeSchema;
+  type: NFT_COLLECTION_TRADE;
+};
+```
 
 NFT Collection Trade requirement type
 
@@ -14,11 +19,11 @@ NFT Collection Trade requirement type
 
 | Name | Type | Default value | Description |
 | ------ | ------ | ------ | ------ |
-| `requirement` | `object` | NftCollectionTradeSchema | - |
+| `requirement` | \{ `collectionAddress`: `string`; `tradeType`: [`NftCollectionTradeType`](../enumerations/NftCollectionTradeType.md); \} | NftCollectionTradeSchema | - |
 | `requirement.collectionAddress` | `string` | - | The collection address to trace |
 | `requirement.tradeType` | [`NftCollectionTradeType`](../enumerations/NftCollectionTradeType.md) | - | The type of trade to perform |
 | `type` | `NFT_COLLECTION_TRADE` | - | - |
 
 ## Defined in
 
-[types/eventConfig/config.ts:182](https://github.com/torque-labs/torque-utils/blob/a612e615fa21888d00ebb7bf70f9910fab4be80a/types/eventConfig/config.ts#L182)
+[types/eventConfig/config.ts:182](https://github.com/torque-labs/torque-utils/blob/3bd29ca22f900f1cf2686f7f240bf82e15337207/types/eventConfig/config.ts#L182)

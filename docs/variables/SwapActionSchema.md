@@ -6,7 +6,9 @@
 
 # Variable: SwapActionSchema
 
-> `const` **SwapActionSchema**: `ZodEffects`\<[`SwapAction`](../type-aliases/SwapAction.md)\>
+```ts
+const SwapActionSchema: ZodEffects<SwapAction>;
+```
 
 Refined schema for swap action with valid combinations
 
@@ -18,4 +20,4 @@ swap -> both token and one amount
 
 ## Defined in
 
-[types/eventConfig/requirements.ts:48](https://github.com/torque-labs/torque-utils/blob/a612e615fa21888d00ebb7bf70f9910fab4be80a/types/eventConfig/requirements.ts#L48)
+[types/eventConfig/requirements.ts:48](https://github.com/torque-labs/torque-utils/blob/3bd29ca22f900f1cf2686f7f240bf82e15337207/types/eventConfig/requirements.ts#L48)

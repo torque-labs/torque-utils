@@ -6,7 +6,19 @@
 
 # Function: mapCollection()
 
-> **mapCollection**(`collection`): `object`
+```ts
+function mapCollection(collection): {
+  collId: collection.collId;
+  compressed: collection.compressed;
+  imageUri: collection.imageUri;
+  name: collection.name;
+  slugdisplay: collection.slugDisplay;
+  stats: collection.stats;
+  symbol: collection.symbol;
+  tokenStandard: collection.tokenStandard;
+  whitelistPda: collection.whitelistPda;
+}
+```
 
 ## Parameters
 
@@ -16,7 +28,19 @@
 
 ## Returns
 
-`object`
+```ts
+{
+  collId: collection.collId;
+  compressed: collection.compressed;
+  imageUri: collection.imageUri;
+  name: collection.name;
+  slugdisplay: collection.slugDisplay;
+  stats: collection.stats;
+  symbol: collection.symbol;
+  tokenStandard: collection.tokenStandard;
+  whitelistPda: collection.whitelistPda;
+}
+```
 
 | Name | Type | Default value |
 | ------ | ------ | ------ |
@@ -32,4 +56,4 @@
 
 ## Defined in
 
-[lib/tensor-api.ts:64](https://github.com/torque-labs/torque-utils/blob/a612e615fa21888d00ebb7bf70f9910fab4be80a/lib/tensor-api.ts#L64)
+[lib/tensor-api.ts:64](https://github.com/torque-labs/torque-utils/blob/3bd29ca22f900f1cf2686f7f240bf82e15337207/lib/tensor-api.ts#L64)

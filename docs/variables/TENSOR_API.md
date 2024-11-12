@@ -6,8 +6,10 @@
 
 # Variable: TENSOR\_API
 
-> `const` **TENSOR\_API**: `"https://api.mainnet.tensordev.io/api/v1"` = `"https://api.mainnet.tensordev.io/api/v1"`
+```ts
+const TENSOR_API: "https://api.mainnet.tensordev.io/api/v1" = "https://api.mainnet.tensordev.io/api/v1";
+```
 
 ## Defined in
 
-[lib/tensor-api.ts:4](https://github.com/torque-labs/torque-utils/blob/a612e615fa21888d00ebb7bf70f9910fab4be80a/lib/tensor-api.ts#L4)
+[lib/tensor-api.ts:4](https://github.com/torque-labs/torque-utils/blob/3bd29ca22f900f1cf2686f7f240bf82e15337207/lib/tensor-api.ts#L4)

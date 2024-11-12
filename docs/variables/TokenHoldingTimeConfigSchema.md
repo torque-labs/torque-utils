@@ -6,8 +6,10 @@
 
 # Variable: TokenHoldingTimeConfigSchema
 
-> `const` **TokenHoldingTimeConfigSchema**: `ZodObject`\<[`TokenHoldingTimeConfig`](../type-aliases/TokenHoldingTimeConfig.md)\>
+```ts
+const TokenHoldingTimeConfigSchema: ZodObject<TokenHoldingTimeConfig>;
+```
 
 ## Defined in
 
-[types/timeConfig/requirements.ts:3](https://github.com/torque-labs/torque-utils/blob/a612e615fa21888d00ebb7bf70f9910fab4be80a/types/timeConfig/requirements.ts#L3)
+[types/timeConfig/requirements.ts:3](https://github.com/torque-labs/torque-utils/blob/3bd29ca22f900f1cf2686f7f240bf82e15337207/types/timeConfig/requirements.ts#L3)

@@ -6,7 +6,20 @@
 
 # Function: fetchSingleCollectionDetails()
 
-> **fetchSingleCollectionDetails**(`collectionId`): `Promise`\<`object`\>
+```ts
+function fetchSingleCollectionDetails(collectionId): Promise<{
+  collId: collection.collId;
+  compressed: collection.compressed;
+  imageUri: collection.imageUri;
+  metadataProgram: any;
+  name: collection.name;
+  slugdisplay: collection.slugDisplay;
+  stats: collection.stats;
+  symbol: collection.symbol;
+  tokenStandard: collection.tokenStandard;
+  whitelistPda: collection.whitelistPda;
+}>
+```
 
 Fetches single collection details
 
@@ -18,7 +31,18 @@ Fetches single collection details
 
 ## Returns
 
-`Promise`\<`object`\>
+`Promise`\<\{
+  `collId`: `collection.collId`;
+  `compressed`: `collection.compressed`;
+  `imageUri`: `collection.imageUri`;
+  `metadataProgram`: `any`;
+  `name`: `collection.name`;
+  `slugdisplay`: `collection.slugDisplay`;
+  `stats`: `collection.stats`;
+  `symbol`: `collection.symbol`;
+  `tokenStandard`: `collection.tokenStandard`;
+  `whitelistPda`: `collection.whitelistPda`;
+ \}\>
 
 | Name | Type | Default value |
 | ------ | ------ | ------ |
@@ -35,4 +59,4 @@ Fetches single collection details
 
 ## Defined in
 
-[lib/tensor-api.ts:99](https://github.com/torque-labs/torque-utils/blob/a612e615fa21888d00ebb7bf70f9910fab4be80a/lib/tensor-api.ts#L99)
+[lib/tensor-api.ts:99](https://github.com/torque-labs/torque-utils/blob/3bd29ca22f900f1cf2686f7f240bf82e15337207/lib/tensor-api.ts#L99)

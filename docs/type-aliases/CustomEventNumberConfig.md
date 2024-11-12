@@ -6,7 +6,20 @@
 
 # Type Alias: CustomEventNumberConfig
 
-> **CustomEventNumberConfig**: `object` & `object`
+```ts
+type CustomEventNumberConfig: {
+  description: null | string;
+  image: null | string;
+  label: null | string;
+  name: string;
+ } & {
+  type: "number";
+  validation: {
+     max: null | number;
+     min: null | number;
+    };
+};
+```
 
 Custom event config type for number properties
 
@@ -24,10 +37,10 @@ Custom event config type for number properties
 | Name | Type | Description |
 | ------ | ------ | ------ |
 | `type` | `"number"` | Number custom event field type |
-| `validation` | `object` | Validation for this custom event number property |
+| `validation` | \{ `max`: `null` \| `number`; `min`: `null` \| `number`; \} | Validation for this custom event number property |
 | `validation.max`? | `null` \| `number` | Maximum value for this number field |
 | `validation.min`? | `null` \| `number` | Minimum value for this number field |
 
 ## Defined in
 
-[types/custom-events/events.ts:109](https://github.com/torque-labs/torque-utils/blob/a612e615fa21888d00ebb7bf70f9910fab4be80a/types/custom-events/events.ts#L109)
+[types/custom-events/events.ts:109](https://github.com/torque-labs/torque-utils/blob/3bd29ca22f900f1cf2686f7f240bf82e15337207/types/custom-events/events.ts#L109)

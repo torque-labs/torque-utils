@@ -6,7 +6,12 @@
 
 # Type Alias: CreateCustomEventInput
 
-> **CreateCustomEventInput**: `object`
+```ts
+type CreateCustomEventInput: {
+  config: CustomEventDefinitionSchema;
+  name: string;
+};
+```
 
 Create custom event input type
 
@@ -19,4 +24,4 @@ Create custom event input type
 
 ## Defined in
 
-[types/custom-events/events.ts:236](https://github.com/torque-labs/torque-utils/blob/a612e615fa21888d00ebb7bf70f9910fab4be80a/types/custom-events/events.ts#L236)
+[types/custom-events/events.ts:236](https://github.com/torque-labs/torque-utils/blob/3bd29ca22f900f1cf2686f7f240bf82e15337207/types/custom-events/events.ts#L236)

@@ -6,10 +6,12 @@
 
 # Variable: TimeConfigStakeSolSchema
 
-> `const` **TimeConfigStakeSolSchema**: `ZodObject`\<[`TimeConfigStakeSol`](../type-aliases/TimeConfigStakeSol.md)\>
+```ts
+const TimeConfigStakeSolSchema: ZodObject<TimeConfigStakeSol>;
+```
 
 Stake solana time config schema
 
 ## Defined in
 
-[types/timeConfig/config.ts:64](https://github.com/torque-labs/torque-utils/blob/a612e615fa21888d00ebb7bf70f9910fab4be80a/types/timeConfig/config.ts#L64)
+[types/timeConfig/config.ts:64](https://github.com/torque-labs/torque-utils/blob/3bd29ca22f900f1cf2686f7f240bf82e15337207/types/timeConfig/config.ts#L64)

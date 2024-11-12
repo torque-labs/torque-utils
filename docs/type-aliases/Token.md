@@ -6,7 +6,17 @@
 
 # Type Alias: Token
 
-> **Token**: `object`
+```ts
+type Token: {
+  decimals: number;
+  isCompressed: boolean;
+  logo: string;
+  name: string;
+  symbol: string;
+  tokenStandard: string;
+  usdcValuePerToken: number;
+};
+```
 
 Token type
 
@@ -24,4 +34,4 @@ Token type
 
 ## Defined in
 
-[types/tokens.ts:4](https://github.com/torque-labs/torque-utils/blob/a612e615fa21888d00ebb7bf70f9910fab4be80a/types/tokens.ts#L4)
+[types/tokens.ts:4](https://github.com/torque-labs/torque-utils/blob/3bd29ca22f900f1cf2686f7f240bf82e15337207/types/tokens.ts#L4)

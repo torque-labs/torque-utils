@@ -6,10 +6,12 @@
 
 # Variable: CreateCustomEventInputSchema
 
-> `const` **CreateCustomEventInputSchema**: `ZodObject`\<[`CreateCustomEventInput`](../type-aliases/CreateCustomEventInput.md)\>
+```ts
+const CreateCustomEventInputSchema: ZodObject<CreateCustomEventInput>;
+```
 
 Create custom event input schema
 
 ## Defined in
 
-[types/custom-events/events.ts:215](https://github.com/torque-labs/torque-utils/blob/a612e615fa21888d00ebb7bf70f9910fab4be80a/types/custom-events/events.ts#L215)
+[types/custom-events/events.ts:215](https://github.com/torque-labs/torque-utils/blob/3bd29ca22f900f1cf2686f7f240bf82e15337207/types/custom-events/events.ts#L215)

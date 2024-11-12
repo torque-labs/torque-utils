@@ -14,7 +14,9 @@
 
 ### new ApiError()
 
-> **new ApiError**(`__namedParameters`): [`ApiError`](ApiError.md)
+```ts
+new ApiError(__namedParameters): ApiError
+```
 
 #### Parameters
 
@@ -36,7 +38,7 @@
 
 #### Defined in
 
-[types/errors.ts:24](https://github.com/torque-labs/torque-utils/blob/a612e615fa21888d00ebb7bf70f9910fab4be80a/types/errors.ts#L24)
+[types/errors.ts:24](https://github.com/torque-labs/torque-utils/blob/3bd29ca22f900f1cf2686f7f240bf82e15337207/types/errors.ts#L24)
 
 ## Properties
 
@@ -55,7 +57,9 @@
 
 ### captureStackTrace()
 
-> `static` **captureStackTrace**(`targetObject`, `constructorOpt`?): `void`
+```ts
+static captureStackTrace(targetObject, constructorOpt?): void
+```
 
 Create .stack property on a target object
 

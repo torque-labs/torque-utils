@@ -6,7 +6,12 @@
 
 # Type Alias: MarginfiLendIngest
 
-> **MarginfiLendIngest**: `object`
+```ts
+type MarginfiLendIngest: {
+  amount: number;
+  bankAddress: string;
+};
+```
 
 Marginfi lend transaction ingest type (from Shyft)
 
@@ -19,4 +24,4 @@ Marginfi lend transaction ingest type (from Shyft)
 
 ## Defined in
 
-[types/events.ts:15](https://github.com/torque-labs/torque-utils/blob/a612e615fa21888d00ebb7bf70f9910fab4be80a/types/events.ts#L15)
+[types/events.ts:15](https://github.com/torque-labs/torque-utils/blob/3bd29ca22f900f1cf2686f7f240bf82e15337207/types/events.ts#L15)

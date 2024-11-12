@@ -6,7 +6,24 @@
 
 # Function: clickGet()
 
-> **clickGet**(`clickData`, `offerId`, `title`, `publisherHandle`, `remainingConversions`?, `imageUrl`?, `description`?, `userRewardType`?, `userRewardToken`?, `userRewardAmount`?, `raffleRewardType`?, `raffleRewardToken`?, `raffleRewardAmount`?, `requireSignature`?, `antiSybilFee`?): `Promise`\<`ActionGetResponse`\>
+```ts
+function clickGet(
+   clickData, 
+   offerId, 
+   title, 
+   publisherHandle, 
+   remainingConversions?, 
+   imageUrl?, 
+   description?, 
+   userRewardType?, 
+   userRewardToken?, 
+   userRewardAmount?, 
+   raffleRewardType?, 
+   raffleRewardToken?, 
+   raffleRewardAmount?, 
+   requireSignature?, 
+antiSybilFee?): Promise<ActionGetResponse>
+```
 
 ## Parameters
 
@@ -37,4 +54,4 @@
 
 ## Defined in
 
-[solana-actions/buildGet.ts:405](https://github.com/torque-labs/torque-utils/blob/a612e615fa21888d00ebb7bf70f9910fab4be80a/solana-actions/buildGet.ts#L405)
+[solana-actions/buildGet.ts:405](https://github.com/torque-labs/torque-utils/blob/3bd29ca22f900f1cf2686f7f240bf82e15337207/solana-actions/buildGet.ts#L405)

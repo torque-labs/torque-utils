@@ -6,7 +6,13 @@
 
 # Type Alias: StakeSolanaAction
 
-> **StakeSolanaAction**: `object`
+```ts
+type StakeSolanaAction: {
+  amount: number;
+  epochs: number;
+  validator: string;
+};
+```
 
 Stake solana action type
 
@@ -20,4 +26,4 @@ Stake solana action type
 
 ## Defined in
 
-[types/eventConfig/requirements.ts:412](https://github.com/torque-labs/torque-utils/blob/a612e615fa21888d00ebb7bf70f9910fab4be80a/types/eventConfig/requirements.ts#L412)
+[types/eventConfig/requirements.ts:412](https://github.com/torque-labs/torque-utils/blob/3bd29ca22f900f1cf2686f7f240bf82e15337207/types/eventConfig/requirements.ts#L412)

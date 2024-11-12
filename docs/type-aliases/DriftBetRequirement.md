@@ -6,7 +6,12 @@
 
 # Type Alias: DriftBetRequirement
 
-> **DriftBetRequirement**: `object`
+```ts
+type DriftBetRequirement: {
+  requirement: DriftBetActionSchema;
+  type: DRIFT_BET;
+};
+```
 
 Drift Bet requirement type
 
@@ -14,11 +19,11 @@ Drift Bet requirement type
 
 | Name | Type | Default value | Description |
 | ------ | ------ | ------ | ------ |
-| `requirement` | `object` | DriftBetActionSchema | - |
+| `requirement` | \{ `marketIndex`: `number`; `shares`: `number`; \} | DriftBetActionSchema | - |
 | `requirement.marketIndex` | `number` | - | The market index to bet on |
 | `requirement.shares` | `number` | - | The number of minimum shars to bet |
 | `type` | `DRIFT_BET` | - | - |
 
 ## Defined in
 
-[types/eventConfig/config.ts:85](https://github.com/torque-labs/torque-utils/blob/a612e615fa21888d00ebb7bf70f9910fab4be80a/types/eventConfig/config.ts#L85)
+[types/eventConfig/config.ts:85](https://github.com/torque-labs/torque-utils/blob/3bd29ca22f900f1cf2686f7f240bf82e15337207/types/eventConfig/config.ts#L85)

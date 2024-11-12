@@ -6,7 +6,13 @@
 
 # Type Alias: TimeConfigOpenPosition
 
-> **TimeConfigOpenPosition**: `object`
+```ts
+type TimeConfigOpenPosition: {
+  duration: number;
+  requirement: OpenPositionTimeConfigSchema;
+  type: OPEN_POSITION;
+};
+```
 
 Open position time config type
 
@@ -15,7 +21,7 @@ Open position time config type
 | Name | Type | Default value | Description |
 | ------ | ------ | ------ | ------ |
 | `duration` | `number` | - | The duration of the requirement in seconds |
-| `requirement` | `object` | OpenPositionTimeConfigSchema | - |
+| `requirement` | \{ `amount`: `number`; `pool`: `string`; `protocol`: `string`; `token`: `string`; \} | OpenPositionTimeConfigSchema | - |
 | `requirement.amount` | `number` | - | The minimum amount to have |
 | `requirement.pool`? | `string` | - | The pool address |
 | `requirement.protocol`? | `string` | - | The protocol address |
@@ -24,4 +30,4 @@ Open position time config type
 
 ## Defined in
 
-[types/timeConfig/config.ts:57](https://github.com/torque-labs/torque-utils/blob/a612e615fa21888d00ebb7bf70f9910fab4be80a/types/timeConfig/config.ts#L57)
+[types/timeConfig/config.ts:57](https://github.com/torque-labs/torque-utils/blob/3bd29ca22f900f1cf2686f7f240bf82e15337207/types/timeConfig/config.ts#L57)
