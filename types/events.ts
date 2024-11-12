@@ -2,7 +2,7 @@ import { z } from "zod";
 import { EventType } from "./eventConfig";
 
 /**
- * Marginfi lend transaction ingest schema (from Shyft)
+ * Marginfi lend transaction ingest schema
  */
 export const MarginfiLendIngestSchema = z.object({
   bankAddress: z.string(),
@@ -10,7 +10,7 @@ export const MarginfiLendIngestSchema = z.object({
 });
 
 /**
- * Marginfi lend transaction ingest type (from Shyft)
+ * Marginfi lend transaction ingest type
  */
 export type MarginfiLendIngest = z.infer<typeof MarginfiLendIngestSchema>;
 
