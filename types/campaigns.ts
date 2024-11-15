@@ -124,22 +124,14 @@ export type LootBoxReward = z.infer<typeof LootBoxRewardSchema>;
 /**
  * Loot Box form input schema for creating a new campaign
  */
-export const LootBoxRewardInputSchema = z.discriminatedUnion("enabled", [
-  z
-    .object({
-      /**
-       * Whether the loot box reward is enabled or not
-       */
-      enabled: z.literal(true),
-    })
-    .merge(LootBoxRewardSchema),
-  z.object({
+export const LootBoxRewardInputSchema = z
+  .object({
     /**
-     * Wether the loot box reward is disabled or not
+     * Whether the loot box reward is enabled or not
      */
-    enabled: z.literal(false),
-  }),
-]);
+    enabled: z.literal(true),
+  })
+  .merge(LootBoxRewardSchema);
 
 /**
  * Loot Box form input type
