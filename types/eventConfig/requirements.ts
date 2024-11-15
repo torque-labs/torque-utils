@@ -399,7 +399,7 @@ export const StakeSolanaActionSchema = z.object({
   /**
    * The validator to stake with
    */
-  validator: z.string(),
+  validator: z.string().min(1),
   /**
    * The minimum number of epochs to stake for
    */
