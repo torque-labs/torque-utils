@@ -129,7 +129,7 @@ export const LootBoxRewardInputSchema = z
     /**
      * Whether the loot box reward is enabled or not
      */
-    enabled: z.literal(true),
+    enabled: z.boolean(),
   })
   .merge(LootBoxRewardSchema);
 
