@@ -1,18 +1,19 @@
 import { z } from "zod";
 import {
-  SwapActionSchema,
-  NftCollectionTradeSchema,
-  ClickActionSchema,
-  TensorActionSchema,
-  DriftDepositActionSchema,
-  NftBidBuySchema,
-  RealmsVoteActionSchema,
-  MarginfiLendActionSchema,
-  MemoActionSchema,
-  KaminoLendActionSchema,
-  DriftBetActionSchema,
-  StakeSolanaActionSchema,
-  FormSubmissionActionSchema,
+    SwapActionSchema,
+    NftCollectionTradeSchema,
+    ClickActionSchema,
+    TensorActionSchema,
+    DriftDepositActionSchema,
+    NftBidBuySchema,
+    RealmsVoteActionSchema,
+    MarginfiLendActionSchema,
+    MemoActionSchema,
+    KaminoLendActionSchema,
+    DriftBetActionSchema,
+    StakeSolanaActionSchema,
+    FormSubmissionActionSchema,
+    PumpFunActionSchema,
 } from "./requirements";
 
 import { CustomEventConfigSchema } from "../custom-events/events";
@@ -26,29 +27,30 @@ import { TimeConfigTokenHoldingSchema } from "../timeConfig";
  * HEDGEHOG_PLACE_BET
  */
 export enum EventType {
-  CLICK = "CLICK",
-  SWAP = "SWAP",
-  NFT_COLLECTION_TRADE = "NFT_COLLECTION_TRADE",
-  TENSOR_BUY = "TENSOR_BUY",
-  TENSOR_BID = "TENSOR_BID",
-  DRIFT_DEPOSIT = "DRIFT_DEPOSIT",
-  NFT_BUY_BID = "NFT_BUY_BID",
-  CUSTOM_EVENT = "CUSTOM_EVENT",
-  REALMS_VOTE = "REALMS_VOTE",
-  MARGINFI_LEND = "MARGINFI_LEND",
-  KAMINO_LEND = "KAMINO_LEND",
-  MEMO = "MEMO",
-  DRIFT_BET = "DRIFT_BET",
-  STAKE_SOL = "STAKE_SOL",
-  FORM_SUBMISSION = "FORM_SUBMISSION",
+    CLICK = "CLICK",
+    SWAP = "SWAP",
+    NFT_COLLECTION_TRADE = "NFT_COLLECTION_TRADE",
+    TENSOR_BUY = "TENSOR_BUY",
+    TENSOR_BID = "TENSOR_BID",
+    DRIFT_DEPOSIT = "DRIFT_DEPOSIT",
+    NFT_BUY_BID = "NFT_BUY_BID",
+    CUSTOM_EVENT = "CUSTOM_EVENT",
+    REALMS_VOTE = "REALMS_VOTE",
+    MARGINFI_LEND = "MARGINFI_LEND",
+    KAMINO_LEND = "KAMINO_LEND",
+    MEMO = "MEMO",
+    DRIFT_BET = "DRIFT_BET",
+    STAKE_SOL = "STAKE_SOL",
+    FORM_SUBMISSION = "FORM_SUBMISSION",
+    PUMP_FUN_BUY = "PUMP_FUN_BUY",
 }
 
 /**
  * Click requirement schema
  */
 export const ClickRequirementSchema = z.object({
-  type: z.literal(EventType.CLICK),
-  requirement: ClickActionSchema,
+    type: z.literal(EventType.CLICK),
+    requirement: ClickActionSchema,
 });
 
 /**
@@ -60,23 +62,21 @@ export type ClickRequirement = z.infer<typeof ClickRequirementSchema>;
  * Custom event requirement schema
  */
 export const CustomEventRequirementSchema = z.object({
-  type: z.literal(EventType.CUSTOM_EVENT),
-  requirement: CustomEventConfigSchema,
+    type: z.literal(EventType.CUSTOM_EVENT),
+    requirement: CustomEventConfigSchema,
 });
 
 /**
  * Custom event requirement type
  */
-export type CustomEventRequirement = z.infer<
-  typeof CustomEventRequirementSchema
->;
+export type CustomEventRequirement = z.infer<typeof CustomEventRequirementSchema>;
 
 /**
  * Drift Bet requirement schema
  */
 export const DriftBetRequirementSchema = z.object({
-  type: z.literal(EventType.DRIFT_BET),
-  requirement: DriftBetActionSchema,
+    type: z.literal(EventType.DRIFT_BET),
+    requirement: DriftBetActionSchema,
 });
 
 /**
@@ -88,38 +88,34 @@ export type DriftBetRequirement = z.infer<typeof DriftBetRequirementSchema>;
  * Drift Deposit requirement schema
  */
 export const DriftDepositRequirementSchema = z.object({
-  type: z.literal(EventType.DRIFT_DEPOSIT),
-  requirement: DriftDepositActionSchema,
+    type: z.literal(EventType.DRIFT_DEPOSIT),
+    requirement: DriftDepositActionSchema,
 });
 
 /**
  * Drift Deposit requirement type
  */
-export type DriftDepositRequirement = z.infer<
-  typeof DriftDepositRequirementSchema
->;
+export type DriftDepositRequirement = z.infer<typeof DriftDepositRequirementSchema>;
 
 /**
  * Form Submission requirement schema
  */
 export const FormSubmissionRequirementSchema = z.object({
-  type: z.literal(EventType.FORM_SUBMISSION),
-  requirement: FormSubmissionActionSchema,
+    type: z.literal(EventType.FORM_SUBMISSION),
+    requirement: FormSubmissionActionSchema,
 });
 
 /**
  * Form Submission requirement type
  */
-export type FormSubmissionRequirement = z.infer<
-  typeof FormSubmissionRequirementSchema
->;
+export type FormSubmissionRequirement = z.infer<typeof FormSubmissionRequirementSchema>;
 
 /**
  * Kamino Lend requirement schema
  */
 export const KaminoLendRequirementSchema = z.object({
-  type: z.literal(EventType.KAMINO_LEND),
-  requirement: KaminoLendActionSchema,
+    type: z.literal(EventType.KAMINO_LEND),
+    requirement: KaminoLendActionSchema,
 });
 
 /**
@@ -131,23 +127,21 @@ export type KaminoLendRequirement = z.infer<typeof KaminoLendRequirementSchema>;
  * Marginfi Lend requirement schema
  */
 export const MarginfiLendRequirementSchema = z.object({
-  type: z.literal(EventType.MARGINFI_LEND),
-  requirement: MarginfiLendActionSchema,
+    type: z.literal(EventType.MARGINFI_LEND),
+    requirement: MarginfiLendActionSchema,
 });
 
 /**
  * Marginfi Lend requirement type
  */
-export type MarginfiLendRequirement = z.infer<
-  typeof MarginfiLendRequirementSchema
->;
+export type MarginfiLendRequirement = z.infer<typeof MarginfiLendRequirementSchema>;
 
 /**
  * Memo requirement schema
  */
 export const MemoRequirementSchema = z.object({
-  type: z.literal(EventType.MEMO),
-  requirement: MemoActionSchema,
+    type: z.literal(EventType.MEMO),
+    requirement: MemoActionSchema,
 });
 
 /**
@@ -159,8 +153,8 @@ export type MemoRequirement = z.infer<typeof MemoRequirementSchema>;
  * NFT Bid Buy requirement schema
  */
 export const NftBidBuyRequirementSchema = z.object({
-  type: z.literal(EventType.NFT_BUY_BID),
-  requirement: NftBidBuySchema,
+    type: z.literal(EventType.NFT_BUY_BID),
+    requirement: NftBidBuySchema,
 });
 
 /**
@@ -172,23 +166,21 @@ export type NftBidBuyRequirement = z.infer<typeof NftBidBuyRequirementSchema>;
  * NFT Collection Trade requirement schema
  */
 export const NftCollectionTradeRequirementSchema = z.object({
-  type: z.literal(EventType.NFT_COLLECTION_TRADE),
-  requirement: NftCollectionTradeSchema,
+    type: z.literal(EventType.NFT_COLLECTION_TRADE),
+    requirement: NftCollectionTradeSchema,
 });
 
 /**
  * NFT Collection Trade requirement type
  */
-export type NftCollectionTradeRequirement = z.infer<
-  typeof NftCollectionTradeRequirementSchema
->;
+export type NftCollectionTradeRequirement = z.infer<typeof NftCollectionTradeRequirementSchema>;
 
 /**
  * Realms Vote requirement schema
  */
 export const RealmsVoteRequirementSchema = z.object({
-  type: z.literal(EventType.REALMS_VOTE),
-  requirement: RealmsVoteActionSchema,
+    type: z.literal(EventType.REALMS_VOTE),
+    requirement: RealmsVoteActionSchema,
 });
 
 /**
@@ -200,24 +192,22 @@ export type RealmsVoteRequirement = z.infer<typeof RealmsVoteRequirementSchema>;
  * Stake Solana requirement schema
  */
 export const StakeSolanaRequirementSchema = z.object({
-  type: z.literal(EventType.STAKE_SOL),
-  requirement: StakeSolanaActionSchema,
+    type: z.literal(EventType.STAKE_SOL),
+    requirement: StakeSolanaActionSchema,
 });
 
 /**
  * Stake Solana requirement type
  */
-export type StakeSolanaRequirement = z.infer<
-  typeof StakeSolanaRequirementSchema
->;
+export type StakeSolanaRequirement = z.infer<typeof StakeSolanaRequirementSchema>;
 
 /**
  * Swap requirement schema
  */
 export const SwapRequirementSchema = z.object({
-  type: z.literal(EventType.SWAP),
-  requirement: SwapActionSchema,
-  timeConfig: TimeConfigTokenHoldingSchema.optional(),
+    type: z.literal(EventType.SWAP),
+    requirement: SwapActionSchema,
+    timeConfig: TimeConfigTokenHoldingSchema.optional(),
 });
 
 /**
@@ -229,8 +219,8 @@ export type SwapRequirement = z.infer<typeof SwapRequirementSchema>;
  * Tensor Bid requirement schema
  */
 export const TensorBidRequirementSchema = z.object({
-  type: z.literal(EventType.TENSOR_BID),
-  requirement: TensorActionSchema,
+    type: z.literal(EventType.TENSOR_BID),
+    requirement: TensorActionSchema,
 });
 
 /**
@@ -242,14 +232,27 @@ export type TensorBidRequirement = z.infer<typeof TensorBidRequirementSchema>;
  * Tensor Buy requirement schema
  */
 export const TensorBuyRequirementSchema = z.object({
-  type: z.literal(EventType.TENSOR_BUY),
-  requirement: TensorActionSchema,
+    type: z.literal(EventType.TENSOR_BUY),
+    requirement: TensorActionSchema,
 });
 
 /**
  * Tensor Buy requirement type
  */
 export type TensorBuyRequirement = z.infer<typeof TensorBuyRequirementSchema>;
+
+/**
+ * Pump.Fun Buy requirement schema
+ */
+export const PumpFunRequirementSchema = z.object({
+    type: z.literal(EventType.PUMP_FUN_BUY),
+    requirement: PumpFunActionSchema,
+});
+
+/**
+ * Pump.Fun Buy requirement type
+ */
+export type PumpFunRequirement = z.infer<typeof PumpFunRequirementSchema>;
 
 /**
  * Local type mapping for each requirement type.
@@ -259,21 +262,22 @@ export type TensorBuyRequirement = z.infer<typeof TensorBuyRequirementSchema>;
  * union below whenever a new EventType is added
  */
 const EventTypeMapping: Record<EventType, z.ZodType> = {
-  [EventType.CLICK]: ClickRequirementSchema,
-  [EventType.CUSTOM_EVENT]: CustomEventRequirementSchema,
-  [EventType.DRIFT_BET]: DriftBetRequirementSchema,
-  [EventType.DRIFT_DEPOSIT]: DriftDepositRequirementSchema,
-  [EventType.FORM_SUBMISSION]: FormSubmissionRequirementSchema,
-  [EventType.KAMINO_LEND]: KaminoLendRequirementSchema,
-  [EventType.MARGINFI_LEND]: MarginfiLendRequirementSchema,
-  [EventType.MEMO]: MemoRequirementSchema,
-  [EventType.NFT_BUY_BID]: NftBidBuyRequirementSchema,
-  [EventType.NFT_COLLECTION_TRADE]: NftCollectionTradeRequirementSchema,
-  [EventType.REALMS_VOTE]: RealmsVoteRequirementSchema,
-  [EventType.STAKE_SOL]: StakeSolanaRequirementSchema,
-  [EventType.SWAP]: SwapRequirementSchema,
-  [EventType.TENSOR_BID]: TensorBidRequirementSchema,
-  [EventType.TENSOR_BUY]: TensorBuyRequirementSchema,
+    [EventType.CLICK]: ClickRequirementSchema,
+    [EventType.CUSTOM_EVENT]: CustomEventRequirementSchema,
+    [EventType.DRIFT_BET]: DriftBetRequirementSchema,
+    [EventType.DRIFT_DEPOSIT]: DriftDepositRequirementSchema,
+    [EventType.FORM_SUBMISSION]: FormSubmissionRequirementSchema,
+    [EventType.KAMINO_LEND]: KaminoLendRequirementSchema,
+    [EventType.MARGINFI_LEND]: MarginfiLendRequirementSchema,
+    [EventType.MEMO]: MemoRequirementSchema,
+    [EventType.NFT_BUY_BID]: NftBidBuyRequirementSchema,
+    [EventType.NFT_COLLECTION_TRADE]: NftCollectionTradeRequirementSchema,
+    [EventType.REALMS_VOTE]: RealmsVoteRequirementSchema,
+    [EventType.STAKE_SOL]: StakeSolanaRequirementSchema,
+    [EventType.SWAP]: SwapRequirementSchema,
+    [EventType.TENSOR_BID]: TensorBidRequirementSchema,
+    [EventType.TENSOR_BUY]: TensorBuyRequirementSchema,
+    [EventType.PUMP_FUN_BUY]: PumpFunRequirementSchema,
 };
 
 /**
@@ -282,21 +286,22 @@ const EventTypeMapping: Record<EventType, z.ZodType> = {
  * NOTE: Always add new requirements when EventType enum above is updated
  */
 export const EventRequirementConfigSchema = z.discriminatedUnion("type", [
-  ClickRequirementSchema,
-  CustomEventRequirementSchema,
-  DriftBetRequirementSchema,
-  DriftDepositRequirementSchema,
-  FormSubmissionRequirementSchema,
-  KaminoLendRequirementSchema,
-  MarginfiLendRequirementSchema,
-  MemoRequirementSchema,
-  NftBidBuyRequirementSchema,
-  NftCollectionTradeRequirementSchema,
-  RealmsVoteRequirementSchema,
-  StakeSolanaRequirementSchema,
-  SwapRequirementSchema,
-  TensorBidRequirementSchema,
-  TensorBuyRequirementSchema,
+    ClickRequirementSchema,
+    CustomEventRequirementSchema,
+    DriftBetRequirementSchema,
+    DriftDepositRequirementSchema,
+    FormSubmissionRequirementSchema,
+    KaminoLendRequirementSchema,
+    MarginfiLendRequirementSchema,
+    MemoRequirementSchema,
+    NftBidBuyRequirementSchema,
+    NftCollectionTradeRequirementSchema,
+    RealmsVoteRequirementSchema,
+    StakeSolanaRequirementSchema,
+    SwapRequirementSchema,
+    TensorBidRequirementSchema,
+    TensorBuyRequirementSchema,
+    PumpFunRequirementSchema,
 ]);
 
 /**
@@ -305,18 +310,19 @@ export const EventRequirementConfigSchema = z.discriminatedUnion("type", [
  * Manually added to ensure we have coverage and also ensure export is correct
  */
 export type EventRequirementConfig =
-  | ClickRequirement
-  | CustomEventRequirement
-  | DriftBetRequirement
-  | DriftDepositRequirement
-  | FormSubmissionRequirement
-  | KaminoLendRequirement
-  | MarginfiLendRequirement
-  | MemoRequirement
-  | NftBidBuyRequirement
-  | NftCollectionTradeRequirement
-  | RealmsVoteRequirement
-  | StakeSolanaRequirement
-  | SwapRequirement
-  | TensorBidRequirement
-  | TensorBuyRequirement;
+    | ClickRequirement
+    | CustomEventRequirement
+    | DriftBetRequirement
+    | DriftDepositRequirement
+    | FormSubmissionRequirement
+    | KaminoLendRequirement
+    | MarginfiLendRequirement
+    | MemoRequirement
+    | NftBidBuyRequirement
+    | NftCollectionTradeRequirement
+    | RealmsVoteRequirement
+    | StakeSolanaRequirement
+    | SwapRequirement
+    | TensorBidRequirement
+    | TensorBuyRequirement
+    | PumpFunRequirement;
