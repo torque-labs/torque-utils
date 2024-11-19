@@ -14,6 +14,8 @@ import {
     StakeSolanaActionSchema,
     FormSubmissionActionSchema,
     PumpFunActionSchema,
+    LockTokenActionSchema,
+    BurnTokenActionSchema,
 } from "./requirements";
 
 import { CustomEventConfigSchema } from "../custom-events/events";
@@ -43,6 +45,8 @@ export enum EventType {
     STAKE_SOL = "STAKE_SOL",
     FORM_SUBMISSION = "FORM_SUBMISSION",
     PUMP_FUN_BUY = "PUMP_FUN_BUY",
+    LOCK_TOKEN = "LOCK_TOKEN",
+    BURN_TOKEN = "BURN_TOKEN",
 }
 
 /**
@@ -255,6 +259,32 @@ export const PumpFunRequirementSchema = z.object({
 export type PumpFunRequirement = z.infer<typeof PumpFunRequirementSchema>;
 
 /**
+ * Lock Token requirement schema
+ */
+export const LockTokenRequirementSchema = z.object({
+    type: z.literal(EventType.LOCK_TOKEN),
+    requirement: LockTokenActionSchema,
+});
+
+/**
+ * Lock Token requirement type
+ */
+export type LockTokenRequirement = z.infer<typeof LockTokenRequirementSchema>;
+
+/**
+ * Burn Token requirement schema
+ */
+export const BurnTokenRequirementSchema = z.object({
+    type: z.literal(EventType.BURN_TOKEN),
+    requirement: BurnTokenActionSchema,
+});
+
+/**
+ * Burn Token requirement type
+ */
+export type BurnTokenRequirement = z.infer<typeof BurnTokenRequirementSchema>;
+
+/**
  * Local type mapping for each requirement type.
  * This is mostly to ensure that we have coverage for all EventType enum values.
  *
@@ -278,6 +308,8 @@ const EventTypeMapping: Record<EventType, z.ZodType> = {
     [EventType.TENSOR_BID]: TensorBidRequirementSchema,
     [EventType.TENSOR_BUY]: TensorBuyRequirementSchema,
     [EventType.PUMP_FUN_BUY]: PumpFunRequirementSchema,
+    [EventType.LOCK_TOKEN]: LockTokenRequirementSchema,
+    [EventType.BURN_TOKEN]: BurnTokenRequirementSchema,
 };
 
 /**
@@ -302,6 +334,8 @@ export const EventRequirementConfigSchema = z.discriminatedUnion("type", [
     TensorBidRequirementSchema,
     TensorBuyRequirementSchema,
     PumpFunRequirementSchema,
+    LockTokenRequirementSchema,
+    BurnTokenRequirementSchema,
 ]);
 
 /**
@@ -325,4 +359,6 @@ export type EventRequirementConfig =
     | SwapRequirement
     | TensorBidRequirement
     | TensorBuyRequirement
-    | PumpFunRequirement;
+    | PumpFunRequirement
+    | LockTokenRequirement
+    | BurnTokenRequirement;
