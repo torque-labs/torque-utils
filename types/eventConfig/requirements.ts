@@ -421,3 +421,45 @@ export const PumpFunActionSchema = z.object({
  * Pump.Fun action type
  */
 export type PumpFunAction = z.infer<typeof PumpFunActionSchema>;
+
+/**
+ * Lock Token action schema
+ */
+export const LockTokenActionSchema = z.object({
+    /**
+     * The token address to lock
+     */
+    tokenAddress: z.string(),
+    /**
+     * The minimum amount to lock
+     */
+    amount: z.coerce.number(),
+    /**
+     * seconds to lock for
+     */
+    seconds: z.coerce.number(),
+});
+
+/**
+ * Lock Token action type
+ */
+export type LockTokenAction = z.infer<typeof LockTokenActionSchema>;
+
+/**
+ * Burn Token action schema
+ */
+export const BurnTokenActionSchema = z.object({
+    /**
+     * The token address to burn
+     */
+    tokenAddress: z.string(),
+    /**
+     * The minimum amount to burn
+     */
+    amount: z.coerce.number(),
+});
+
+/**
+ * Burn Token action type
+ */
+export type BurnTokenAction = z.infer<typeof BurnTokenActionSchema>;
