@@ -96,6 +96,12 @@ export const OnChainEventRequestSchema = z.discriminatedUnion("eventType", [
         amount: z.coerce.number(),
         wallet: z.string(),
     }),
+    z.object({
+        eventType: z.literal(EventType.BUY_AND_LOCK_TOKEN),
+        tokenAddress: z.string(),
+        amount: z.coerce.number(),
+        wallet: z.coerce.number(),
+    }),
 ]);
 
 /**

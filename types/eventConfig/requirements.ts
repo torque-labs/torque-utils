@@ -463,3 +463,26 @@ export const BurnTokenActionSchema = z.object({
  * Burn Token action type
  */
 export type BurnTokenAction = z.infer<typeof BurnTokenActionSchema>;
+
+/**
+ * Buy and Lock Token action schema
+ */
+export const BuyAndLockTokenActionSchema = z.object({
+    /**
+     * The token address to buy
+     */
+    tokenAddress: z.string(),
+    /**
+     * The minimum amount to buy
+     */
+    amount: z.coerce.number(),
+    /**
+     * The minimum amount to lock
+     */
+    duration: z.coerce.number(),
+});
+
+/**
+ * Buy and Lock Token action type
+ */
+export type BuyAndLockTokenAction = z.infer<typeof BuyAndLockTokenActionSchema>;
