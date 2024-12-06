@@ -16,6 +16,7 @@ import {
     PumpFunActionSchema,
     LockTokenActionSchema,
     BurnTokenActionSchema,
+    BuyAndLockTokenActionSchema,
 } from "./requirements";
 
 import { CustomEventConfigSchema } from "../custom-events/events";
@@ -47,6 +48,7 @@ export enum EventType {
     PUMP_FUN_BUY = "PUMP_FUN_BUY",
     LOCK_TOKEN = "LOCK_TOKEN",
     BURN_TOKEN = "BURN_TOKEN",
+    BUY_AND_LOCK_TOKEN = "BUY_AND_LOCK_TOKEN",
 }
 
 /**
@@ -285,6 +287,19 @@ export const BurnTokenRequirementSchema = z.object({
 export type BurnTokenRequirement = z.infer<typeof BurnTokenRequirementSchema>;
 
 /**
+ * Buy and Lock Token requirement schema
+ */
+export const BuyAndLockTokenRequirementSchema = z.object({
+    type: z.literal(EventType.BUY_AND_LOCK_TOKEN),
+    requirement: BuyAndLockTokenActionSchema,
+});
+
+/**
+ * Buy and Lock Token requirement type
+ */
+export type BuyAndLockTokenRequirement = z.infer<typeof BuyAndLockTokenRequirementSchema>;
+
+/**
  * Local type mapping for each requirement type.
  * This is mostly to ensure that we have coverage for all EventType enum values.
  *
@@ -310,6 +325,7 @@ const EventTypeMapping: Record<EventType, z.ZodType> = {
     [EventType.PUMP_FUN_BUY]: PumpFunRequirementSchema,
     [EventType.LOCK_TOKEN]: LockTokenRequirementSchema,
     [EventType.BURN_TOKEN]: BurnTokenRequirementSchema,
+    [EventType.BUY_AND_LOCK_TOKEN]: BuyAndLockTokenRequirementSchema,
 };
 
 /**
@@ -336,6 +352,7 @@ export const EventRequirementConfigSchema = z.discriminatedUnion("type", [
     PumpFunRequirementSchema,
     LockTokenRequirementSchema,
     BurnTokenRequirementSchema,
+    BuyAndLockTokenRequirementSchema,
 ]);
 
 /**
@@ -361,4 +378,5 @@ export type EventRequirementConfig =
     | TensorBuyRequirement
     | PumpFunRequirement
     | LockTokenRequirement
-    | BurnTokenRequirement;
+    | BurnTokenRequirement
+    | BuyAndLockTokenRequirement;
